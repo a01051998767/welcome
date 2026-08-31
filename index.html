@@ -1,2 +1,825 @@
-<h1>도연님 사랑해 20260831</h1>
-머리카락 단발로 자르지마요ㅠㅠ
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- ▼▼ 공유(카톡) 미리보기 설정 — 주소와 이미지만 나중에 바꿔주세요 ▼▼ -->
+<title>결혼합니다 · 신랑 ♡ 신부</title>
+<meta name="description" content="저희 두 사람의 결혼식에 초대합니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="결혼합니다 · 신랑 ♡ 신부">
+<meta property="og:description" content="저희 두 사람의 결혼식에 초대합니다.">
+<meta property="og:image" content="images/og-image.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#F2F5EE">
+<!-- ▲▲ 여기까지 ▲▲ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+
+<style>
+:root{
+  --paper:      #F2F5EE;
+  --paper-warm: #FAFBF7;
+  --ink:        #1B2B23;
+  --ink-soft:   #4E6357;
+  --pine:       #234A3C;
+  --jade:       #3E7A63;
+  --sage:       #9FBBA6;
+  --seal:       #9C3B34;
+  --line:       rgba(35,74,60,.16);
+  --shadow:     0 18px 50px -30px rgba(27,43,35,.55);
+
+  --serif: "Gowun Batang", "Nanum Myeongjo", serif;
+  --sans:  "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --latin: "Cormorant Garamond", serif;
+
+  --col: 470px;
+  --gutter: 26px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--pine);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.85;
+  word-break:keep-all;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--jade); outline-offset:3px; border-radius:4px}
+
+/* 종이 한 장처럼 가운데 정렬 */
+.paper{
+  max-width:var(--col);
+  margin:0 auto;
+  background:var(--paper);
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 80px rgba(0,0,0,.35);
+}
+
+/* ── 언어 전환 ── */
+.langbar{
+  position:fixed; top:14px; right:14px; z-index:60;
+  display:flex; gap:2px; padding:3px;
+  background:rgba(242,245,238,.86);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--line);
+  border-radius:999px;
+}
+@media (min-width:520px){
+  .langbar{ right:calc(50% - var(--col)/2 + 14px) }
+}
+.langbar button{
+  border:0; background:transparent; cursor:pointer;
+  padding:5px 13px; border-radius:999px;
+  font-size:11.5px; font-weight:600; letter-spacing:.06em;
+  color:var(--ink-soft);
+}
+.langbar button[aria-pressed="true"]{ background:var(--pine); color:#fff }
+
+/* ── 공통 섹션 ── */
+.sec{ padding:66px var(--gutter) }
+.sec + .sec{ border-top:1px solid var(--line) }
+.sec-head{ text-align:center; margin-bottom:34px }
+.sec-head h2{
+  font-family:var(--serif); font-weight:400;
+  font-size:21px; letter-spacing:.02em; margin:0;
+}
+.sec-head p{
+  margin:9px 0 0; font-size:12.5px; color:var(--ink-soft);
+  font-family:var(--latin); font-style:italic; letter-spacing:.08em;
+}
+
+/* ── 표지 ── */
+.cover{ padding:78px var(--gutter) 62px; text-align:center }
+.arch{
+  width:min(258px, 68%); margin:0 auto 34px;
+  aspect-ratio:3/4;
+  border-radius:999px 999px 10px 10px;
+  overflow:hidden;
+  background:linear-gradient(160deg,#DDE7DB,#C3D6C6);
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.arch img{ width:100%; height:100%; object-fit:cover }
+.photo.empty img{ display:none }
+.photo.empty::after{
+  content:attr(data-label);
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  padding:16px; text-align:center;
+  font-size:11.5px; line-height:1.6; color:var(--pine); opacity:.62;
+}
+.cover-names{
+  font-family:var(--serif);
+  font-size:clamp(28px,8vw,36px);
+  line-height:1.35; margin:0;
+  display:flex; align-items:center; justify-content:center;
+  gap:14px; flex-wrap:wrap;
+}
+.cover-names .amp{ color:var(--seal); font-size:.6em; transform:translateY(-2px) }
+.cover-when{
+  margin:26px auto 0; max-width:300px;
+  padding-top:20px; border-top:1px solid var(--line);
+  font-size:14px; line-height:2;
+}
+.cover-when strong{ font-weight:600; display:block; letter-spacing:.01em }
+.cover-when span{ color:var(--ink-soft); font-size:13px }
+
+/* ── 인사말 ── */
+.greeting{ text-align:center }
+.greeting p{ margin:0 0 17px; font-size:14.5px; line-height:2.05 }
+.greeting p:last-child{ margin-bottom:0 }
+
+/* ── 가족 ── */
+.family{ display:grid; gap:14px }
+.fam{
+  background:var(--paper-warm);
+  border:1px solid var(--line);
+  border-radius:3px 3px 3px 16px;
+  padding:20px 22px;
+}
+.fam-role{
+  font-family:var(--latin); font-style:italic;
+  font-size:12px; color:var(--jade); letter-spacing:.09em;
+  margin-bottom:5px;
+}
+.fam-name{ font-family:var(--serif); font-size:20px; line-height:1.3 }
+.fam-parents{ margin-top:11px; font-size:13.5px; color:var(--ink-soft); line-height:1.9 }
+
+/* ── 갤러리 ── */
+.gallery{
+  display:flex; gap:10px; overflow-x:auto;
+  padding:0 var(--gutter) 6px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.gallery::-webkit-scrollbar{ display:none }
+.gallery .photo{
+  flex:0 0 68%; aspect-ratio:4/5;
+  scroll-snap-align:center;
+  border-radius:2px; overflow:hidden;
+  background:linear-gradient(160deg,#DDE7DB,#C3D6C6);
+  position:relative; cursor:zoom-in;
+}
+.gallery .photo img{ width:100%; height:100%; object-fit:cover }
+.gallery-hint{
+  text-align:center; font-size:11.5px; color:var(--ink-soft);
+  margin-top:14px; letter-spacing:.02em;
+}
+
+/* ── 순서 (1·2·3부) ── */
+.program{ display:grid; gap:0 }
+.part{
+  display:grid; grid-template-columns:44px 1fr; gap:16px;
+  padding-bottom:30px; position:relative;
+}
+.part:not(:last-child)::before{
+  content:""; position:absolute; left:21px; top:44px; bottom:0;
+  width:1px; background:var(--line);
+}
+.seal{
+  width:44px; height:44px; border-radius:2px;
+  background:var(--seal); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-size:19px;
+  box-shadow:0 5px 14px -7px rgba(156,59,52,.9);
+}
+.part-title{ font-family:var(--serif); font-size:18px; margin:8px 0 0 }
+.part-meta{ font-size:13px; color:var(--jade); margin-top:4px; letter-spacing:.01em }
+.part-notes{ margin:13px 0 0; padding:0; list-style:none }
+.part-notes li{
+  position:relative; padding-left:14px;
+  font-size:13.5px; color:var(--ink-soft); line-height:1.85;
+  margin-bottom:5px;
+}
+.part-notes li::before{
+  content:""; position:absolute; left:0; top:11px;
+  width:5px; height:5px; border-radius:50%; background:var(--sage);
+}
+
+/* ── 피로연: 비건 메뉴 · 축가 가사 ── */
+.menu-box{
+  margin-top:15px; padding:15px 17px;
+  background:var(--paper-warm);
+  border:1px solid var(--line);
+  border-left:3px solid var(--sage);
+  border-radius:2px;
+}
+.menu-box h4{
+  margin:0 0 9px; font-family:var(--serif); font-weight:400;
+  font-size:14.5px; letter-spacing:.01em;
+}
+.menu-box ul{ margin:0; padding-left:17px; font-size:13px; color:var(--ink-soft); line-height:1.9 }
+.menu-box p{ margin:9px 0 0; font-size:12px; color:var(--ink-soft) }
+
+.song-toggle{
+  margin-top:15px; width:100%;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:13px 16px; cursor:pointer;
+  background:var(--paper-warm); color:var(--pine);
+  border:1px solid var(--line); border-radius:2px;
+  font-size:13.5px; font-weight:600; text-align:left;
+}
+.song-toggle .chev{ font-size:11px; color:var(--jade) }
+.song-panel{
+  display:none; margin-top:-1px;
+  padding:19px 18px; border:1px solid var(--line);
+  background:var(--paper-warm); border-radius:0 0 2px 2px;
+}
+.song-panel.open{ display:block }
+.song-panel h4{
+  margin:0 0 12px; font-family:var(--serif); font-weight:400; font-size:15px;
+}
+.song-panel .lines{
+  margin:0; font-size:13.5px; line-height:2.15; color:var(--ink-soft);
+  white-space:pre-wrap;
+}
+.song-panel .cite{ margin:14px 0 0; font-size:11.5px; color:var(--ink-soft); opacity:.75 }
+
+/* ── 안내사항 ── */
+.notices{ display:grid; gap:13px }
+.notice{
+  background:var(--paper-warm);
+  border:1px solid var(--line);
+  border-radius:3px 16px 3px 3px;
+  padding:18px 20px;
+}
+.notice h3{
+  margin:0; font-family:var(--serif); font-weight:400; font-size:16px;
+}
+.notice p{ margin:7px 0 0; font-size:13.5px; color:var(--ink-soft); line-height:1.85 }
+.notice a.notice-link{
+  display:inline-block; margin-top:11px;
+  font-size:12.5px; font-weight:600; color:var(--pine);
+  text-decoration:none; padding:8px 16px;
+  border:1px solid var(--jade); border-radius:2px;
+}
+
+/* ── 오시는 길 ── */
+.map{
+  aspect-ratio:4/3; border-radius:2px; overflow:hidden;
+  border:1px solid var(--line); background:#E4EBE3; margin-bottom:20px;
+}
+.map iframe{ width:100%; height:100%; border:0; display:block }
+.venue{ text-align:center; margin-bottom:20px }
+.venue-name{ font-family:var(--serif); font-size:19px }
+.venue-addr{ font-size:13.5px; color:var(--ink-soft); margin-top:5px }
+.map-links{ display:flex; gap:8px; margin-bottom:26px }
+.map-links a{
+  flex:1; text-align:center; text-decoration:none;
+  padding:11px 4px; font-size:12.5px; font-weight:600;
+  border:1px solid var(--line); border-radius:2px;
+  background:var(--paper-warm); color:var(--pine);
+}
+.transit{ display:grid; gap:15px }
+.transit-row{ display:grid; grid-template-columns:56px 1fr; gap:12px; font-size:13.5px }
+.transit-label{ color:var(--jade); font-weight:600 }
+.transit-desc{ color:var(--ink-soft); line-height:1.8 }
+
+/* ── 참석 의사 ── */
+.rsvp{ text-align:center; background:var(--paper-warm) }
+.rsvp p{ font-size:14px; margin:0 0 24px; color:var(--ink-soft) }
+.btn{
+  display:inline-block; text-decoration:none;
+  padding:15px 40px; border-radius:2px;
+  background:var(--pine); color:#fff;
+  font-size:14.5px; font-weight:600; letter-spacing:.02em;
+  border:0; cursor:pointer;
+}
+.rsvp small{ display:block; margin-top:14px; font-size:11.5px; color:var(--ink-soft) }
+
+/* ── 계좌 ── */
+.acct-group + .acct-group{ margin-top:26px }
+.acct-group h3{
+  font-family:var(--serif); font-weight:400; font-size:15px;
+  margin:0 0 12px; padding-bottom:9px; border-bottom:1px solid var(--line);
+}
+.acct{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:12px 0;
+}
+.acct-who{ font-size:12.5px; color:var(--ink-soft) }
+.acct-num{ font-size:14px; letter-spacing:.01em; margin-top:2px }
+.copy{
+  flex:0 0 auto; border:1px solid var(--line); background:var(--paper-warm);
+  color:var(--pine); font-size:12px; font-weight:600;
+  padding:7px 14px; border-radius:2px; cursor:pointer;
+}
+.copy.done{ background:var(--pine); color:#fff; border-color:var(--pine) }
+
+/* ── 공유 · 맺음 ── */
+.share{ text-align:center }
+.outro{
+  text-align:center; padding:60px var(--gutter) 74px;
+  background:var(--pine); color:#EAF0E7;
+}
+.outro .hui{ font-family:var(--serif); font-size:26px; color:var(--sage) }
+.outro-names{ font-family:var(--serif); font-size:17px; margin:18px 0 6px }
+.outro-date{ font-family:var(--latin); font-size:13px; letter-spacing:.16em; opacity:.72 }
+.outro-thanks{ font-size:13px; margin-top:24px; opacity:.8 }
+
+/* ── 라이트박스 ── */
+.lightbox{
+  position:fixed; inset:0; z-index:80;
+  background:rgba(20,32,26,.94);
+  display:none; align-items:center; justify-content:center; padding:20px;
+}
+.lightbox.on{ display:flex }
+.lightbox img{ max-width:100%; max-height:88vh; object-fit:contain }
+.lightbox button{
+  position:absolute; top:16px; right:16px;
+  width:40px; height:40px; border-radius:50%;
+  border:0; background:rgba(255,255,255,.15); color:#fff;
+  font-size:20px; cursor:pointer;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto }
+  *{ transition:none !important; animation:none !important }
+}
+</style>
+</head>
+
+<body>
+<div class="langbar" role="group" aria-label="Language">
+  <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
+  <button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+
+<main class="paper">
+
+  <header class="cover">
+    <div class="arch photo" id="coverPhoto"></div>
+    <h1 class="cover-names" id="coverNames"></h1>
+    <div class="cover-when" id="coverWhen"></div>
+  </header>
+
+  <section class="sec greeting">
+    <div class="sec-head"><h2 data-k="greetingTitle"></h2><p>Invitation</p></div>
+    <div id="greetingBody"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2 data-k="familyTitle"></h2><p>Family</p></div>
+    <div class="family" id="familyBody"></div>
+  </section>
+
+  <section class="sec" style="padding-left:0;padding-right:0">
+    <div class="sec-head" style="padding:0 var(--gutter)">
+      <h2 data-k="galleryTitle"></h2><p>Our days</p>
+    </div>
+    <div class="gallery" id="galleryBody"></div>
+    <p class="gallery-hint" data-k="galleryHint"></p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2 data-k="programTitle"></h2><p>Programme</p></div>
+    <div class="program" id="programBody"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2 data-k="noticeTitle"></h2><p>Good to know</p></div>
+    <div class="notices" id="noticeBody"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2 data-k="locationTitle"></h2><p>Location</p></div>
+    <div class="map" id="mapBox"></div>
+    <div class="venue" id="venueBox"></div>
+    <div class="map-links" id="mapLinks"></div>
+    <div class="transit" id="transitBody"></div>
+  </section>
+
+  <section class="sec rsvp">
+    <div class="sec-head"><h2 data-k="rsvpTitle"></h2><p>RSVP</p></div>
+    <p data-k="rsvpDesc"></p>
+    <a class="btn" id="rsvpBtn" href="#" target="_blank" rel="noopener"></a>
+    <small data-k="rsvpNote"></small>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2 data-k="giftTitle"></h2><p>With thanks</p></div>
+    <div id="giftBody"></div>
+  </section>
+
+  <section class="sec share">
+    <div class="sec-head"><h2 data-k="shareTitle"></h2><p>Share</p></div>
+    <button class="btn" type="button" id="shareBtn"></button>
+  </section>
+
+  <footer class="outro">
+    <div class="hui">囍</div>
+    <div class="outro-names" id="outroNames"></div>
+    <div class="outro-date" id="outroDate"></div>
+    <div class="outro-thanks" data-k="thanks"></div>
+  </footer>
+
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button type="button" aria-label="닫기" id="lightboxClose">×</button>
+  <img alt="" id="lightboxImg">
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   ✏️  여기만 고치면 됩니다.
+   · 한국어와 영어가 같으면  "그냥 이렇게"  한 줄로 쓰세요.
+   · 다르게 쓰고 싶으면  { ko:"한국어", en:"English" }  형식으로 쓰세요.
+   ══════════════════════════════════════════════════════════════ */
+const CONFIG = {
+
+  /* ── 1. 신랑 · 신부 ─────────────────────────── */
+  groom: {
+    name:   { ko:"엄지", en:"Eom Ji" },
+    role:   { ko:"신랑", en:"Groom" },
+    father: { ko:"엄봉호", en:"Eom Bongho" },
+    mother: { ko:"박미성", en:"Park misung" }
+  },
+  bride: {
+    name:   { ko:"이도연", en:"Lee Doyoen" },
+    role:   { ko:"신부", en:"Bride" },
+    //father: { ko:"박OO", en:"OO Park" },
+    mother: { ko:"정나일선", en:"Jeong Nailsun" }
+  },
+
+  /* ── 2. 날짜 · 장소 ─────────────────────────── */
+  dateText:  { ko:"2026년 10월 24일 토요일", en:"Saturday, 8 May 2027" },
+  timeText:  { ko:"늦은 5시", en:"11:00 AM" },
+  venueName: { ko:"관악문화예절원 · 예담원", en:"Yedamwon, OOO Hanok Village" },
+  venueAddr: { ko:"서울특별시 OO구 OO로 00", en:"00 OO-ro, OO-gu, Seoul" },
+  outroDate: "2027.05.08",
+
+  /* 구글 지도 → 공유 → 지도 퍼가기 → HTML 복사 → src="..." 안의 주소만 붙여넣기
+     (아직 없으면 "" 로 두세요. 지도 칸이 자동으로 숨겨집니다) */
+  mapEmbed: "",
+  mapLat: "", mapLng: "",   // 예: "37.5665" / "126.9780"
+
+  /* ── 3. 대표 사진 · 갤러리 ──────────────────── */
+  coverPhoto: "images/cover.jpg",
+  gallery: [
+    "images/photo-1.jpg",
+    "images/photo-2.jpg",
+    "images/photo-3.jpg",
+    "images/photo-4.jpg",
+    "images/photo-5.jpg"
+  ],
+
+  /* ── 4. 인사말 (문단별로 나눠 쓰세요) ────────── */
+  greeting: [
+    { ko:"오랜 시간 서로의 계절을 함께 지나온 저희가, 이제 하나의 이름으로 살아가려 합니다.",
+      en:"After walking through many seasons side by side, we are ready to begin a life under one name." },
+    { ko:"귀한 걸음 하시어 저희의 첫날을 함께 지켜봐 주시면 더없는 기쁨이겠습니다.",
+      en:"It would mean the world to us if you could be there for our very first day together." }
+  ],
+
+  /* ── 5. 예식 순서 (1부 · 2부 · 3부) ──────────
+     notes 안에 안내사항을 원하는 만큼 추가하세요. 지우셔도 됩니다. */
+  program: [
+    {
+      mark: "一",
+      title: { ko:"1부 · 전통혼례", en:"Part 1 · Traditional Ceremony" },
+      meta:  { ko:"11:00 – 12:00 · 예담원 마당", en:"11:00 – 12:00 · Yedamwon courtyard" },
+      notes: [
+        { ko:"마당에서 진행되므로 굽이 낮은 신발을 권해드립니다.", en:"The ceremony is held outdoors — flat shoes are recommended." },
+        { ko:"안내사항을 여기에 적어주세요.", en:"Write your notice here." }
+      ]
+    },
+    {
+      mark: "二",
+      title: { ko:"2부 · 피로연", en:"Part 2 · Reception" },
+      meta:  { ko:"12:00 – 14:00 · 별채 연회장", en:"12:00 – 14:00 · Banquet hall" },
+      notes: [
+        { ko:"한정식 코스로 준비했습니다.", en:"A Korean course meal will be served." },
+        { ko:"안내사항을 여기에 적어주세요.", en:"Write your notice here." }
+      ],
+
+      /* 비건 · 채식 메뉴 안내 (필요 없으면 menu 항목 통째로 지우세요) */
+      menu: {
+        title: { ko:"비건 · 채식 메뉴", en:"Vegan & vegetarian menu" },
+        items: [
+          { ko:"OOO — 메뉴 이름을 적어주세요", en:"OOO — write the dish name" },
+          { ko:"OOO — 메뉴 이름을 적어주세요", en:"OOO — write the dish name" },
+          { ko:"OOO — 메뉴 이름을 적어주세요", en:"OOO — write the dish name" }
+        ],
+        foot: { ko:"동물성 재료를 쓰지 않고 따로 조리합니다. 필요하신 분은 참석 의사 폼에 알려주시면 인원수만큼 준비하겠습니다.",
+                en:"Prepared separately without animal products. Please tell us in the RSVP form so we can plan portions." }
+      },
+
+      /* 축가 가사 — 저작권이 있는 가사이니 아래 lines 에 직접 붙여넣어 주세요 */
+      song: {
+        button: { ko:"축가 가사 보기", en:"See the song lyrics" },
+        title:  { ko:"다시 만난 세계 — 소녀시대", en:"Into the New World — Girls' Generation" },
+        lines:  { ko:"여기에 1절 가사를 붙여넣어 주세요.\n줄바꿈은 Enter 대신 \\n 으로 넣으시거나,\n이 따옴표 안에서 그대로 줄을 나누셔도 됩니다.",
+                  en:"Paste the first verse here." },
+        credit: { ko:"작사 김정배 · 작곡 켄지 · 노래 소녀시대", en:"Lyrics by Kim Jung-bae · Music by Kenzie · Performed by Girls' Generation" }
+      }
+    },
+    {
+      mark: "三",
+      title: { ko:"3부 · 맥주 파티", en:"Part 3 · Beer Party" },
+      meta:  { ko:"18:00 – · 장소 미정", en:"From 18:00 · Venue TBC" },
+      notes: [
+        { ko:"편한 옷으로 갈아입고 오셔도 좋습니다.", en:"Feel free to change into something comfortable." },
+        { ko:"참석 인원 파악을 위해 참석 의사 폼에서 3부 참석 여부도 함께 알려주세요.", en:"Please let us know in the RSVP form whether you'll join Part 3." }
+      ]
+    }
+  ],
+
+  /* ── 6. 안내사항 (문자통역 · 접근성 · 온라인 중계) ──
+     link 를 "" 로 비워두면 버튼이 자동으로 숨겨집니다. */
+  notices: [
+    {
+      title: { ko:"문자통역", en:"Live captioning" },
+      desc:  { ko:"예식 전 과정을 실시간 문자로 옮겨드립니다. 아래 링크를 휴대폰으로 열어두시면 자리에서 바로 보실 수 있습니다.",
+               en:"The whole ceremony is transcribed live. Open the link on your phone to follow along from your seat." },
+      link:  "https://여기에_문자통역_링크",
+      linkText: { ko:"문자통역 열기", en:"Open live captions" }
+    },
+    {
+      title: { ko:"장애인 화장실", en:"Accessible restroom" },
+      desc:  { ko:"OO층 OO 옆에 있습니다. 예식장 입구에서 연회장까지 계단 없이 이동하실 수 있고, 필요하시면 입구 안내 데스크에 말씀해 주세요.",
+               en:"Located on floor OO next to OO. There is a step-free route from the entrance to the hall — please ask at the front desk if you need assistance." },
+      link:  "",
+      linkText: { ko:"", en:"" }
+    },
+    {
+      title: { ko:"온라인 중계", en:"Watch online" },
+      desc:  { ko:"먼 곳에서 함께해 주시는 분들을 위해 1부 전통혼례를 실시간으로 중계합니다. 예식 10분 전부터 접속하실 수 있습니다.",
+               en:"Part 1 will be streamed live for those joining from afar. The stream opens ten minutes before the ceremony." },
+      link:  "https://여기에_스트리밍_링크",
+      linkText: { ko:"중계 보러 가기", en:"Watch the stream" }
+    }
+  ],
+
+  /* ── 7. 교통 안내 ───────────────────────────── */
+  transit: [
+    { label:{ko:"지하철",en:"Subway"},  desc:{ko:"O호선 OO역 O번 출구에서 도보 5분.", en:"5 min walk from OO Station (Line O), Exit O."} },
+    { label:{ko:"버스",  en:"Bus"},     desc:{ko:"OO정류장 하차 · 000, 000, 000번.", en:"Get off at OO stop — bus 000, 000, 000."} },
+    { label:{ko:"주차",  en:"Parking"}, desc:{ko:"건물 지하 주차장 2시간 무료.", en:"Two hours free at the basement car park."} }
+  ],
+
+  /* ── 7. 참석 의사 · 뒤풀이 설문 (구글 폼 주소) ── */
+  rsvpUrl: "https://docs.google.com/forms/여기에_폼_주소",
+
+  /* ── 8. 마음 전하실 곳 ──────────────────────── */
+  accounts: {
+    groomSide: [
+      { who:{ko:"신랑 김OO",en:"Groom"},            bank:"OO은행", number:"000-000000-00-000" },
+      { who:{ko:"신랑의 아버지 김OO",en:"Groom's father"}, bank:"OO은행", number:"000-000000-00-000" },
+      { who:{ko:"신랑의 어머니 이OO",en:"Groom's mother"}, bank:"OO은행", number:"000-000000-00-000" }
+    ],
+    brideSide: [
+      { who:{ko:"신부 박OO",en:"Bride"},            bank:"OO은행", number:"000-000000-00-000" },
+      { who:{ko:"신부의 아버지 박OO",en:"Bride's father"}, bank:"OO은행", number:"000-000000-00-000" },
+      { who:{ko:"신부의 어머니 최OO",en:"Bride's mother"}, bank:"OO은행", number:"000-000000-00-000" }
+    ]
+  },
+
+  /* ── 9. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
+  labels: {
+    greetingTitle:{ko:"초대합니다",en:"You are invited"},
+    familyTitle:  {ko:"저희 두 사람",en:"The two of us"},
+    galleryTitle: {ko:"함께한 날들",en:"Our days"},
+    galleryHint:  {ko:"옆으로 넘겨 보세요",en:"Swipe to see more"},
+    programTitle: {ko:"예식 순서",en:"Programme"},
+    noticeTitle:  {ko:"안내 사항",en:"Good to know"},
+    locationTitle:{ko:"오시는 길",en:"How to get there"},
+    rsvpTitle:    {ko:"참석 의사 전하기",en:"Let us know"},
+    rsvpDesc:     {ko:"정성껏 준비할 수 있도록, 1·2·3부 참석 여부를 미리 알려주시면 감사하겠습니다.",
+                   en:"So we can prepare well, please tell us which parts you'll join."},
+    rsvpBtn:      {ko:"참석 의사 보내기",en:"Send your RSVP"},
+    rsvpNote:     {ko:"새 창에서 구글 폼이 열립니다.",en:"Opens a Google Form in a new tab."},
+    giftTitle:    {ko:"마음 전하실 곳",en:"With thanks"},
+    groomSide:    {ko:"신랑에게",en:"To the groom's family"},
+    brideSide:    {ko:"신부에게",en:"To the bride's family"},
+    copy:         {ko:"복사",en:"Copy"},
+    copied:       {ko:"복사됨",en:"Copied"},
+    shareTitle:   {ko:"청첩장 공유",en:"Share"},
+    shareBtn:     {ko:"링크 공유하기",en:"Share this invitation"},
+    thanks:       {ko:"와 주셔서 감사합니다.",en:"Thank you for being with us."},
+    fatherOf:     {ko:"의 아버지",en:"'s father"},
+    motherOf:     {ko:"의 어머니",en:"'s mother"},
+    kakao:"Kakao", naver:"Naver", google:"Google"
+  }
+};
+/* ══════════════ 여기까지만 고치시면 됩니다 ══════════════ */
+
+
+/* ─────────────── 아래는 건드리지 않으셔도 됩니다 ─────────────── */
+let lang = "ko";
+const t  = v => (v && typeof v === "object") ? (v[lang] ?? v.ko) : v;
+const L  = k => t(CONFIG.labels[k]);
+const $  = s => document.querySelector(s);
+
+function photo(src, label){
+  const d = document.createElement("div");
+  d.className = "photo";
+  d.dataset.label = label;
+  const img = new Image();
+  img.alt = label;
+  img.src = src;
+  img.addEventListener("error", () => d.classList.add("empty"));
+  d.appendChild(img);
+  return d;
+}
+
+function render(){
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll("[data-k]").forEach(el => el.textContent = L(el.dataset.k));
+
+  /* 표지 */
+  const cp = $("#coverPhoto");
+  cp.className = "arch photo";
+  cp.innerHTML = "";
+  cp.replaceWith(Object.assign(photo(CONFIG.coverPhoto, lang==="ko"?"images/cover.jpg 파일을 넣어주세요":"Add images/cover.jpg"), {id:"coverPhoto", className:"arch photo"}));
+
+  $("#coverNames").innerHTML =
+    `<span>${t(CONFIG.groom.name)}</span><span class="amp">♡</span><span>${t(CONFIG.bride.name)}</span>`;
+  $("#coverWhen").innerHTML =
+    `<strong>${t(CONFIG.dateText)} ${t(CONFIG.timeText)}</strong><span>${t(CONFIG.venueName)}</span>`;
+
+  /* 인사말 */
+  $("#greetingBody").innerHTML = CONFIG.greeting.map(p => `<p>${t(p)}</p>`).join("");
+
+  /* 가족 */
+  $("#familyBody").innerHTML = [CONFIG.groom, CONFIG.bride].map(p => `
+    <div class="fam">
+      <div class="fam-role">${t(p.role)}</div>
+      <div class="fam-name">${t(p.name)}</div>
+      <div class="fam-parents">
+        ${t(p.name)}${L("fatherOf")} ${t(p.father)}<br>
+        ${t(p.name)}${L("motherOf")} ${t(p.mother)}
+      </div>
+    </div>`).join("");
+
+  /* 갤러리 */
+  const g = $("#galleryBody");
+  g.innerHTML = "";
+  CONFIG.gallery.forEach((src, i) => {
+    const el = photo(src, lang==="ko" ? `${src} 파일을 넣어주세요` : `Add ${src}`);
+    el.addEventListener("click", () => {
+      if (el.classList.contains("empty")) return;
+      $("#lightboxImg").src = src;
+      $("#lightbox").classList.add("on");
+    });
+    g.appendChild(el);
+  });
+
+  /* 순서 */
+  $("#programBody").innerHTML = CONFIG.program.map((p, i) => {
+    const menu = p.menu ? `
+      <div class="menu-box">
+        <h4>${t(p.menu.title)}</h4>
+        <ul>${p.menu.items.map(m => `<li>${t(m)}</li>`).join("")}</ul>
+        ${p.menu.foot ? `<p>${t(p.menu.foot)}</p>` : ""}
+      </div>` : "";
+
+    const song = p.song ? `
+      <button class="song-toggle" type="button" data-song="${i}" aria-expanded="false">
+        <span>${t(p.song.button)}</span><span class="chev">▾</span>
+      </button>
+      <div class="song-panel" id="song-${i}">
+        <h4>${t(p.song.title)}</h4>
+        <p class="lines">${t(p.song.lines)}</p>
+        ${p.song.credit ? `<p class="cite">${t(p.song.credit)}</p>` : ""}
+      </div>` : "";
+
+    return `
+    <div class="part">
+      <div class="seal">${p.mark}</div>
+      <div>
+        <h3 class="part-title">${t(p.title)}</h3>
+        <div class="part-meta">${t(p.meta)}</div>
+        <ul class="part-notes">${p.notes.map(n => `<li>${t(n)}</li>`).join("")}</ul>
+        ${menu}${song}
+      </div>
+    </div>`;
+  }).join("");
+
+  /* 안내 사항 */
+  $("#noticeBody").innerHTML = CONFIG.notices.map(n => `
+    <div class="notice">
+      <h3>${t(n.title)}</h3>
+      <p>${t(n.desc)}</p>
+      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}</a>` : ""}
+    </div>`).join("");
+
+  /* 오시는 길 */
+  const mapBox = $("#mapBox");
+  if (CONFIG.mapEmbed){
+    mapBox.style.display = "";
+    mapBox.innerHTML = `<iframe src="${CONFIG.mapEmbed}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="map"></iframe>`;
+  } else {
+    mapBox.style.display = "none";
+  }
+  $("#venueBox").innerHTML =
+    `<div class="venue-name">${t(CONFIG.venueName)}</div><div class="venue-addr">${t(CONFIG.venueAddr)}</div>`;
+
+  const q = encodeURIComponent(t(CONFIG.venueName));
+  const ll = (CONFIG.mapLat && CONFIG.mapLng) ? `${CONFIG.mapLat},${CONFIG.mapLng}` : "";
+  $("#mapLinks").innerHTML = `
+    <a href="https://map.kakao.com/link/search/${q}" target="_blank" rel="noopener">${L("kakao")}</a>
+    <a href="https://map.naver.com/v5/search/${q}" target="_blank" rel="noopener">${L("naver")}</a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=${ll || q}" target="_blank" rel="noopener">${L("google")}</a>`;
+
+  $("#transitBody").innerHTML = CONFIG.transit.map(r => `
+    <div class="transit-row">
+      <div class="transit-label">${t(r.label)}</div>
+      <div class="transit-desc">${t(r.desc)}</div>
+    </div>`).join("");
+
+  /* 참석 의사 */
+  const btn = $("#rsvpBtn");
+  btn.textContent = L("rsvpBtn");
+  btn.href = CONFIG.rsvpUrl;
+
+  /* 계좌 */
+  const group = (titleKey, list) => `
+    <div class="acct-group">
+      <h3>${L(titleKey)}</h3>
+      ${list.map(a => `
+        <div class="acct">
+          <div>
+            <div class="acct-who">${t(a.who)}</div>
+            <div class="acct-num">${a.bank} ${a.number}</div>
+          </div>
+          <button class="copy" type="button" data-copy="${a.bank} ${a.number}">${L("copy")}</button>
+        </div>`).join("")}
+    </div>`;
+  $("#giftBody").innerHTML =
+    group("groomSide", CONFIG.accounts.groomSide) + group("brideSide", CONFIG.accounts.brideSide);
+
+  /* 공유 · 맺음 */
+  $("#shareBtn").textContent = L("shareBtn");
+  $("#outroNames").textContent = `${t(CONFIG.groom.name)} · ${t(CONFIG.bride.name)}`;
+  $("#outroDate").textContent = CONFIG.outroDate;
+}
+
+/* 언어 전환 */
+document.querySelectorAll(".langbar button").forEach(b => {
+  b.addEventListener("click", () => {
+    lang = b.dataset.lang;
+    document.querySelectorAll(".langbar button")
+      .forEach(x => x.setAttribute("aria-pressed", String(x.dataset.lang === lang)));
+    render();
+  });
+});
+
+/* 축가 가사 펼치기 */
+document.addEventListener("click", e => {
+  const b = e.target.closest(".song-toggle");
+  if (!b) return;
+  const panel = document.getElementById("song-" + b.dataset.song);
+  const open  = panel.classList.toggle("open");
+  b.setAttribute("aria-expanded", String(open));
+  b.querySelector(".chev").textContent = open ? "▴" : "▾";
+});
+
+/* 계좌 복사 */
+document.addEventListener("click", async e => {
+  const b = e.target.closest(".copy");
+  if (!b) return;
+  try{
+    await navigator.clipboard.writeText(b.dataset.copy);
+    b.textContent = L("copied");
+    b.classList.add("done");
+    setTimeout(() => { b.textContent = L("copy"); b.classList.remove("done"); }, 1600);
+  }catch{ alert(b.dataset.copy); }
+});
+
+/* 공유 */
+$("#shareBtn").addEventListener("click", async () => {
+  const data = { title: document.title, url: location.href };
+  if (navigator.share){ try{ await navigator.share(data); }catch{} }
+  else {
+    try{
+      await navigator.clipboard.writeText(location.href);
+      alert(lang === "ko" ? "링크를 복사했어요." : "Link copied.");
+    }catch{ alert(location.href); }
+  }
+});
+
+/* 라이트박스 */
+$("#lightboxClose").addEventListener("click", () => $("#lightbox").classList.remove("on"));
+$("#lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") e.currentTarget.classList.remove("on"); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") $("#lightbox").classList.remove("on"); });
+
+render();
+</script>
+</body>
+</html>
