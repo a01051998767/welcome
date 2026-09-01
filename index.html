@@ -493,14 +493,14 @@ const CONFIG = {
   groom: {
     name:   { ko:"엄지", en:"Ji Eom" },
     role:   { ko:"신랑", en:"Groom" },
-    father: { ko:"김OO", en:"OO Kim" },
-    mother: { ko:"이OO", en:"OO Lee" }
+    father: { ko:"엄봉호", en:"Bongho Eom" },
+    mother: { ko:"박미성", en:"Miseong Park" }
   },
   bride: {
     name:   { ko:"이도연", en:"Doyeon Lee" },
     role:   { ko:"신부", en:"Bride" },
-    father: { ko:"박OO", en:"OO Park" },
-    mother: { ko:"최OO", en:"OO Choi" }
+    /* father 를 비워두면 그 줄은 화면에 나오지 않습니다. */
+    mother: { ko:"정나일선", en:"Ilseon Jeongna" }
   },
 
   /* ── 2. 날짜 · 장소 ─────────────────────────── */
@@ -633,13 +633,12 @@ const CONFIG = {
   accounts: {
     groomSide: [
       { who:{ko:"신랑 엄지",en:"Groom"},                      bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신랑의 아버지 김OO",en:"Groom's father"},   bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신랑의 어머니 이OO",en:"Groom's mother"},   bank:"OO은행", number:"000-000000-00-000" }
+      { who:{ko:"신랑의 아버지 엄봉호",en:"Groom's father"}, bank:"OO은행", number:"000-000000-00-000" },
+      { who:{ko:"신랑의 어머니 박미성",en:"Groom's mother"}, bank:"OO은행", number:"000-000000-00-000" }
     ],
     brideSide: [
       { who:{ko:"신부 이도연",en:"Bride"},                    bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신부의 아버지 박OO",en:"Bride's father"},   bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신부의 어머니 최OO",en:"Bride's mother"},   bank:"OO은행", number:"000-000000-00-000" }
+      { who:{ko:"신부의 어머니 정나일선",en:"Bride's mother"}, bank:"OO은행", number:"000-000000-00-000" }
     ]
   },
 
@@ -740,15 +739,18 @@ function render(){
   $("#greetingBody").innerHTML = CONFIG.greeting.map(p => `<p>${t(p)}</p>`).join("");
 
   /* 가족 */
-  $("#familyBody").innerHTML = [CONFIG.groom, CONFIG.bride].map(p => `
+  $("#familyBody").innerHTML = [CONFIG.groom, CONFIG.bride].map(p => {
+    const parents = [["fatherOf", p.father], ["motherOf", p.mother]]
+      .filter(([, who]) => t(who))
+      .map(([key, who]) => `${t(p.name)}${L(key)} ${t(who)}`)
+      .join("<br>");
+    return `
     <div class="fam">
       <div class="fam-role">${t(p.role)}</div>
       <h3 class="fam-name">${t(p.name)}</h3>
-      <div class="fam-parents">
-        ${t(p.name)}${L("fatherOf")} ${t(p.father)}<br>
-        ${t(p.name)}${L("motherOf")} ${t(p.mother)}
-      </div>
-    </div>`).join("");
+      <div class="fam-parents">${parents}</div>
+    </div>`;
+  }).join("");
 
   /* 갤러리 — 키보드로도 넘기고 열 수 있게 button 으로 만듭니다 */
   const g = $("#galleryBody");
