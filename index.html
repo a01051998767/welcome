@@ -504,11 +504,11 @@ const CONFIG = {
   },
 
   /* ── 2. 날짜 · 장소 ─────────────────────────── */
-  dateText:  { ko:"2027년 5월 8일 토요일", en:"Saturday, 8 May 2027" },
-  timeText:  { ko:"오전 11시", en:"11:00 AM" },
-  venueName: { ko:"OOO 한옥마을 · 예담원", en:"Yedamwon, OOO Hanok Village" },
-  venueAddr: { ko:"서울특별시 OO구 OO로 00", en:"00 OO-ro, OO-gu, Seoul" },
-  outroDate: "2027.05.08",
+  dateText:  { ko:"2026년 10월 24일 토요일", en:"Saturday, 8 May 2027" },
+  timeText:  { ko:"17시", en:"17:00" },
+  venueName: { ko:"관악문화예절원", en:"Gwanak Cultural Etiquette Institute" },
+  venueAddr: { ko:"서울시 관악구 낙성대로3길45(관악문화예절원)", en:"45, Nakseongdae-ro 3-gil, Gwanak-gu, Seoul" },
+  outroDate: "2026.10.24.",
 
   /* 구글 지도 → 공유 → 지도 퍼가기 → src="..." 안 주소만 붙여넣기.
      비워두면 지도 칸이 자동으로 숨겨집니다. */
@@ -546,7 +546,7 @@ const CONFIG = {
     {
       mark: "一",
       title: { ko:"1부 · 전통혼례", en:"Part 1 · Traditional Ceremony" },
-      meta:  { ko:"11:00 – 12:00 · 예담원 마당", en:"11:00 – 12:00 · Yedamwon courtyard" },
+      meta:  { ko:"17:00 – 18:00 · 관악문화예절원 마당", en:"17:00 – 18:00 · Gwanak Cultural Etiquette Institute courtyard" },
       notes: [
         { ko:"마당에서 진행되므로 굽이 낮은 신발을 권해드립니다.", en:"The ceremony is held outdoors — flat shoes are recommended." },
         { ko:"안내사항을 여기에 적어주세요.", en:"Write your notice here." }
@@ -555,9 +555,9 @@ const CONFIG = {
     {
       mark: "二",
       title: { ko:"2부 · 피로연", en:"Part 2 · Reception" },
-      meta:  { ko:"12:00 – 14:00 · 별채 연회장", en:"12:00 – 14:00 · Banquet hall" },
+      meta:  { ko:"18:00 – 19:00 · 관악문화예절원 마당", en:"18:00 – 19:00 · Gwanak Cultural Etiquette Institute courtyard" },
       notes: [
-        { ko:"한정식 코스로 준비했습니다.", en:"A Korean course meal will be served." },
+        { ko:"한정식 뷔페로 준비했습니다.", en:"A Korean buffet meal will be served." },
         { ko:"신랑이 통기타를 연주하며 축가를 부릅니다.", en:"The groom will sing, accompanying himself on guitar." }
       ],
 
@@ -573,19 +573,17 @@ const CONFIG = {
                 en:"Prepared separately without animal products. Please tell us in the RSVP form so we can plan portions." }
       },
 
-      /* 축가 가사 — 저작권이 있는 가사입니다. lines 안에 직접 붙여넣어 주세요. */
+      /* 축가 가사 */
       song: {
         button: { ko:"축가 가사 보기", en:"See the song lyrics" },
         title:  { ko:"다시 만난 세계 — 소녀시대", en:"Into the New World — Girls' Generation" },
-        lines:  { ko:"여기에 1절 가사를 붙여넣어 주세요.\n줄바꿈은 \\n 으로 넣으시면 됩니다.",
-                  en:"Paste the first verse here." },
-        credit: { ko:"작사 김정배 · 작곡 켄지 · 노래 소녀시대", en:"Lyrics by Kim Jung-bae · Music by Kenzie · Girls' Generation" }
+        lines:  "전해주고 싶어 슬픈 시간이\n다 흩어진 후에야 들리지만\n눈을 감고 느껴봐\n움직이는 마음, 너를 향한 내 눈빛을\n특별한 기적을 기다리지마\n눈 앞에선 우리의 거친 길은\n알 수 없는 미래와 벽\n바꾸지 않아, 포기할 수 없어\n변치 않을 사랑으로 지켜줘\n상처 입은 내 맘까지\n시선 속에서 말은 필요 없어\n멈춰져 버린 이 시간\n사랑해 널 이 느낌 이대로\n그려왔던 헤매임의 끝\n이 세상 속에서 반복되는\n슬픔 이젠 안녕\n수많은 알 수 없는 길 속에\n희미한 빛을 난 쫓아가\n언제까지라도 함께 하는 거야\n다시 만난 나의 세계"
       }
     },
     {
       mark: "三",
-      title: { ko:"3부 · 맥주 파티", en:"Part 3 · Beer Party" },
-      meta:  { ko:"18:00 – · 장소 미정", en:"From 18:00 · Venue TBC" },
+      title: { ko:"3부 · 피로연(2차)", en:"Part 3 · Reception2" },
+      meta:  { ko:"19:00 – · The Baer", en:"From 19:00 · The Baer" },
       notes: [
         { ko:"편한 옷으로 갈아입고 오셔도 좋습니다.", en:"Feel free to change into something comfortable." },
         { ko:"인원 파악을 위해 참석 의사 폼에서 3부 참석 여부도 알려주세요.", en:"Please let us know in the RSVP form whether you'll join Part 3." }
@@ -645,11 +643,11 @@ const CONFIG = {
   /* ── 10. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
   labels: {
     greetingTitle:{ko:"초대합니다",en:"You are invited"},
-    familyTitle:  {ko:"저희 두 사람",en:"The two of us"},
+    familyTitle:  {ko:"우리 두 사람",en:"The two of us"},
     galleryTitle: {ko:"함께한 날들",en:"Our days"},
     galleryHint:  {ko:"옆으로 넘기거나 방향키로 넘겨 보세요. 사진을 누르면 크게 볼 수 있습니다.",
                    en:"Swipe or use the arrow keys. Select a photo to enlarge it."},
-    programTitle: {ko:"예식 순서",en:"Programme"},
+    programTitle: {ko:"예식 순서",en:"Program"},
     noticeTitle:  {ko:"안내 사항",en:"Good to know"},
     locationTitle:{ko:"오시는 길",en:"How to get there"},
     rsvpTitle:    {ko:"참석 의사 전하기",en:"Let us know"},
@@ -779,7 +777,6 @@ function render(){
       <div class="song-panel" id="song-${i}">
         <h4>${t(p.song.title)}</h4>
         <p class="lines">${t(p.song.lines)}</p>
-        ${p.song.credit ? `<p class="cite">${t(p.song.credit)}</p>` : ""}
       </div>` : "";
     return `
       <div class="part">
