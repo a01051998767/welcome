@@ -335,6 +335,22 @@ button{ font-family:inherit; font-size:inherit }
 }
 .copy.done{ background:var(--pine); color:#fff; border-color:var(--pine) }
 
+/* ── 고마운 분들 ── */
+.credits .lead{ font-size:.96rem; color:var(--ink-soft); margin:0 0 26px; text-align:center }
+.credit-group + .credit-group{ margin-top:28px }
+.credit-group h3{
+  font-family:var(--serif); font-weight:400; font-size:1.05rem;
+  margin:0 0 12px; padding-bottom:9px; border-bottom:1px solid var(--line);
+}
+.credit-list{ list-style:none; margin:0; padding:0; display:grid; gap:16px }
+.credit-name{ font-size:1rem }
+.credit-list a.credit-name{
+  display:inline-flex; align-items:center; min-height:44px;
+  color:var(--pine); font-weight:600;
+  text-decoration:underline; text-underline-offset:3px;
+}
+.credit-role{ font-size:.92rem; color:var(--ink-soft); line-height:1.8; margin-top:2px }
+
 /* ── 공유 · 맺음 ── */
 .share{ text-align:center }
 .outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:#F0F5EE }
@@ -464,6 +480,12 @@ button{ font-family:inherit; font-size:inherit }
   <section class="sec share" aria-labelledby="h-share">
     <div class="sec-head"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
     <button class="btn" type="button" id="shareBtn"></button>
+  </section>
+
+  <section class="sec credits" id="creditsSection" aria-labelledby="h-credits">
+    <div class="sec-head"><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
+    <p class="lead" data-k="creditsDesc"></p>
+    <div id="creditsBody"></div>
   </section>
 
   <footer class="outro">
@@ -640,7 +662,38 @@ const CONFIG = {
     ]
   },
 
-  /* ── 10. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
+  /* ── 10. 고마운 분들 (Thanks to) ──
+     · 이 결혼식을 도와주신 분·기관을 적습니다.
+     · url 을 적으면 이름이 링크가 되고, "" 로 비우면 그냥 글씨로 나옵니다.
+     · 그룹 하나를 통째로 지워도 되고, credits: [] 로 두면 섹션이 통째로 숨습니다. */
+  credits: [
+    {
+      title: { ko:"함께해 주신 기관 · 단체", en:"Organisations who helped" },
+      items: [
+        { name: { ko:"기관 이름을 적어주세요", en:"Organisation name" },
+          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 문자통역 지원)",
+                  en:"One line on how they helped — e.g. live captioning." },
+          url:  "https://기관_홈페이지_주소" },
+        { name: { ko:"기관 이름을 적어주세요", en:"Organisation name" },
+          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 전통혼례 진행)",
+                  en:"One line on how they helped — e.g. running the traditional ceremony." },
+          url:  "https://기관_홈페이지_주소" }
+      ]
+    },
+    {
+      title: { ko:"도움 주신 분들", en:"People who helped" },
+      items: [
+        { name: { ko:"이름을 적어주세요", en:"Name" },
+          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 사진)", en:"e.g. photography" },
+          url:  "" },
+        { name: { ko:"이름을 적어주세요", en:"Name" },
+          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 청첩장 글씨)", en:"e.g. calligraphy" },
+          url:  "" }
+      ]
+    }
+  ],
+
+  /* ── 11. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
   labels: {
     greetingTitle:{ko:"초대합니다",en:"You are invited"},
     familyTitle:  {ko:"우리 두 사람",en:"The two of us"},
@@ -665,6 +718,10 @@ const CONFIG = {
     shareTitle:   {ko:"청첩장 공유",en:"Share"},
     shareBtn:     {ko:"링크 공유하기",en:"Share this invitation"},
     sharedMsg:    {ko:"링크를 복사했습니다.",en:"Link copied."},
+    creditsTitle: {ko:"고마운 분들",en:"Thanks to"},
+    creditsDesc:  {ko:"이 하루는 여러 사람의 손을 거쳐 만들어졌습니다. 함께해 주신 분들과 기관을 적어 둡니다.",
+                   en:"This day was made by many hands. Here are the people and organisations who helped."},
+    newWindow:    {ko:"새 창에서 열립니다",en:"opens in a new window"},
     thanks:       {ko:"와 주셔서 감사합니다.",en:"Thank you for being with us."},
     fatherOf:     {ko:"의 아버지",en:"'s father"},
     motherOf:     {ko:"의 어머니",en:"'s mother"},
@@ -843,6 +900,23 @@ function render(){
     </div>`;
   $("#giftBody").innerHTML =
     group("groomSide", CONFIG.accounts.groomSide) + group("brideSide", CONFIG.accounts.brideSide);
+
+  /* 고마운 분들 */
+  const credits = CONFIG.credits || [];
+  $("#creditsSection").style.display = credits.length ? "" : "none";
+  $("#creditsBody").innerHTML = credits.map(g => `
+    <div class="credit-group">
+      <h3>${t(g.title)}</h3>
+      <ul class="credit-list">
+        ${g.items.map(i => `
+          <li>
+            ${i.url
+              ? `<a class="credit-name" href="${i.url}" target="_blank" rel="noopener">${t(i.name)}<span class="sr-only"> — ${L("newWindow")}</span></a>`
+              : `<div class="credit-name">${t(i.name)}</div>`}
+            ${i.role ? `<div class="credit-role">${t(i.role)}</div>` : ""}
+          </li>`).join("")}
+      </ul>
+    </div>`).join("");
 
   /* 공유 · 맺음 */
   $("#shareBtn").textContent = L("shareBtn");
