@@ -353,6 +353,15 @@ button{ font-family:inherit; font-size:inherit }
 
 /* ── 공유 · 맺음 ── */
 .share{ text-align:center }
+.share .license{
+  font-size:.88rem; line-height:1.9; color:var(--ink-soft);
+  margin:24px auto 0; max-width:34em; text-align:left;
+}
+.share .license a{
+  display:inline-flex; align-items:center; min-height:44px;
+  color:var(--pine); font-weight:600;
+  text-decoration:underline; text-underline-offset:3px;
+}
 .outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:#F0F5EE }
 .outro .hui{ font-family:var(--serif); font-size:1.7rem; color:#C9DCCC }
 .outro-names{ font-family:var(--serif); font-size:1.1rem; margin:18px 0 6px }
@@ -477,15 +486,16 @@ button{ font-family:inherit; font-size:inherit }
     <div id="giftBody"></div>
   </section>
 
-  <section class="sec share" aria-labelledby="h-share">
-    <div class="sec-head"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
-    <button class="btn" type="button" id="shareBtn"></button>
-  </section>
-
   <section class="sec credits" id="creditsSection" aria-labelledby="h-credits">
     <div class="sec-head"><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
     <p class="lead" data-k="creditsDesc"></p>
     <div id="creditsBody"></div>
+  </section>
+
+  <section class="sec share" aria-labelledby="h-share">
+    <div class="sec-head"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
+    <button class="btn" type="button" id="shareBtn"></button>
+    <p class="license" id="licenseNote"></p>
   </section>
 
   <footer class="outro">
@@ -662,7 +672,10 @@ const CONFIG = {
     ]
   },
 
-  /* ── 10. 고마운 분들 (Thanks to) ──
+  /* ── 10. 소스코드 주소 (비우면 공유 섹션의 안내가 숨습니다) ── */
+  repoUrl: "https://github.com/a01051998767/welcome",
+
+  /* ── 11. 고마운 분들 (Thanks to) ──
      · 이 결혼식을 도와주신 분·기관을 적습니다.
      · url 을 적으면 이름이 링크가 되고, "" 로 비우면 그냥 글씨로 나옵니다.
      · 그룹 하나를 통째로 지워도 되고, credits: [] 로 두면 섹션이 통째로 숨습니다. */
@@ -693,7 +706,7 @@ const CONFIG = {
     }
   ],
 
-  /* ── 11. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
+  /* ── 12. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
   labels: {
     greetingTitle:{ko:"초대합니다",en:"You are invited"},
     familyTitle:  {ko:"우리 두 사람",en:"The two of us"},
@@ -718,6 +731,9 @@ const CONFIG = {
     shareTitle:   {ko:"청첩장 공유",en:"Share"},
     shareBtn:     {ko:"링크 공유하기",en:"Share this invitation"},
     sharedMsg:    {ko:"링크를 복사했습니다.",en:"Link copied."},
+    licenseDesc:  {ko:"이 청첩장을 만든 코드(HTML · CSS · JS)는 MIT 라이선스로 공개했습니다. 상업적으로든 비상업적으로든 마음껏 가져다 고쳐 쓰셔도 됩니다. 다만 사진과 축가 가사, 계좌번호 같은 개인 정보는 라이선스에 포함되지 않습니다.",
+                   en:"The code behind this invitation (HTML, CSS, JS) is open source under the MIT licence — free to reuse and adapt, commercially or not. The photographs, song lyrics and personal details are not covered."},
+    repoLink:     {ko:"GitHub에서 코드 보기",en:"See the code on GitHub"},
     creditsTitle: {ko:"고마운 분들",en:"Thanks to"},
     creditsDesc:  {ko:"이 하루는 여러 사람의 손을 거쳐 만들어졌습니다. 함께해 주신 분들과 기관을 적어 둡니다.",
                    en:"This day was made by many hands. Here are the people and organisations who helped."},
@@ -920,6 +936,13 @@ function render(){
 
   /* 공유 · 맺음 */
   $("#shareBtn").textContent = L("shareBtn");
+  const note = $("#licenseNote");
+  if (CONFIG.repoUrl){
+    note.style.display = "";
+    note.innerHTML = `${L("licenseDesc")} <a href="${CONFIG.repoUrl}" target="_blank" rel="noopener">${L("repoLink")}<span class="sr-only"> — ${L("newWindow")}</span></a>`;
+  } else {
+    note.style.display = "none";
+  }
   $("#outroNames").textContent = `${t(CONFIG.groom.name)} · ${t(CONFIG.bride.name)}`;
   $("#outroDate").textContent = CONFIG.outroDate;
 }
