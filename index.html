@@ -496,6 +496,7 @@ button{ font-family:inherit; font-size:inherit }
   <section class="sec share" aria-labelledby="h-share">
     <div class="sec-head"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
     <button class="btn" type="button" id="shareBtn"></button>
+    <p class="license" id="a11yNote" data-k="a11yNote"></p>
     <p class="license" id="licenseNote"></p>
   </section>
 
@@ -634,6 +635,13 @@ const CONFIG = {
      link 를 "" 로 비우면 버튼이 자동으로 숨겨집니다. */
   notices: [
     {
+      title: { ko:"편하게 읽으시라고", en:"Reading this invitation" },
+      desc:  { ko:"이 청첩장은 웹접근성을 지켜 만들었습니다. 화면 위쪽 버튼으로 글씨를 150%까지 키우실 수 있고, 한국어와 영어를 오갈 수 있습니다. 스크린리더(안드로이드 TalkBack · 아이폰 VoiceOver)로 처음부터 끝까지 읽으실 수 있으며, 사진에는 설명을 붙였습니다. 마우스 없이 키보드만으로도 모든 기능을 쓰실 수 있습니다.",
+               en:"This invitation is built to be accessible. Use the buttons at the top to enlarge the text up to 150% or switch between Korean and English. It reads end to end with a screen reader (TalkBack on Android, VoiceOver on iPhone), every photograph has a description, and everything works with the keyboard alone." },
+      link:  "",
+      linkText: { ko:"", en:"" }
+    },
+    {
       title: { ko:"문자통역", en:"Live captioning" },
       desc:  { ko:"예식 전 과정을 실시간 문자로 옮겨드립니다. 아래 링크를 휴대폰으로 열어두시면 자리에서 바로 보실 수 있습니다.",
                en:"The whole ceremony is transcribed live. Open the link on your phone to follow along from your seat." },
@@ -738,6 +746,8 @@ const CONFIG = {
     shareTitle:   {ko:"청첩장 공유",en:"Share"},
     shareBtn:     {ko:"링크 공유하기",en:"Share this invitation"},
     sharedMsg:    {ko:"링크를 복사했습니다.",en:"Link copied."},
+    a11yNote:     {ko:"이 청첩장은 웹접근성을 지켜 만들었습니다. 스크린리더로 끝까지 읽히고, 글씨를 150%까지 키울 수 있으며, 키보드만으로도 모든 기능을 쓸 수 있고, 본문 대비는 7:1 이상입니다.",
+                   en:"This invitation was built to web accessibility standards: it reads end to end with a screen reader, the text scales to 150%, everything works by keyboard alone, and body text meets a 7:1 contrast ratio."},
     licenseDesc:  {ko:"이 청첩장을 만든 코드(HTML · CSS · JS)는 MIT 라이선스로 공개했습니다. 상업적으로든 비상업적으로든 마음껏 가져다 고쳐 쓰셔도 됩니다. 다만 사진과 축가 가사, 계좌번호 같은 개인 정보는 라이선스에 포함되지 않습니다.",
                    en:"The code behind this invitation (HTML, CSS, JS) is open source under the MIT licence — free to reuse and adapt, commercially or not. The photographs, song lyrics and personal details are not covered."},
     repoLink:     {ko:"GitHub에서 코드 보기",en:"See the code on GitHub"},
