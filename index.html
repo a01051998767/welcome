@@ -776,7 +776,7 @@ const CONFIG = {
   /* 예식장 지도 링크. 지도 앱에서 장소를 열고 공유 주소를 그대로 붙여넣으면 됩니다.
      label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
   mapLinks: [
-    { label:"kakao",  url:"https://place.map.kakao.com/23317123" },
+    { label:"kakao",  url:"https://map.kakao.com/?urlX=491122.9999999992&urlY=1103609.9999999977&urlLevel=3&itemId=23317123&q=%EA%B4%80%EC%95%85%EB%AC%B8%ED%99%94%EC%9B%90%20%EC%98%88%EC%A0%88%EC%9B%90&srcid=23317123&map_type=TYPE_MAP" },
     { label:"naver",  url:"https://naver.me/xQe2ubEq" },
     { label:"google", url:"https://maps.app.goo.gl/1d6FKq3BvhddcgN4A" }
   ],
@@ -864,7 +864,7 @@ const CONFIG = {
          label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
       linksTitle: { ko:"The Bear 위치", en:"Finding The Bear" },
       links: [
-        { label:"kakao",  url:"https://place.map.kakao.com/17735953" },
+        { label:"kakao",  url:"https://map.kakao.com/?urlX=490891.00000000093&urlY=1104817.0000000007&urlLevel=3&itemId=17735953&q=%EB%8D%94%EB%B2%A0%EC%96%B4%20%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&srcid=17735953&map_type=TYPE_MAP" },
         { label:"naver",  url:"https://naver.me/x5GrDmb4" },
         { label:"google", url:"https://maps.app.goo.gl/NtXyXgKnLB5oPZcKA" }
       ]
@@ -1440,10 +1440,12 @@ document.addEventListener("click", async e => {
 
 /* ── 공유 ── */
 $("#shareBtn").addEventListener("click", async () => {
-  const data = { title: document.title, url: location.href };
+  /* 차례로 건너뛴 뒤 공유하면 주소 끝에 #자리표시가 붙어 중간부터 열립니다. 떼고 보냅니다. */
+  const url = location.href.split("#")[0];
+  const data = { title: document.title, url };
   if (navigator.share){ try{ await navigator.share(data); return; }catch{} }
-  try{ await navigator.clipboard.writeText(location.href); say(L("sharedMsg")); }
-  catch{ window.prompt("URL", location.href); }
+  try{ await navigator.clipboard.writeText(url); say(L("sharedMsg")); }
+  catch{ window.prompt("URL", url); }
 });
 
 /* ── 사진 크게 보기 (초점 가두기 · 되돌리기) ── */
@@ -1475,6 +1477,12 @@ $("#galleryBody").addEventListener("keydown", e => {
   const step = e.currentTarget.clientWidth * 0.7;
   e.currentTarget.scrollBy({ left: e.key === "ArrowRight" ? step : -step, behavior: "smooth" });
 });
+
+/* ── 열었을 때는 언제나 맨 위부터 ──
+   브라우저가 지난번에 보던 위치를 되살리지 않도록 합니다. */
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+if (!location.hash) window.scrollTo(0, 0);
+window.addEventListener("pageshow", e => { if (e.persisted && !location.hash) window.scrollTo(0, 0); });
 
 /* ── 지난번 설정 불러오기 ── */
 try{
