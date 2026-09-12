@@ -14,7 +14,8 @@ const SETTINGS = {
   spreadsheetId: '1R7I0eYxUiP7VPKBWQtJkJCMdjMoS0a2E2uRbxbTHz5s',
   sheetName: 'RSVP'
 };
-const HEADERS = ['번호','접수 날짜 (한국시간)','성함','신랑측/신부측','비건식 필요','1부 참석','2부 참석','3부 참석','연락처','요청 ID'];
+const HEADERS = ['번호','접수 날짜 (한국시간)','성함','1부 참석','2부 참석','3부 참석','미리 알려주실 것','연락처','요청 ID'];
+const COL_NEEDS = 7, COL_PHONE = 8, COL_REQUEST = 9;
 function jsonResponse_(value) {
   return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);
 }
@@ -23,14 +24,17 @@ function sheet_() {
   book.setSpreadsheetTimeZone('Asia/Seoul');
   let sheet = book.getSheetByName(SETTINGS.sheetName);
   if (!sheet) sheet = book.insertSheet(SETTINGS.sheetName);
-  if (sheet.getLastRow() === 0) {
+  /* 아직 접수된 줄이 없으면 제목 줄을 새로 씁니다 (항목이 바뀌었을 때도 그대로 맞춰집니다) */
+  if (sheet.getLastRow() <= 1) {
+    sheet.clear();
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
     sheet.getRange(1,1,1,HEADERS.length).setFontWeight('bold').setBackground('#2e5b4f').setFontColor('#ffffff');
     sheet.setColumnWidth(2,180);
     sheet.setColumnWidth(3,140);
-    sheet.setColumnWidth(9,160);
-    sheet.hideColumns(10);
+    sheet.setColumnWidth(COL_NEEDS,320);
+    sheet.setColumnWidth(COL_PHONE,160);
+    sheet.hideColumns(COL_REQUEST);
   }
   const actual = sheet.getRange(1,1,1,HEADERS.length).getValues()[0];
   if (JSON.stringify(actual) !== JSON.stringify(HEADERS)) throw new Error('Unexpected sheet columns');
@@ -43,10 +47,10 @@ function doGet() { return jsonResponse_({ok:true, service:'wedding-rsvp'}); }
 function validate_(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid data');
   if (typeof data.name !== 'string' || !data.name.trim() || data.name.length > 80) throw new Error('Invalid name');
-  if (!['groom','bride'].includes(data.side)) throw new Error('Invalid side');
+  if (typeof data.needs !== 'string' || data.needs.length > 500) throw new Error('Invalid note');
   if (typeof data.phone !== 'string' || data.phone.length > 40) throw new Error('Invalid phone');
   if (typeof data.requestId !== 'string' || !/^[A-Za-z0-9-]{10,100}$/.test(data.requestId)) throw new Error('Invalid request');
-  ['vegan','part1','part2','part3'].forEach(key => { if (typeof data[key] !== 'boolean') throw new Error('Invalid checkbox'); });
+  ['part1','part2','part3'].forEach(key => { if (typeof data[key] !== 'boolean') throw new Error('Invalid checkbox'); });
   return data;
 }
 function safeText_(text) {
@@ -56,14 +60,14 @@ function safeText_(text) {
 function doPost(e) {
   let lock;
   try {
-    if (!e || !e.postData || e.postData.contents.length > 4000) throw new Error('Invalid payload');
+    if (!e || !e.postData || e.postData.contents.length > 6000) throw new Error('Invalid payload');
     const data = validate_(JSON.parse(e.postData.contents));
     lock = LockService.getScriptLock();
     lock.waitLock(20000);
     const sheet = sheet_();
     const lastRow = sheet.getLastRow();
     if (lastRow > 1) {
-      const match = sheet.getRange(2,10,lastRow-1,1).createTextFinder(data.requestId).matchEntireCell(true).findNext();
+      const match = sheet.getRange(2,COL_REQUEST,lastRow-1,1).createTextFinder(data.requestId).matchEntireCell(true).findNext();
       if (match) return jsonResponse_({ok:true, number:Number(sheet.getRange(match.getRow(),1).getValue()),requestId:data.requestId,duplicate:true});
     }
     const numbers = lastRow > 1 ? sheet.getRange(2,1,lastRow-1,1).getValues().map(row => Number(row[0]) || 0) : [];
@@ -71,8 +75,9 @@ function doPost(e) {
     const date = Utilities.formatDate(new Date(),'Asia/Seoul','yyyy-MM-dd HH:mm:ss');
     const row = lastRow + 1;
     sheet.getRange(row,3).setNumberFormat('@');
-    sheet.getRange(row,9).setNumberFormat('@');
-    sheet.getRange(row,1,1,HEADERS.length).setValues([[number,date,safeText_(data.name),data.side === 'groom' ? '신랑측' : '신부측',data.vegan,data.part1,data.part2,data.part3,safeText_(data.phone),data.requestId]]);
+    sheet.getRange(row,COL_NEEDS).setNumberFormat('@');
+    sheet.getRange(row,COL_PHONE).setNumberFormat('@');
+    sheet.getRange(row,1,1,HEADERS.length).setValues([[number,date,safeText_(data.name),data.part1,data.part2,data.part3,safeText_(data.needs),safeText_(data.phone),data.requestId]]);
     SpreadsheetApp.flush();
     return jsonResponse_({ok:true,number: number,requestId:data.requestId});
   } catch (error) {
