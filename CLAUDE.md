@@ -12,7 +12,7 @@ GitHub Pages로 호스팅하는 한 페이지짜리 모바일 청첩장.
 ## 파일 구조
 ```
 index.html      ← 화면에 필요한 것은 전부 여기에 들어있다
-images/         ← cover.jpg, photo-1~5.jpg, og-image.jpg
+images/         ← cover.jpg, photo-1~5.jpg, og-image.jpg, apple-touch-icon.png
 apps-script.gs  ← 참석 의사를 시트에 받아 적는 코드. 붙여넣기용이라 따로 둔다
 CLAUDE.md       ← 이 파일
 ```
@@ -105,6 +105,7 @@ CLAUDE.md       ← 이 파일
 - cover.jpg — 3:4 세로, 900×1200px, 300KB 이하
 - photo-1~5.jpg — 4:5 세로, 1000×1250px, 각 250KB 이하 (지금은 photo-1~3 세 장)
 - og-image.jpg — 1200×630px
+- apple-touch-icon.png — 180×180px. 홈 화면에 추가했을 때 쓰는 그림. 모서리는 iOS가 알아서 둥글게 자르므로 네모로 만든다. 탭 아이콘은 파일 없이 `<link rel="icon">` 안에 SVG로 넣어 두었다
 
 ## 작업 방식
 - 커밋 메시지는 한국어로 짧게 쓴다.
