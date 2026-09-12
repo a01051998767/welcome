@@ -400,6 +400,7 @@ button{ font-family:inherit; font-size:inherit }
 .venue-name{ font-family:var(--serif); font-size:1.2rem }
 .venue-addr{ font-size:.96rem; color:var(--ink-soft); margin-top:5px }
 .map-links{ display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap }
+.notice-links{ margin:14px 0 0 }
 .song-panel .venue{ margin-bottom:16px }
 .song-panel .map{ margin-bottom:16px }
 .song-panel .map-links{ margin-bottom:0 }
@@ -775,7 +776,7 @@ const CONFIG = {
 
   /* 구글 지도 → 공유 → 지도 퍼가기 → src="..." 안 주소만 붙여넣기.
      비워두면 지도 칸이 자동으로 숨겨집니다. */
-  mapEmbed: "https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%EC%8B%9C+%EA%B4%80%EC%95%85%EA%B5%AC+%EB%82%99%EC%84%B1%EB%8C%80%EB%A1%9C3%EA%B8%B8+45&output=embed&hl=ko",
+  mapEmbed: "https://www.google.com/maps?q=%EA%B4%80%EC%95%85%EB%AC%B8%ED%99%94%EC%98%88%EC%A0%88%EC%9B%90&output=embed&hl=ko",
 
   /* 예식장 지도 링크. 지도 앱에서 장소를 열고 공유 주소를 그대로 붙여넣으면 됩니다.
      label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
@@ -871,7 +872,7 @@ const CONFIG = {
       place: {
         button: { ko:"피로연(2차) 장소 보기", en:"Where Part 3 is" },
         name:   { ko:"더 베어 낙성대점", en:"The Bear, Nakseongdae" },
-        addr:   { ko:"", en:"" },
+        addr:   { ko:"서울 관악구 낙성대로 20", en:"20, Nakseongdae-ro, Gwanak-gu, Seoul" },
         embed:  "https://www.google.com/maps?q=%EB%8D%94%EB%B2%A0%EC%96%B4+%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&output=embed&hl=ko",
         links: [
           { label:"naver",  url:"https://naver.me/x5GrDmb4" },
@@ -904,10 +905,15 @@ const CONFIG = {
     {
       icon:  "route",
       title: { ko:"장애인 화장실 · 이동 안내", en:"Accessible restroom & step-free route" },
-      desc:  { ko:"장애인 화장실은 OO층 OO 옆에 있습니다. 정문에서 연회장까지 계단 없이 이동하실 수 있고, 도움이 필요하시면 입구 안내 데스크에 말씀해 주세요.",
-               en:"The accessible restroom is on floor OO next to OO. There is a step-free route from the main entrance to the hall — please ask at the front desk if you need assistance." },
+      desc:  { ko:"가까운 장애인 화장실 두 곳의 위치를 아래 버튼에서 지도로 보실 수 있습니다. 이동에 도움이 필요하시면 참석 의사를 보내실 때 알려주시거나, 당일 안내하는 사람에게 편하게 말씀해 주세요.",
+               en:"The two nearest accessible restrooms are on the maps below. If you need help getting around, tell us in your RSVP or ask one of us on the day." },
       link:  "",
-      linkText: { ko:"", en:"" }
+      linkText: { ko:"", en:"" },
+      /* 링크를 여러 개 달 때는 links 를 씁니다. */
+      links: [
+        { url:"https://kko.to/6BUPN3tJ6r", text:{ ko:"장애인 화장실 ①", en:"Accessible restroom 1" } },
+        { url:"https://kko.to/dbtQWN3Z_T", text:{ ko:"장애인 화장실 ②", en:"Accessible restroom 2" } }
+      ]
     },
     {
       icon:  "live",
@@ -1202,7 +1208,9 @@ function render(){
     <div class="notice">
       <h3>${n.icon ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n.title)}</h3>
       <p>${t(n.desc)}</p>
-      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}</a>` : ""}
+      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>` : ""}
+      ${(n.links && n.links.length) ? `<div class="map-links notice-links">${n.links.map(l => `
+        <a href="${l.url}" target="_blank" rel="noopener">${t(l.text)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
     </div>`).join("");
 
   /* 오시는 길 */
