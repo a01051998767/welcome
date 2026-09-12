@@ -1,4 +1,14 @@
-/** Google 스프레드시트 → 확장 프로그램 → Apps Script에 붙여 넣으세요. */
+/**
+ * 참석 의사(RSVP)를 구글 스프레드시트에 받아 적는 코드입니다.
+ *
+ * 쓰는 방법은 README.md 의 "참석 의사 접수 연결하기"를 보세요.
+ * 요약: 하객 리스트 시트 → 확장 프로그램 → Apps Script → 이 파일 전체를 붙여넣기
+ *       → setup 실행 → 배포(웹 앱, 실행: 나, 액세스: 모든 사용자)
+ *       → 끝이 /exec 인 주소를 index.html 의 CONFIG.rsvpEndpoint 에 넣기
+ *
+ * 이 코드는 시트 주인의 권한으로 실행되므로, 하객은 로그인하지 않아도 답을 보낼 수 있습니다.
+ * 시트 자체를 공개할 필요는 없습니다.
+ */
 const SETTINGS = {
   // 하객 리스트 시트: https://docs.google.com/spreadsheets/d/1R7I0eYxUiP7VPKBWQtJkJCMdjMoS0a2E2uRbxbTHz5s/edit
   spreadsheetId: '1R7I0eYxUiP7VPKBWQtJkJCMdjMoS0a2E2uRbxbTHz5s',

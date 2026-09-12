@@ -10,7 +10,12 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="결혼합니다 · 엄지 ♡ 이도연">
 <meta property="og:description" content="저희 두 사람의 결혼식에 초대합니다.">
-<meta property="og:image" content="images/og-image.jpg">
+<meta property="og:url" content="https://a01051998767.github.io/welcome/">
+<meta property="og:image" content="https://a01051998767.github.io/welcome/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="엄지와 이도연의 결혼식 청첩장 카드">
+<link rel="canonical" href="https://a01051998767.github.io/welcome/">
 <meta property="og:locale" content="ko_KR">
 <meta name="theme-color" content="#F2F5EE">
 <!-- ▲▲ 여기까지 ▲▲ -->
@@ -121,7 +126,8 @@ button{ font-family:inherit; font-size:inherit }
 .sec:nth-of-type(even){ background:var(--paper-warm); --card:var(--paper) }
 .sec + .sec{ border-top:1px solid var(--line) }
 .sec-head{ text-align:center; margin-bottom:32px }
-.sec-head .orn{ width:32px; height:32px; margin:0 auto 14px; opacity:.9 }
+.sprite{ position:absolute; width:0; height:0; overflow:hidden }
+.sec-head .orn{ display:block; width:32px; height:32px; margin:0 auto 14px; color:var(--jade); opacity:.95 }
 .sec-head h2{
   font-family:var(--serif); font-weight:400;
   font-size:1.4rem; line-height:1.4; letter-spacing:.02em; margin:0;
@@ -132,7 +138,7 @@ button{ font-family:inherit; font-size:inherit }
   letter-spacing:.32em; text-transform:uppercase;
 }
 /* 금색 문양 구분선 — 장식이므로 글씨를 올리지 않습니다 */
-.orn-divider{ display:block; width:66px; margin:28px auto 0; opacity:.85 }
+.orn-divider{ display:block; width:66px; height:36px; margin:28px auto 0; color:var(--gold); opacity:.9 }
 
 /* ── 표지 ── */
 .cover{ padding:76px var(--gutter) 58px; text-align:center }
@@ -372,11 +378,53 @@ button{ font-family:inherit; font-size:inherit }
 }
 .share .license + .license{ margin-top:14px }
 .outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:var(--paper) }
-.outro .orn-outro{ width:34px; height:34px; margin:0 auto 18px; opacity:.9 }
+.outro .orn-outro{ display:block; width:34px; height:34px; margin:0 auto 18px; color:var(--gold-soft); opacity:.95 }
 .outro .hui{ font-family:var(--serif); font-size:1.7rem; color:var(--gold-soft) }
 .outro-names{ font-family:var(--serif); font-size:1.1rem; margin:18px 0 6px }
 .outro-date{ font-family:var(--latin); font-size:.78rem; letter-spacing:.22em; color:#CFDCD2 }
 .outro-thanks{ font-size:.94rem; margin-top:22px; color:#E8EFE6 }
+
+/* ── 참석 의사 입력창 ── */
+.modal{
+  width:min(94vw, 430px); max-height:88dvh; padding:0;
+  border:1px solid var(--line-strong); border-radius:3px;
+  background:var(--paper); color:var(--ink); box-shadow:var(--shadow);
+}
+.modal::backdrop{ background:rgba(14,24,19,.62) }
+.modal-top{
+  position:sticky; top:0; z-index:1;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:18px 18px 14px 22px; background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+.modal-top h2{ margin:0; font-family:var(--serif); font-weight:400; font-size:1.2rem }
+.modal-close{
+  flex:0 0 auto; min-width:44px; min-height:44px;
+  border:1px solid var(--line-strong); border-radius:2px;
+  background:var(--paper-warm); color:var(--pine); font-size:1.2rem; cursor:pointer;
+}
+#rsvpForm, #rsvpDone{ padding:20px 22px 26px }
+.field{ margin:0 0 22px; padding:0; border:0 }
+.field > label:not(.choice), .field legend{
+  display:block; padding:0; margin-bottom:9px;
+  font-size:.94rem; font-weight:600; color:var(--ink);
+}
+.field em{ font-style:normal; font-size:.8rem; font-weight:400; color:var(--jade) }
+.field .hint{ margin:-4px 0 10px; font-size:.85rem; line-height:1.7; color:var(--ink-soft) }
+.field input[type="text"], .field input[type="tel"]{
+  width:100%; min-height:48px; padding:12px 14px;
+  border:1px solid var(--line-strong); border-radius:2px;
+  background:var(--paper-warm); color:var(--ink); font-family:var(--sans); font-size:1rem;
+}
+.choice{
+  display:flex; align-items:center; gap:11px;
+  min-height:46px; padding:5px 2px; font-size:.98rem; cursor:pointer;
+}
+.choice input{ width:22px; height:22px; flex:0 0 auto; accent-color:var(--pine); margin:0 }
+.rsvp-msg{ margin:0 0 16px; font-size:.92rem; line-height:1.75; color:var(--seal) }
+.rsvp-msg:empty{ display:none }
+#rsvpForm .btn{ width:100% }
+.rsvp-done{ margin:0 0 20px; font-size:1rem; line-height:1.9 }
 
 /* ── 사진 크게 보기 ── */
 .lightbox{
@@ -416,7 +464,7 @@ button{ font-family:inherit; font-size:inherit }
 /* 인쇄 */
 @media print{
   body{ background:#fff }
-  .toolbar, .skip, .lightbox, .song-toggle{ display:none !important }
+  .toolbar, .skip, .lightbox, .modal, .song-toggle{ display:none !important }
   .song-panel{ display:block !important }
   .paper{ box-shadow:none; max-width:none }
 }
@@ -438,6 +486,14 @@ button{ font-family:inherit; font-size:inherit }
   </div>
 </div>
 
+<!-- 전통 문양 — 장식입니다. 색은 CSS의 color 로 정합니다. -->
+<svg class="sprite" aria-hidden="true" focusable="false"><defs>
+  <symbol id="orn-02" viewBox="-64.5 -64.5 129 129"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M -23.5 -7.5 L 23.5 -7.5 L 23.5 -31 A 23.5 23.5 0 0 0 -23.5 -31 Z"/><path d="M 7.5 -23.5 L 7.5 23.5 L 31 23.5 A 23.5 23.5 0 0 0 31 -23.5 Z"/><path d="M 23.5 7.5 L -23.5 7.5 L -23.5 31 A 23.5 23.5 0 0 0 23.5 31 Z"/><path d="M -7.5 23.5 L -7.5 -23.5 L -31 -23.5 A 23.5 23.5 0 0 0 -31 23.5 Z"/></g></symbol>
+  <symbol id="orn-05" viewBox="-55.1 -55.1 110.2 110.2"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 0 -3.1 L -9.16892 -32.65556 A 9.6 9.6 0 1 1 9.16892 -32.65556 Z"/><path d="M 2.19203 -2.19203 L 16.60756 -29.57437 A 9.6 9.6 0 1 1 29.57437 -16.60756 Z"/><path d="M 3.1 0 L 32.65556 -9.16892 A 9.6 9.6 0 1 1 32.65556 9.16892 Z"/><path d="M 2.19203 2.19203 L 29.57437 16.60756 A 9.6 9.6 0 1 1 16.60756 29.57437 Z"/><path d="M 0 3.1 L 9.16892 32.65556 A 9.6 9.6 0 1 1 -9.16892 32.65556 Z"/><path d="M -2.19203 2.19203 L -16.60756 29.57437 A 9.6 9.6 0 1 1 -29.57437 16.60756 Z"/><path d="M -3.1 0 L -32.65556 9.16892 A 9.6 9.6 0 1 1 -32.65556 -9.16892 Z"/><path d="M -2.19203 -2.19203 L -29.57437 -16.60756 A 9.6 9.6 0 1 1 -16.60756 -29.57437 Z"/></g></symbol>
+  <symbol id="orn-07" viewBox="-57.31859 -31.5 114.63717 63"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 0 0 L 13.85929 -13.85929 A 19.6 19.6 0 1 1 13.85929 13.85929 L -13.85929 -13.85929 A 19.6 19.6 0 1 0 -13.85929 13.85929 Z"/><path d="M 0 -21.5 L 21.5 0 L 0 21.5 L -21.5 0 Z"/></g></symbol>
+  <symbol id="orn-11" viewBox="-52 -52 104 104"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M -14 -28 V 28 A 14 14 0 1 1 -28 14 H 28 A 14 14 0 1 1 14 28 V -28 A 14 14 0 1 1 28 -14 H -28 A 14 14 0 1 1 -14 -28 Z"/></g></symbol>
+</defs></svg>
+
 <p class="sr-only" role="status" aria-live="polite" id="live"></p>
 
 <main class="paper" id="main">
@@ -446,39 +502,39 @@ button{ font-family:inherit; font-size:inherit }
     <div class="arch photo" id="coverPhoto"></div>
     <h1 class="cover-names" id="coverNames"></h1>
     <div class="cover-when" id="coverWhen"></div>
-    <img class="orn-divider" src="patterns/pattern_07-gold.svg" alt="" aria-hidden="true">
+    <svg class="orn-divider" aria-hidden="true"><use href="#orn-07"></use></svg>
   </header>
 
   <section class="sec greeting" aria-labelledby="h-greeting">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_05-green.svg" alt="" aria-hidden="true"><h2 id="h-greeting" data-k="greetingTitle"></h2><p class="en" lang="en" aria-hidden="true">Invitation</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-greeting" data-k="greetingTitle"></h2><p class="en" lang="en" aria-hidden="true">Invitation</p></div>
     <div id="greetingBody"></div>
   </section>
 
   <section class="sec" aria-labelledby="h-family">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_11-green.svg" alt="" aria-hidden="true"><h2 id="h-family" data-k="familyTitle"></h2><p class="en" lang="en" aria-hidden="true">Family</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-family" data-k="familyTitle"></h2><p class="en" lang="en" aria-hidden="true">Family</p></div>
     <div class="family" id="familyBody"></div>
   </section>
 
   <section class="sec" style="padding-left:0;padding-right:0" aria-labelledby="h-gallery">
     <div class="sec-head" style="padding:0 var(--gutter)">
-      <img class="orn" src="patterns/pattern_02-green.svg" alt="" aria-hidden="true"><h2 id="h-gallery" data-k="galleryTitle"></h2><p class="en" lang="en" aria-hidden="true">Our days</p>
+      <svg class="orn" aria-hidden="true"><use href="#orn-02"></use></svg><h2 id="h-gallery" data-k="galleryTitle"></h2><p class="en" lang="en" aria-hidden="true">Our days</p>
     </div>
     <div class="gallery" id="galleryBody" tabindex="0" role="group"></div>
     <p class="gallery-hint" data-k="galleryHint"></p>
   </section>
 
   <section class="sec" aria-labelledby="h-program">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_07-green.svg" alt="" aria-hidden="true"><h2 id="h-program" data-k="programTitle"></h2><p class="en" lang="en" aria-hidden="true">Programme</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-07"></use></svg><h2 id="h-program" data-k="programTitle"></h2><p class="en" lang="en" aria-hidden="true">Programme</p></div>
     <div id="programBody"></div>
   </section>
 
   <section class="sec" aria-labelledby="h-notice">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_11-green.svg" alt="" aria-hidden="true"><h2 id="h-notice" data-k="noticeTitle"></h2><p class="en" lang="en" aria-hidden="true">Good to know</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-notice" data-k="noticeTitle"></h2><p class="en" lang="en" aria-hidden="true">Good to know</p></div>
     <div class="notices" id="noticeBody"></div>
   </section>
 
   <section class="sec" aria-labelledby="h-location">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_05-green.svg" alt="" aria-hidden="true"><h2 id="h-location" data-k="locationTitle"></h2><p class="en" lang="en" aria-hidden="true">Location</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-location" data-k="locationTitle"></h2><p class="en" lang="en" aria-hidden="true">Location</p></div>
     <div class="map" id="mapBox"></div>
     <div class="venue" id="venueBox"></div>
     <div class="map-links" id="mapLinks"></div>
@@ -486,32 +542,32 @@ button{ font-family:inherit; font-size:inherit }
   </section>
 
   <section class="sec rsvp" aria-labelledby="h-rsvp">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_02-green.svg" alt="" aria-hidden="true"><h2 id="h-rsvp" data-k="rsvpTitle"></h2><p class="en" lang="en" aria-hidden="true">RSVP</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-02"></use></svg><h2 id="h-rsvp" data-k="rsvpTitle"></h2><p class="en" lang="en" aria-hidden="true">RSVP</p></div>
     <p class="lead" data-k="rsvpDesc"></p>
-    <a class="btn" id="rsvpBtn" href="#" target="_blank" rel="noopener"></a>
+    <button class="btn" type="button" id="rsvpBtn"></button>
     <span class="note" data-k="rsvpNote"></span>
   </section>
 
   <section class="sec" aria-labelledby="h-gift">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_07-green.svg" alt="" aria-hidden="true"><h2 id="h-gift" data-k="giftTitle"></h2><p class="en" lang="en" aria-hidden="true">With thanks</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-07"></use></svg><h2 id="h-gift" data-k="giftTitle"></h2><p class="en" lang="en" aria-hidden="true">With thanks</p></div>
     <div id="giftBody"></div>
   </section>
 
   <section class="sec credits" id="creditsSection" aria-labelledby="h-credits">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_11-green.svg" alt="" aria-hidden="true"><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
     <p class="lead" data-k="creditsDesc"></p>
     <div id="creditsBody"></div>
   </section>
 
   <section class="sec share" aria-labelledby="h-share">
-    <div class="sec-head"><img class="orn" src="patterns/pattern_05-green.svg" alt="" aria-hidden="true"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
+    <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
     <button class="btn" type="button" id="shareBtn"></button>
     <p class="license" id="a11yNote" data-k="a11yNote"></p>
     <p class="license" id="licenseNote"></p>
   </section>
 
   <footer class="outro">
-    <img class="orn-outro" src="patterns/pattern_05-gold.svg" alt="" aria-hidden="true">
+    <svg class="orn-outro" aria-hidden="true"><use href="#orn-05"></use></svg>
     <div class="hui" aria-hidden="true">囍</div>
     <div class="outro-names" id="outroNames"></div>
     <div class="outro-date" id="outroDate"></div>
@@ -519,6 +575,50 @@ button{ font-family:inherit; font-size:inherit }
   </footer>
 
 </main>
+
+<dialog class="modal" id="rsvpModal" aria-labelledby="rsvpHeading">
+  <form method="dialog" class="modal-top">
+    <h2 id="rsvpHeading" data-k="rsvpTitle"></h2>
+    <button class="modal-close" type="submit" id="rsvpClose">×<span class="sr-only" data-k="close"></span></button>
+  </form>
+
+  <form id="rsvpForm" novalidate>
+    <p class="field">
+      <label for="rsvpName"><span data-k="rsvpName"></span> <em data-k="rsvpRequired"></em></label>
+      <input id="rsvpName" name="name" type="text" maxlength="80" autocomplete="name" required>
+    </p>
+
+    <fieldset class="field">
+      <legend><span data-k="rsvpSide"></span> <em data-k="rsvpRequired"></em></legend>
+      <label class="choice"><input type="radio" name="side" value="groom"><span data-k="groomSideShort"></span></label>
+      <label class="choice"><input type="radio" name="side" value="bride"><span data-k="brideSideShort"></span></label>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend data-k="rsvpParts"></legend>
+      <p class="hint" data-k="rsvpPartsHint"></p>
+      <div id="rsvpParts"></div>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend data-k="rsvpMeal"></legend>
+      <label class="choice"><input type="checkbox" name="vegan"><span data-k="rsvpVegan"></span></label>
+    </fieldset>
+
+    <p class="field">
+      <label for="rsvpPhone"><span data-k="rsvpPhone"></span> <em data-k="rsvpOptional"></em></label>
+      <input id="rsvpPhone" name="phone" type="tel" inputmode="tel" maxlength="40" autocomplete="tel">
+    </p>
+
+    <p class="rsvp-msg" id="rsvpMsg" role="status" aria-live="polite"></p>
+    <button class="btn" type="submit" id="rsvpSend"></button>
+  </form>
+
+  <div id="rsvpDone" tabindex="-1" hidden>
+    <p class="rsvp-done" id="rsvpDoneMsg"></p>
+    <button class="copy" type="button" id="rsvpAgain"></button>
+  </div>
+</dialog>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
   <button class="close" type="button" id="lightboxClose">×<span class="sr-only">닫기</span></button>
@@ -682,8 +782,11 @@ const CONFIG = {
     { label:{ko:"주차",  en:"Parking"}, desc:{ko:"지하 주차장 2시간 무료. 장애인 전용 주차 구역은 지상 정문 옆에 있습니다.", en:"Two hours free at the basement car park. Accessible parking is beside the main entrance."} }
   ],
 
-  /* ── 8. 참석 의사 · 뒤풀이 설문 (구글 폼 주소) ── */
-  rsvpUrl: "https://docs.google.com/forms/여기에_폼_주소",
+  /* ── 8. 참석 의사 접수 주소 ──
+     · 구글 스프레드시트에 바로 쌓입니다. 만드는 방법은 README.md 를 보세요.
+     · 끝이 /exec 인 Apps Script 웹 앱 주소를 넣습니다.
+     · 비워 두면 "준비 중" 안내가 나오고 아무것도 전송되지 않습니다. */
+  rsvpEndpoint: "",
 
   /* ── 9. 마음 전하실 곳 ──────────────────────── */
   accounts: {
@@ -722,6 +825,9 @@ const CONFIG = {
     {
       title: { ko:"도움 주신 분들", en:"People who helped" },
       items: [
+        { name: { ko:"이재", en:"Yijae" },
+          role: { ko:"청첩장 디자인과 전통 문양", en:"Invitation design and the traditional patterns" },
+          url:  "" },
         { name: { ko:"이름을 적어주세요", en:"Name" },
           role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 사진)", en:"e.g. photography" },
           url:  "" },
@@ -746,7 +852,29 @@ const CONFIG = {
     rsvpDesc:     {ko:"정성껏 준비할 수 있도록, 1·2·3부 참석 여부를 미리 알려주시면 감사하겠습니다.",
                    en:"So we can prepare well, please tell us which parts you'll join."},
     rsvpBtn:      {ko:"참석 의사 보내기",en:"Send your RSVP"},
-    rsvpNote:     {ko:"새 창에서 구글 폼이 열립니다.",en:"Opens a Google Form in a new tab."},
+    rsvpNote:     {ko:"같은 화면에서 입력창이 열립니다.",en:"A short form opens on this page."},
+    rsvpName:     {ko:"성함",en:"Your name"},
+    rsvpSide:     {ko:"어느 쪽 하객이신가요",en:"Whose guest are you?"},
+    groomSideShort:{ko:"신랑측",en:"Groom's side"},
+    brideSideShort:{ko:"신부측",en:"Bride's side"},
+    rsvpParts:    {ko:"참석하실 순서",en:"Which parts will you join?"},
+    rsvpPartsHint:{ko:"오실 수 있는 순서를 모두 골라주세요. 이번에 오기 어려우시면 비워 두고 보내셔도 됩니다.",
+                   en:"Tick every part you can join. If you cannot come this time, send it with none ticked."},
+    rsvpMeal:     {ko:"식사",en:"Meal"},
+    rsvpVegan:    {ko:"비건 · 채식 식사가 필요합니다",en:"I need a vegan or vegetarian meal"},
+    rsvpPhone:    {ko:"연락처",en:"Phone"},
+    rsvpRequired: {ko:"(필수)",en:"(required)"},
+    rsvpOptional: {ko:"(선택)",en:"(optional)"},
+    rsvpSend:     {ko:"보내기",en:"Send"},
+    rsvpSending:  {ko:"보내는 중입니다…",en:"Sending…"},
+    rsvpNeedName: {ko:"성함을 입력해 주세요.",en:"Please enter your name."},
+    rsvpNeedSide: {ko:"신랑측 또는 신부측을 골라주세요.",en:"Please choose the groom's or bride's side."},
+    rsvpNotReady: {ko:"참석 접수가 아직 준비 중입니다. 보내지지 않았습니다.",en:"The RSVP form is not connected yet. Nothing was sent."},
+    rsvpFailed:   {ko:"저장된 것을 확인하지 못했습니다. 잠시 후 다시 보내주세요.",en:"We could not confirm your reply was saved. Please try again in a moment."},
+    rsvpThanks:   {ko:"참석 의사를 받았습니다. 고맙습니다.",en:"We have received your reply. Thank you."},
+    rsvpNumber:   {ko:"접수 번호",en:"Reference"},
+    rsvpAgain:    {ko:"한 분 더 보내기",en:"Send another reply"},
+    close:        {ko:"닫기",en:"Close"},
     giftTitle:    {ko:"마음 전하실 곳",en:"With thanks"},
     groomSide:    {ko:"신랑에게",en:"To the groom's family"},
     brideSide:    {ko:"신부에게",en:"To the bride's family"},
@@ -926,9 +1054,14 @@ function render(){
     </div>`).join("");
 
   /* 참석 의사 */
-  const btn = $("#rsvpBtn");
-  btn.textContent = L("rsvpBtn");
-  btn.href = CONFIG.rsvpUrl;
+  $("#rsvpBtn").textContent = L("rsvpBtn");
+  $("#rsvpSend").textContent = L(rsvpPending ? "rsvpSending" : "rsvpSend");
+  $("#rsvpAgain").textContent = L("rsvpAgain");
+  $("#rsvpParts").innerHTML = CONFIG.program.slice(0, 3).map((part, i) => `
+    <label class="choice">
+      <input type="checkbox" name="part${i + 1}"${rsvpChecked["part" + (i + 1)] ? " checked" : ""}>
+      <span>${t(part.title)}</span>
+    </label>`).join("");
 
   /* 계좌 */
   const group = (key, list) => `
@@ -976,6 +1109,90 @@ function render(){
   $("#outroNames").textContent = `${t(CONFIG.groom.name)} · ${t(CONFIG.bride.name)}`;
   $("#outroDate").textContent = CONFIG.outroDate;
 }
+
+/* ── 참석 의사 입력창 ── */
+const rsvpModal = $("#rsvpModal");
+const rsvpForm  = $("#rsvpForm");
+let rsvpPending = false;      /* 보내는 중인가 */
+let rsvpChecked = {};         /* 언어를 바꿔도 체크가 풀리지 않도록 기억합니다 */
+let rsvpRequest = null;       /* 같은 내용을 다시 보내도 줄이 두 번 생기지 않도록 */
+
+function rsvpSay(key){ $("#rsvpMsg").textContent = key ? L(key) : ""; }
+
+$("#rsvpBtn").addEventListener("click", () => {
+  rsvpSay("");
+  rsvpModal.showModal();
+  $("#rsvpName").focus();
+});
+
+/* 바깥을 누르면 닫힙니다 (Esc 와 닫기 버튼은 dialog 가 알아서 처리합니다) */
+rsvpModal.addEventListener("click", e => { if (e.target === rsvpModal) rsvpModal.close(); });
+rsvpModal.addEventListener("close", () => $("#rsvpBtn").focus());
+
+/* 체크 상태 기억 */
+$("#rsvpParts").addEventListener("change", e => {
+  if (e.target.name) rsvpChecked[e.target.name] = e.target.checked;
+});
+
+$("#rsvpAgain").addEventListener("click", () => {
+  rsvpForm.reset(); rsvpChecked = {}; rsvpRequest = null;
+  rsvpForm.hidden = false; $("#rsvpDone").hidden = true;
+  render(); rsvpSay(""); $("#rsvpName").focus();
+});
+
+const rsvpId = () => (crypto.randomUUID ? crypto.randomUUID()
+  : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+
+rsvpForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  if (rsvpPending) return;
+
+  const f = new FormData(rsvpForm);
+  const data = {
+    name:  String(f.get("name")  || "").trim(),
+    side:  f.get("side"),
+    phone: String(f.get("phone") || "").trim(),
+    vegan: f.has("vegan"), part1: f.has("part1"), part2: f.has("part2"), part3: f.has("part3")
+  };
+  if (!data.name){ rsvpSay("rsvpNeedName"); $("#rsvpName").focus(); return; }
+  if (data.side !== "groom" && data.side !== "bride"){ rsvpSay("rsvpNeedSide"); return; }
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(CONFIG.rsvpEndpoint || "")){
+    rsvpSay("rsvpNotReady"); return;
+  }
+
+  /* 같은 내용을 다시 보내면 같은 요청 번호를 씁니다 */
+  const print = JSON.stringify(data);
+  if (!rsvpRequest || rsvpRequest.print !== print) rsvpRequest = { print, id: rsvpId() };
+  data.requestId = rsvpRequest.id;
+
+  rsvpPending = true; rsvpSay(""); $("#rsvpSend").disabled = true;
+  $("#rsvpSend").textContent = L("rsvpSending");
+  const stop = new AbortController();
+  const timer = setTimeout(() => stop.abort(), 25000);
+  try{
+    const res = await fetch(CONFIG.rsvpEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(data), signal: stop.signal, redirect: "follow"
+    });
+    if (!res.ok) throw new Error("http");
+    const out = await res.json();
+    if (out.ok !== true || out.requestId !== data.requestId
+        || !Number.isInteger(out.number) || out.number < 1) throw new Error("unconfirmed");
+    rsvpForm.hidden = true;
+    $("#rsvpDone").hidden = false;
+    $("#rsvpDoneMsg").textContent = `${L("rsvpThanks")} (${L("rsvpNumber")} ${out.number})`;
+    $("#rsvpDone").focus();
+    rsvpRequest = null;
+  } catch {
+    rsvpSay("rsvpFailed");
+  } finally {
+    clearTimeout(timer);
+    rsvpPending = false;
+    $("#rsvpSend").disabled = false;
+    $("#rsvpSend").textContent = L("rsvpSend");
+  }
+});
 
 /* ── 언어 전환 ── */
 $("#langGroup").addEventListener("click", e => {
