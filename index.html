@@ -17,27 +17,28 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --paper:      #F2F5EE;
-  --paper-warm: #FAFBF7;
-  --ink:        #16241D;   /* 본문 — 종이 대비 14.4:1 */
-  --ink-soft:   #42574B;   /* 보조 — 종이 대비 7.4:1  */
-  --pine:       #1E4033;
-  --jade:       #2F6350;   /* 강조 — 종이 대비 6.6:1  */
+  --paper:      #F7F4EC;   /* 크림 — 기본 바탕            */
+  --paper-warm: #E7EBE1;   /* 연녹 — 카드·교차 바탕        */
+  --ink:        #23302B;   /* 본문 — 크림 대비 12.5:1      */
+  --ink-soft:   #3A473F;   /* 보조 — 크림 대비 8.9:1       */
+  --pine:       #2E5B4F;   /* 소나무색 — 위에 크림 글씨 7:1 */
+  --jade:       #275044;   /* 강조 — 크림 대비 8.3:1       */
   --sage:       #7FA189;
-  --seal:       #8E332C;
-  --line:       rgba(22,36,29,.22);
-  --line-strong:rgba(22,36,29,.38);
+  --gold:       #BFA46A;   /* 금색 — 장식 전용, 글씨 금지  */
+  --gold-soft:  #DCC894;   /* 금색 — 초록 바탕 위 장식     */
+  --seal:       #7E2D27;   /* 낙관 — 크림 대비 8.3:1       */
+  --line:       rgba(46,91,79,.22);
+  --line-strong:rgba(46,91,79,.40);
   --focus:      #B4531F;   /* 초록 위에서도 분간되는 주황 계열 */
-  --shadow:     0 18px 50px -30px rgba(22,36,29,.55);
+  --shadow:     0 18px 50px -30px rgba(35,48,43,.55);
 
-  --serif: "Gowun Batang", "Nanum Myeongjo", serif;
-  --sans:  "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --latin: "Cormorant Garamond", serif;
+  --serif: "Gowun Batang", "Noto Serif KR", serif;
+  --sans:  "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --latin: "Noto Sans KR", sans-serif;
 
   --col: 480px;
   --gutter: 26px;
@@ -51,9 +52,9 @@ html.text-xl{ font-size:150% }
 *{ box-sizing:border-box }
 body{
   margin:0;
-  background:var(--pine);
+  background:#EDEAE2;
   color:var(--ink);
-  font-family:var(--sans);
+  font-family:var(--serif);
   font-size:1rem;
   line-height:1.9;
   word-break:keep-all;
@@ -101,7 +102,7 @@ button{ font-family:inherit; font-size:inherit }
 }
 .pillset{
   display:flex; gap:2px; padding:3px;
-  background:rgba(250,251,247,.94);
+  background:rgba(247,244,236,.95);
   backdrop-filter:blur(10px);
   border:1px solid var(--line-strong);
   border-radius:999px;
@@ -109,23 +110,29 @@ button{ font-family:inherit; font-size:inherit }
 .pillset button{
   border:0; background:transparent; cursor:pointer;
   padding:7px 14px; border-radius:999px;
-  font-size:.8rem; font-weight:600; letter-spacing:.02em;
+  font-family:var(--sans);
+  font-size:.8rem; font-weight:500; letter-spacing:.02em;
   color:var(--ink-soft); min-height:34px;
 }
-.pillset button[aria-pressed="true"]{ background:var(--pine); color:#fff }
+.pillset button[aria-pressed="true"]{ background:var(--pine); color:var(--paper) }
 
-/* ── 공통 섹션 ── */
-.sec{ padding:60px var(--gutter) }
+/* ── 공통 섹션 : 크림 바탕과 연녹 바탕이 번갈아 나옵니다 ── */
+.sec{ padding:60px var(--gutter); background:var(--paper); --card:var(--paper-warm) }
+.sec:nth-of-type(even){ background:var(--paper-warm); --card:var(--paper) }
 .sec + .sec{ border-top:1px solid var(--line) }
 .sec-head{ text-align:center; margin-bottom:32px }
+.sec-head .orn{ width:32px; height:32px; margin:0 auto 14px; opacity:.9 }
 .sec-head h2{
   font-family:var(--serif); font-weight:400;
   font-size:1.4rem; line-height:1.4; letter-spacing:.02em; margin:0;
 }
 .sec-head .en{
-  margin:8px 0 0; font-size:.85rem; color:var(--ink-soft);
-  font-family:var(--latin); font-style:italic; letter-spacing:.1em;
+  margin:9px 0 0; font-size:.66rem; color:var(--ink-soft);
+  font-family:var(--latin); font-weight:400;
+  letter-spacing:.32em; text-transform:uppercase;
 }
+/* 금색 문양 구분선 — 장식이므로 글씨를 올리지 않습니다 */
+.orn-divider{ display:block; width:66px; margin:28px auto 0; opacity:.85 }
 
 /* ── 표지 ── */
 .cover{ padding:76px var(--gutter) 58px; text-align:center }
@@ -134,7 +141,7 @@ button{ font-family:inherit; font-size:inherit }
   aspect-ratio:3/4;
   border-radius:999px 999px 10px 10px;
   overflow:hidden;
-  background:linear-gradient(160deg,#D5E2D6,#B7CCBB);
+  background:linear-gradient(160deg,#DCE3D6,#BFCEBD);
   box-shadow:var(--shadow);
   position:relative;
 }
@@ -154,14 +161,14 @@ button{ font-family:inherit; font-size:inherit }
   display:flex; align-items:center; justify-content:center;
   gap:14px; flex-wrap:wrap;
 }
-.cover-names .amp{ color:var(--seal); font-size:.6em; transform:translateY(-2px) }
+.cover-names .amp{ color:var(--gold); font-size:.6em; transform:translateY(-2px) }
 .cover-when{
   margin:24px auto 0; max-width:320px;
   padding-top:20px; border-top:1px solid var(--line);
   font-size:1rem; line-height:1.95;
 }
 .cover-when strong{ font-weight:600; display:block }
-.cover-when span{ color:var(--ink-soft); font-size:.94rem }
+.cover-when span{ font-family:var(--sans); color:var(--ink-soft); font-size:.9rem; letter-spacing:.06em }
 
 /* ── 인사말 ── */
 .greeting{ text-align:center }
@@ -171,14 +178,14 @@ button{ font-family:inherit; font-size:inherit }
 /* ── 가족 ── */
 .family{ display:grid; gap:14px }
 .fam{
-  background:var(--paper-warm);
+  background:var(--card);
   border:1px solid var(--line);
   border-radius:3px 3px 3px 16px;
   padding:20px 22px;
 }
 .fam-role{
-  font-family:var(--latin); font-style:italic;
-  font-size:.85rem; color:var(--jade); letter-spacing:.09em; margin-bottom:4px;
+  font-family:var(--sans); font-size:.8rem; color:var(--jade);
+  letter-spacing:.12em; margin-bottom:6px;
 }
 .fam-name{ font-family:var(--serif); font-size:1.25rem; line-height:1.3; margin:0; font-weight:400 }
 .fam-parents{ margin-top:10px; font-size:.94rem; color:var(--ink-soft); line-height:1.9 }
@@ -196,7 +203,7 @@ button{ font-family:inherit; font-size:inherit }
   scroll-snap-align:center;
   border:0; padding:0; margin:0;
   border-radius:2px; overflow:hidden;
-  background:linear-gradient(160deg,#D5E2D6,#B7CCBB);
+  background:linear-gradient(160deg,#DCE3D6,#BFCEBD);
   position:relative; cursor:zoom-in;
 }
 .gallery .photo img{ width:100%; height:100%; object-fit:cover }
@@ -217,7 +224,7 @@ button{ font-family:inherit; font-size:inherit }
 }
 .seal{
   width:46px; height:46px; border-radius:2px;
-  background:var(--seal); color:#fff;
+  background:var(--seal); color:var(--paper);
   display:flex; align-items:center; justify-content:center;
   font-family:var(--serif); font-size:1.2rem;
 }
@@ -236,7 +243,7 @@ button{ font-family:inherit; font-size:inherit }
 /* ── 피로연: 비건 메뉴 · 축가 ── */
 .menu-box{
   margin-top:15px; padding:16px 18px;
-  background:var(--paper-warm);
+  background:var(--card);
   border:1px solid var(--line);
   border-left:4px solid var(--jade);
   border-radius:2px;
@@ -249,7 +256,7 @@ button{ font-family:inherit; font-size:inherit }
   margin-top:15px; width:100%;
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   padding:14px 16px; cursor:pointer; min-height:48px;
-  background:var(--paper-warm); color:var(--pine);
+  background:var(--card); color:var(--pine);
   border:1px solid var(--line-strong); border-radius:2px;
   font-size:.96rem; font-weight:600; text-align:left;
 }
@@ -257,7 +264,7 @@ button{ font-family:inherit; font-size:inherit }
 .song-panel{
   display:none; margin-top:-1px;
   padding:20px 18px; border:1px solid var(--line-strong);
-  background:var(--paper-warm); border-radius:0 0 2px 2px;
+  background:var(--card); border-radius:0 0 2px 2px;
 }
 .song-panel.open{ display:block }
 .song-panel h4{ margin:0 0 12px; font-family:var(--serif); font-weight:400; font-size:1.05rem }
@@ -271,7 +278,7 @@ button{ font-family:inherit; font-size:inherit }
 /* ── 안내 사항 ── */
 .notices{ display:grid; gap:13px }
 .notice{
-  background:var(--paper-warm);
+  background:var(--card);
   border:1px solid var(--line);
   border-radius:3px 16px 3px 3px;
   padding:19px 20px;
@@ -301,7 +308,7 @@ button{ font-family:inherit; font-size:inherit }
   text-decoration:underline; text-underline-offset:3px;
   padding:11px 6px; font-size:.9rem; font-weight:600;
   border:1px solid var(--line-strong); border-radius:2px;
-  background:var(--paper-warm); color:var(--pine);
+  background:var(--card); color:var(--pine);
 }
 .transit{ display:grid; gap:15px }
 .transit-row{ display:grid; grid-template-columns:64px 1fr; gap:12px; font-size:.96rem }
@@ -309,7 +316,7 @@ button{ font-family:inherit; font-size:inherit }
 .transit-desc{ color:var(--ink-soft); line-height:1.8 }
 
 /* ── 참석 의사 ── */
-.rsvp{ text-align:center; background:var(--paper-warm) }
+.rsvp{ text-align:center }
 .rsvp .lead{ font-size:1rem; margin:0 0 24px; color:var(--ink-soft) }
 .btn{
   display:inline-block; text-decoration:none;
@@ -330,7 +337,7 @@ button{ font-family:inherit; font-size:inherit }
 .acct-num{ font-size:1rem; margin-top:2px }
 .copy{
   flex:0 0 auto; min-height:44px;
-  border:1px solid var(--line-strong); background:var(--paper-warm);
+  border:1px solid var(--line-strong); background:var(--card);
   color:var(--pine); font-size:.88rem; font-weight:600;
   padding:9px 16px; border-radius:2px; cursor:pointer;
 }
@@ -364,11 +371,12 @@ button{ font-family:inherit; font-size:inherit }
   text-decoration:underline; text-underline-offset:3px;
 }
 .share .license + .license{ margin-top:14px }
-.outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:#F0F5EE }
-.outro .hui{ font-family:var(--serif); font-size:1.7rem; color:#C9DCCC }
+.outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:var(--paper) }
+.outro .orn-outro{ width:34px; height:34px; margin:0 auto 18px; opacity:.9 }
+.outro .hui{ font-family:var(--serif); font-size:1.7rem; color:var(--gold-soft) }
 .outro-names{ font-family:var(--serif); font-size:1.1rem; margin:18px 0 6px }
-.outro-date{ font-family:var(--latin); font-size:.9rem; letter-spacing:.16em; color:#D3E1D2 }
-.outro-thanks{ font-size:.94rem; margin-top:22px; color:#E3EDE1 }
+.outro-date{ font-family:var(--latin); font-size:.78rem; letter-spacing:.22em; color:#CFDCD2 }
+.outro-thanks{ font-size:.94rem; margin-top:22px; color:#E8EFE6 }
 
 /* ── 사진 크게 보기 ── */
 .lightbox{
@@ -438,38 +446,39 @@ button{ font-family:inherit; font-size:inherit }
     <div class="arch photo" id="coverPhoto"></div>
     <h1 class="cover-names" id="coverNames"></h1>
     <div class="cover-when" id="coverWhen"></div>
+    <img class="orn-divider" src="patterns/pattern_07-gold.svg" alt="" aria-hidden="true">
   </header>
 
   <section class="sec greeting" aria-labelledby="h-greeting">
-    <div class="sec-head"><h2 id="h-greeting" data-k="greetingTitle"></h2><p class="en" lang="en" aria-hidden="true">Invitation</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_05-green.svg" alt="" aria-hidden="true"><h2 id="h-greeting" data-k="greetingTitle"></h2><p class="en" lang="en" aria-hidden="true">Invitation</p></div>
     <div id="greetingBody"></div>
   </section>
 
   <section class="sec" aria-labelledby="h-family">
-    <div class="sec-head"><h2 id="h-family" data-k="familyTitle"></h2><p class="en" lang="en" aria-hidden="true">Family</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_11-green.svg" alt="" aria-hidden="true"><h2 id="h-family" data-k="familyTitle"></h2><p class="en" lang="en" aria-hidden="true">Family</p></div>
     <div class="family" id="familyBody"></div>
   </section>
 
   <section class="sec" style="padding-left:0;padding-right:0" aria-labelledby="h-gallery">
     <div class="sec-head" style="padding:0 var(--gutter)">
-      <h2 id="h-gallery" data-k="galleryTitle"></h2><p class="en" lang="en" aria-hidden="true">Our days</p>
+      <img class="orn" src="patterns/pattern_02-green.svg" alt="" aria-hidden="true"><h2 id="h-gallery" data-k="galleryTitle"></h2><p class="en" lang="en" aria-hidden="true">Our days</p>
     </div>
     <div class="gallery" id="galleryBody" tabindex="0" role="group"></div>
     <p class="gallery-hint" data-k="galleryHint"></p>
   </section>
 
   <section class="sec" aria-labelledby="h-program">
-    <div class="sec-head"><h2 id="h-program" data-k="programTitle"></h2><p class="en" lang="en" aria-hidden="true">Programme</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_07-green.svg" alt="" aria-hidden="true"><h2 id="h-program" data-k="programTitle"></h2><p class="en" lang="en" aria-hidden="true">Programme</p></div>
     <div id="programBody"></div>
   </section>
 
   <section class="sec" aria-labelledby="h-notice">
-    <div class="sec-head"><h2 id="h-notice" data-k="noticeTitle"></h2><p class="en" lang="en" aria-hidden="true">Good to know</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_11-green.svg" alt="" aria-hidden="true"><h2 id="h-notice" data-k="noticeTitle"></h2><p class="en" lang="en" aria-hidden="true">Good to know</p></div>
     <div class="notices" id="noticeBody"></div>
   </section>
 
   <section class="sec" aria-labelledby="h-location">
-    <div class="sec-head"><h2 id="h-location" data-k="locationTitle"></h2><p class="en" lang="en" aria-hidden="true">Location</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_05-green.svg" alt="" aria-hidden="true"><h2 id="h-location" data-k="locationTitle"></h2><p class="en" lang="en" aria-hidden="true">Location</p></div>
     <div class="map" id="mapBox"></div>
     <div class="venue" id="venueBox"></div>
     <div class="map-links" id="mapLinks"></div>
@@ -477,31 +486,32 @@ button{ font-family:inherit; font-size:inherit }
   </section>
 
   <section class="sec rsvp" aria-labelledby="h-rsvp">
-    <div class="sec-head"><h2 id="h-rsvp" data-k="rsvpTitle"></h2><p class="en" lang="en" aria-hidden="true">RSVP</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_02-green.svg" alt="" aria-hidden="true"><h2 id="h-rsvp" data-k="rsvpTitle"></h2><p class="en" lang="en" aria-hidden="true">RSVP</p></div>
     <p class="lead" data-k="rsvpDesc"></p>
     <a class="btn" id="rsvpBtn" href="#" target="_blank" rel="noopener"></a>
     <span class="note" data-k="rsvpNote"></span>
   </section>
 
   <section class="sec" aria-labelledby="h-gift">
-    <div class="sec-head"><h2 id="h-gift" data-k="giftTitle"></h2><p class="en" lang="en" aria-hidden="true">With thanks</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_07-green.svg" alt="" aria-hidden="true"><h2 id="h-gift" data-k="giftTitle"></h2><p class="en" lang="en" aria-hidden="true">With thanks</p></div>
     <div id="giftBody"></div>
   </section>
 
   <section class="sec credits" id="creditsSection" aria-labelledby="h-credits">
-    <div class="sec-head"><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_11-green.svg" alt="" aria-hidden="true"><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
     <p class="lead" data-k="creditsDesc"></p>
     <div id="creditsBody"></div>
   </section>
 
   <section class="sec share" aria-labelledby="h-share">
-    <div class="sec-head"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
+    <div class="sec-head"><img class="orn" src="patterns/pattern_05-green.svg" alt="" aria-hidden="true"><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
     <button class="btn" type="button" id="shareBtn"></button>
     <p class="license" id="a11yNote" data-k="a11yNote"></p>
     <p class="license" id="licenseNote"></p>
   </section>
 
   <footer class="outro">
+    <img class="orn-outro" src="patterns/pattern_05-gold.svg" alt="" aria-hidden="true">
     <div class="hui" aria-hidden="true">囍</div>
     <div class="outro-names" id="outroNames"></div>
     <div class="outro-date" id="outroDate"></div>

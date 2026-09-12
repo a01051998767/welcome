@@ -13,8 +13,10 @@ GitHub Pages로 호스팅하는 한 페이지짜리 모바일 청첩장.
 ```
 index.html      ← 전부 여기에 들어있다
 images/         ← cover.jpg, photo-1~5.jpg, og-image.jpg
+patterns/       ← 전통 문양 SVG. 장식이므로 alt=""·aria-hidden
 CLAUDE.md       ← 이 파일
 ```
+`# 전통혼례 청첩장 개선/`은 별도 구현본(디자인 참고용)이며 배포에 쓰지 않는다.
 
 ## index.html 구조
 파일 하단 `const CONFIG = { ... }` 블록에 모든 내용(텍스트·사진·계좌·링크)이 모여 있다.
@@ -62,12 +64,17 @@ CLAUDE.md       ← 이 파일
 
 ## 라이선스
 코드는 MIT(`LICENSE`). 사진·축가 가사·개인 정보는 제외이며, 그 범위는 `LICENSE` 아래쪽에 적어 두었다.
-폰트 Pretendard · Gowun Batang · Cormorant Garamond는 모두 SIL OFL 1.1이라 상업적 사용에 문제가 없다.
+폰트 Gowun Batang · Noto Serif KR · Noto Sans KR는 모두 SIL OFL 1.1이라 상업적 사용에 문제가 없다.
+`patterns/`의 문양 SVG는 출처와 라이선스가 확인되지 않았다. MIT 범위에서 빼두었으며, 재배포 전에 출처를 확인해야 한다.
 
 ## 디자인 방향
-- 전통혼례에 맞춘 초록 계열. 소나무색(`--pine`), 청자색(`--jade`), 한지 배경(`--paper`).
+- 전통혼례에 맞춘 초록·크림 계열. 크림 바탕(`--paper` #F7F4EC)과 연녹 바탕(`--paper-warm` #E7EBE1)이 섹션마다 번갈아 나온다.
+- 카드·패널은 `--card`를 쓴다. 섹션 바탕이 크림이면 카드가 연녹, 연녹이면 카드가 크림으로 자동으로 뒤집힌다.
+- 소나무색(`--pine` #2E5B4F)은 버튼·맺음 바탕, 청자색(`--jade` #275044)은 강조 글씨.
+- 금색(`--gold`, `--gold-soft`)은 **장식 전용**이다. 대비가 낮으므로 글씨에 쓰지 않는다.
 - 붉은 낙관 도장색(`--seal`)은 1·2·3부 표시에만 아주 좁게 쓴다.
-- 서체: 제목 Gowun Batang(명조), 본문 Pretendard, 영문 장식 Cormorant Garamond.
+- 섹션 머리는 `문양 → 한글 제목 → 영문 레터스페이싱 라벨` 순서다. 문양은 `patterns/`의 SVG이며 장식이므로 `alt=""` + `aria-hidden`.
+- 서체: 제목·본문 Gowun Batang(명조), 보조 Noto Serif KR, 라벨·숫자 Noto Sans KR.
 - 모바일이 기본. 최대 폭 480px 한 칸으로 고정하고 데스크톱에서는 가운데 정렬.
 
 ## 아직 안 채운 것

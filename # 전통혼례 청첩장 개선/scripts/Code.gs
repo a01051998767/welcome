@@ -1,6 +1,7 @@
 /** Google 스프레드시트 → 확장 프로그램 → Apps Script에 붙여 넣으세요. */
 const SETTINGS = {
-  spreadsheetId: '1_O2tANr8eJBz49NY5AlVh8zZg84aOMTt4pL9ah9eT4I',
+  // 하객 리스트 시트: https://docs.google.com/spreadsheets/d/1R7I0eYxUiP7VPKBWQtJkJCMdjMoS0a2E2uRbxbTHz5s/edit
+  spreadsheetId: '1R7I0eYxUiP7VPKBWQtJkJCMdjMoS0a2E2uRbxbTHz5s',
   sheetName: 'RSVP'
 };
 const HEADERS = ['번호','접수 날짜 (한국시간)','성함','신랑측/신부측','비건식 필요','1부 참석','2부 참석','3부 참석','연락처','요청 ID'];
