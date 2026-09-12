@@ -42,6 +42,17 @@ function sheet_() {
 }
 /** 최초 1회 실행하여 권한을 승인하고 RSVP 탭을 만드세요. */
 function setup() { sheet_(); }
+
+/**
+ * 받는 항목을 바꿨을 때 한 번 실행하세요.
+ * 지금까지 받은 RSVP 탭은 날짜를 붙여 그대로 보관하고, 새 제목 줄로 새 탭을 만듭니다.
+ */
+function resetSheet() {
+  const book = SpreadsheetApp.openById(SETTINGS.spreadsheetId);
+  const old = book.getSheetByName(SETTINGS.sheetName);
+  if (old) old.setName(SETTINGS.sheetName + '_' + Utilities.formatDate(new Date(),'Asia/Seoul','yyyyMMdd_HHmm'));
+  sheet_();
+}
 /** 응답 내용은 외부에서 읽을 수 없으며 상태만 반환합니다. */
 function doGet() { return jsonResponse_({ok:true, service:'wedding-rsvp'}); }
 function validate_(data) {
@@ -81,6 +92,7 @@ function doPost(e) {
     SpreadsheetApp.flush();
     return jsonResponse_({ok:true,number: number,requestId:data.requestId});
   } catch (error) {
-    return jsonResponse_({ok:false,message:'저장하지 못했습니다. 설정과 입력값을 확인해 주세요.'});
+    /* reason 은 원인을 찾기 위한 짧은 영문 메모입니다. 하객 화면에는 보이지 않습니다. */
+    return jsonResponse_({ok:false,message:'저장하지 못했습니다. 설정과 입력값을 확인해 주세요.',reason:String((error && error.message) || error)});
   } finally { if (lock && lock.hasLock()) lock.releaseLock(); }
 }

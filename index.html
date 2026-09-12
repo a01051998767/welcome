@@ -1361,7 +1361,7 @@ rsvpForm.addEventListener("submit", async e => {
     reached = true;
     if (!res.ok) throw new Error("HTTP " + res.status);
     const out = await res.json();
-    if (out.ok !== true) throw new Error("server said: " + (out.message || "ok=false"));
+    if (out.ok !== true) throw new Error("server said: " + (out.reason || out.message || "ok=false"));
     if (out.requestId !== data.requestId || !Number.isInteger(out.number) || out.number < 1)
       throw new Error("receipt not confirmed");
     rsvpForm.hidden = true;
