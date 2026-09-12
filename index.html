@@ -190,6 +190,7 @@ button{ font-family:inherit; font-size:inherit }
 }
 .sec.dark .sec-head .orn{ color:var(--gold-soft) }
 .sec.dark .song-toggle{ color:var(--ink) }
+.sec.dark .notice-link{ background:var(--paper); color:var(--pine) }
 .sec.dark .copy, .sec.dark .map-links a{ color:var(--ink) }
 
 /* 청해파 무늬 띠 — 장식입니다 */
@@ -834,8 +835,11 @@ const CONFIG = {
       meta:  { ko:"19:00 – · The Baer", en:"From 19:00 · The Baer" },
       notes: [
         { ko:"편한 옷으로 갈아입고 오셔도 좋습니다.", en:"Feel free to change into something comfortable." },
-        { ko:"인원 파악을 위해 참석 의사 폼에서 3부 참석 여부도 알려주세요.", en:"Please let us know in the RSVP form whether you'll join Part 3." }
-      ]
+        { ko:"인원 파악을 위해 참석 의사를 보내실 때 3부 참석 여부도 알려주세요.", en:"Please tell us in your RSVP whether you'll join Part 3." }
+      ],
+      /* 순서마다 장소 지도 링크를 붙일 수 있습니다. 비워 두면 버튼이 숨습니다. */
+      link: "https://maps.app.goo.gl/NtXyXgKnLB5oPZcKA",
+      linkText: { ko:"The Baer 위치 보기", en:"See The Baer on the map" }
     }
   ],
 
@@ -1124,6 +1128,7 @@ function render(){
           <h3 class="part-title">${t(p.title)}</h3>
           <p class="part-meta">${t(p.meta)}</p>
           <ul class="part-notes">${p.notes.map(n => `<li>${t(n)}</li>`).join("")}</ul>
+          ${p.link ? `<a class="notice-link" href="${p.link}" target="_blank" rel="noopener">${t(p.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>` : ""}
           ${menu}${song}
         </div>
       </div>`;
