@@ -137,6 +137,35 @@ button{ font-family:inherit; font-size:inherit }
   font-family:var(--latin); font-weight:400;
   letter-spacing:.32em; text-transform:uppercase;
 }
+/* 짙은 초록 섹션 — 안쪽 색을 통째로 뒤집습니다 (모두 대비 7:1 이상) */
+.sec.dark{
+  position:relative; overflow:hidden;
+  padding-top:150px;
+  background:#24483D; color:#F7F4EC;
+  --card:#1E4033;
+  --ink:#F7F4EC;        /* 9.2:1 */
+  --ink-soft:#CFE0D5;   /* 7.4:1 */
+  --jade:#E8D9A8;       /* 7.2:1 */
+  --line:rgba(247,244,236,.24);
+  --line-strong:rgba(247,244,236,.45);
+}
+.sec.dark .sec-head .orn{ color:var(--gold-soft) }
+.sec.dark .song-toggle{ color:var(--ink) }
+.sec.dark .copy, .sec.dark .map-links a{ color:var(--ink) }
+
+/* 청해파 무늬 띠 — 장식입니다 */
+.waves{ position:absolute; top:0; left:0; right:0; display:flex; flex-direction:column }
+.waves i{
+  display:block; height:44px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='72.5' viewBox='-80 -62.5 160 72.5'%3E%3Cg fill='none' stroke='%23F7F4EC' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-30.47835 -34.70669A35 35 0 0 1 30.47835 -34.70669'/%3E%3Cpath d='M-21.64461 -32.35172A26.25 26.25 0 0 1 21.64461 -32.35172'/%3E%3Cpath d='M-14 -28A17.5 17.5 0 0 1 14 -28'/%3E%3Cpath d='M-7.61959 -21.80167A8.75 8.75 0 0 1 7.61959 -21.80167'/%3E%3Cpath d='M-70 0A35 35 0 0 1 0 0'/%3E%3Cpath d='M-61.25 0A26.25 26.25 0 0 1-8.75 0'/%3E%3Cpath d='M-52.5 0A17.5 17.5 0 0 1-17.5 0'/%3E%3Cpath d='M-43.75 0A8.75 8.75 0 0 1-26.25 0'/%3E%3Cpath d='M0 0A35 35 0 0 1 70 0'/%3E%3Cpath d='M8.75 0A26.25 26.25 0 0 1 61.25 0'/%3E%3Cpath d='M17.5 0A17.5 17.5 0 0 1 52.5 0'/%3E%3Cpath d='M26.25 0A8.75 8.75 0 0 1 43.75 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:96px 44px; background-repeat:repeat-x; background-position:0 bottom;
+}
+.waves i:nth-child(1){ opacity:.32 }
+.waves i:nth-child(2){ opacity:.22; background-position:48px bottom }
+.waves i:nth-child(3){ opacity:.14 }
+.waves i:nth-child(4){ opacity:.07; background-position:48px bottom }
+.outro{ position:relative; overflow:hidden; padding-top:150px }
+
 /* 금색 문양 구분선 — 장식이므로 글씨를 올리지 않습니다 */
 .orn-divider{ display:block; width:66px; height:36px; margin:28px auto 0; color:var(--gold); opacity:.9 }
 
@@ -289,7 +318,16 @@ button{ font-family:inherit; font-size:inherit }
   border-radius:3px 16px 3px 3px;
   padding:19px 20px;
 }
-.notice h3{ margin:0; font-family:var(--serif); font-weight:400; font-size:1.1rem }
+.notice h3{
+  margin:0; font-family:var(--serif); font-weight:400; font-size:1.1rem;
+  display:flex; align-items:center; gap:11px;
+}
+.ico{
+  flex:0 0 auto; width:32px; height:32px; padding:6px;
+  border-radius:50%; background:rgba(46,91,79,.12); color:var(--jade);
+}
+.sec.dark .ico{ background:rgba(247,244,236,.12) }
+.menu-box h4{ display:flex; align-items:center; gap:10px }
 .notice p{ margin:7px 0 0; font-size:.96rem; color:var(--ink-soft); line-height:1.85 }
 .notice-link{
   display:inline-block; margin-top:12px; min-height:44px;
@@ -492,6 +530,12 @@ button{ font-family:inherit; font-size:inherit }
   <symbol id="orn-05" viewBox="-55.1 -55.1 110.2 110.2"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 0 -3.1 L -9.16892 -32.65556 A 9.6 9.6 0 1 1 9.16892 -32.65556 Z"/><path d="M 2.19203 -2.19203 L 16.60756 -29.57437 A 9.6 9.6 0 1 1 29.57437 -16.60756 Z"/><path d="M 3.1 0 L 32.65556 -9.16892 A 9.6 9.6 0 1 1 32.65556 9.16892 Z"/><path d="M 2.19203 2.19203 L 29.57437 16.60756 A 9.6 9.6 0 1 1 16.60756 29.57437 Z"/><path d="M 0 3.1 L 9.16892 32.65556 A 9.6 9.6 0 1 1 -9.16892 32.65556 Z"/><path d="M -2.19203 2.19203 L -16.60756 29.57437 A 9.6 9.6 0 1 1 -29.57437 16.60756 Z"/><path d="M -3.1 0 L -32.65556 9.16892 A 9.6 9.6 0 1 1 -32.65556 -9.16892 Z"/><path d="M -2.19203 -2.19203 L -29.57437 -16.60756 A 9.6 9.6 0 1 1 -16.60756 -29.57437 Z"/></g></symbol>
   <symbol id="orn-07" viewBox="-57.31859 -31.5 114.63717 63"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M 0 0 L 13.85929 -13.85929 A 19.6 19.6 0 1 1 13.85929 13.85929 L -13.85929 -13.85929 A 19.6 19.6 0 1 0 -13.85929 13.85929 Z"/><path d="M 0 -21.5 L 21.5 0 L 0 21.5 L -21.5 0 Z"/></g></symbol>
   <symbol id="orn-11" viewBox="-52 -52 104 104"><g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M -14 -28 V 28 A 14 14 0 1 1 -28 14 H 28 A 14 14 0 1 1 14 28 V -28 A 14 14 0 1 1 28 -14 H -28 A 14 14 0 1 1 -14 -28 Z"/></g></symbol>
+
+  <symbol id="ico-access" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.2" r="2"/><path d="M4.8 9h14.4"/><path d="M12 7.2v6"/><path d="M12 13.2 8.6 20.5"/><path d="M12 13.2l3.4 7.3"/></g></symbol>
+  <symbol id="ico-caption" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10.6 10.4a2.6 2.6 0 1 0 0 3.2"/><path d="M17.1 10.4a2.6 2.6 0 1 0 0 3.2"/></g></symbol>
+  <symbol id="ico-route" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="16.5" r="4.6"/><circle cx="13.6" cy="3.9" r="1.7"/><path d="M12.6 7.1v5.2h4.1"/><path d="M16.7 12.3 19 18.6"/></g></symbol>
+  <symbol id="ico-live" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="13" rx="2.5"/><path d="M10.2 8.6 15 11l-4.8 2.4z"/><path d="M8 21h8"/></g></symbol>
+  <symbol id="ico-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 3.5c0 8.6-4.9 13.6-11.4 13.6-1.3 0-2.4-.2-3.3-.6C5.4 9.2 10.3 5.4 20.5 3.5Z"/><path d="M6.6 20.5c.6-3.6 2.4-6.4 5.4-8.4"/></g></symbol>
 </defs></svg>
 
 <p class="sr-only" role="status" aria-live="polite" id="live"></p>
@@ -523,7 +567,8 @@ button{ font-family:inherit; font-size:inherit }
     <p class="gallery-hint" data-k="galleryHint"></p>
   </section>
 
-  <section class="sec" aria-labelledby="h-program">
+  <section class="sec dark" aria-labelledby="h-program">
+    <div class="waves" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-07"></use></svg><h2 id="h-program" data-k="programTitle"></h2><p class="en" lang="en" aria-hidden="true">Programme</p></div>
     <div id="programBody"></div>
   </section>
@@ -567,6 +612,7 @@ button{ font-family:inherit; font-size:inherit }
   </section>
 
   <footer class="outro">
+    <div class="waves" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <svg class="orn-outro" aria-hidden="true"><use href="#orn-05"></use></svg>
     <div class="hui" aria-hidden="true">囍</div>
     <div class="outro-names" id="outroNames"></div>
@@ -746,6 +792,7 @@ const CONFIG = {
      link 를 "" 로 비우면 버튼이 자동으로 숨겨집니다. */
   notices: [
     {
+      icon:  "access",
       title: { ko:"편하게 읽으시라고", en:"Reading this invitation" },
       desc:  { ko:"이 청첩장은 웹접근성을 지켜 만들었습니다. 화면 위쪽 버튼으로 글씨를 150%까지 키우실 수 있고, 한국어와 영어를 오갈 수 있습니다. 스크린리더(안드로이드 TalkBack · 아이폰 VoiceOver)로 처음부터 끝까지 읽으실 수 있으며, 사진에는 설명을 붙였습니다. 마우스 없이 키보드만으로도 모든 기능을 쓰실 수 있습니다.",
                en:"This invitation is built to be accessible. Use the buttons at the top to enlarge the text up to 150% or switch between Korean and English. It reads end to end with a screen reader (TalkBack on Android, VoiceOver on iPhone), every photograph has a description, and everything works with the keyboard alone." },
@@ -753,6 +800,7 @@ const CONFIG = {
       linkText: { ko:"", en:"" }
     },
     {
+      icon:  "caption",
       title: { ko:"문자통역", en:"Live captioning" },
       desc:  { ko:"예식 전 과정을 실시간 문자로 옮겨드립니다. 아래 링크를 휴대폰으로 열어두시면 자리에서 바로 보실 수 있습니다.",
                en:"The whole ceremony is transcribed live. Open the link on your phone to follow along from your seat." },
@@ -760,6 +808,7 @@ const CONFIG = {
       linkText: { ko:"문자통역 열기", en:"Open live captions" }
     },
     {
+      icon:  "route",
       title: { ko:"장애인 화장실 · 이동 안내", en:"Accessible restroom & step-free route" },
       desc:  { ko:"장애인 화장실은 OO층 OO 옆에 있습니다. 정문에서 연회장까지 계단 없이 이동하실 수 있고, 도움이 필요하시면 입구 안내 데스크에 말씀해 주세요.",
                en:"The accessible restroom is on floor OO next to OO. There is a step-free route from the main entrance to the hall — please ask at the front desk if you need assistance." },
@@ -767,6 +816,7 @@ const CONFIG = {
       linkText: { ko:"", en:"" }
     },
     {
+      icon:  "live",
       title: { ko:"온라인 중계", en:"Watch online" },
       desc:  { ko:"먼 곳에서 함께해 주시는 분들을 위해 1부 전통혼례를 실시간으로 중계합니다. 예식 10분 전부터 접속하실 수 있습니다.",
                en:"Part 1 will be streamed live for those joining from afar. The stream opens ten minutes before the ceremony." },
@@ -870,6 +920,10 @@ const CONFIG = {
     rsvpNeedName: {ko:"성함을 입력해 주세요.",en:"Please enter your name."},
     rsvpNeedSide: {ko:"신랑측 또는 신부측을 골라주세요.",en:"Please choose the groom's or bride's side."},
     rsvpNotReady: {ko:"참석 접수가 아직 준비 중입니다. 보내지지 않았습니다.",en:"The RSVP form is not connected yet. Nothing was sent."},
+    rsvpNoReach:  {ko:"접수 서버에 닿지 못했습니다. 잠시 후 다시 보내주세요. 계속 이러면 신랑·신부에게 알려주세요.",
+                   en:"We could not reach the RSVP server. Please try again shortly, and let the couple know if it keeps happening."},
+    rsvpRejected: {ko:"서버가 저장하지 못했다고 답했습니다. 신랑·신부에게 알려주세요.",
+                   en:"The server replied that it could not save your reply. Please let the couple know."},
     rsvpFailed:   {ko:"저장된 것을 확인하지 못했습니다. 잠시 후 다시 보내주세요.",en:"We could not confirm your reply was saved. Please try again in a moment."},
     rsvpThanks:   {ko:"참석 의사를 받았습니다. 고맙습니다.",en:"We have received your reply. Thank you."},
     rsvpNumber:   {ko:"접수 번호",en:"Reference"},
@@ -995,7 +1049,7 @@ function render(){
   $("#programBody").innerHTML = CONFIG.program.map((p, i) => {
     const menu = p.menu ? `
       <div class="menu-box">
-        <h4>${t(p.menu.title)}</h4>
+        <h4><svg class="ico" aria-hidden="true"><use href="#ico-leaf"></use></svg>${t(p.menu.title)}</h4>
         <ul>${p.menu.items.map(m => `<li>${t(m)}</li>`).join("")}</ul>
         ${p.menu.foot ? `<p>${t(p.menu.foot)}</p>` : ""}
       </div>` : "";
@@ -1024,7 +1078,7 @@ function render(){
   /* 안내 사항 */
   $("#noticeBody").innerHTML = CONFIG.notices.map(n => `
     <div class="notice">
-      <h3>${t(n.title)}</h3>
+      <h3>${n.icon ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n.title)}</h3>
       <p>${t(n.desc)}</p>
       ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}</a>` : ""}
     </div>`).join("");
@@ -1169,23 +1223,27 @@ rsvpForm.addEventListener("submit", async e => {
   $("#rsvpSend").textContent = L("rsvpSending");
   const stop = new AbortController();
   const timer = setTimeout(() => stop.abort(), 25000);
+  let reached = false;   /* 서버까지 갔는지 / 아예 못 닿았는지 구분합니다 */
   try{
     const res = await fetch(CONFIG.rsvpEndpoint, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(data), signal: stop.signal, redirect: "follow"
     });
-    if (!res.ok) throw new Error("http");
+    reached = true;
+    if (!res.ok) throw new Error("HTTP " + res.status);
     const out = await res.json();
-    if (out.ok !== true || out.requestId !== data.requestId
-        || !Number.isInteger(out.number) || out.number < 1) throw new Error("unconfirmed");
+    if (out.ok !== true) throw new Error("server said: " + (out.message || "ok=false"));
+    if (out.requestId !== data.requestId || !Number.isInteger(out.number) || out.number < 1)
+      throw new Error("receipt not confirmed");
     rsvpForm.hidden = true;
     $("#rsvpDone").hidden = false;
     $("#rsvpDoneMsg").textContent = `${L("rsvpThanks")} (${L("rsvpNumber")} ${out.number})`;
     $("#rsvpDone").focus();
     rsvpRequest = null;
-  } catch {
-    rsvpSay("rsvpFailed");
+  } catch (err) {
+    console.error("[RSVP]", err);        /* 원인은 개발자 도구 콘솔에 남습니다 */
+    rsvpSay(reached ? "rsvpRejected" : "rsvpNoReach");
   } finally {
     clearTimeout(timer);
     rsvpPending = false;
