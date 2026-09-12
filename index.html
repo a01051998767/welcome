@@ -205,6 +205,7 @@ button{ font-family:inherit; font-size:inherit }
 .sec.dark .song-toggle{ color:var(--ink) }
 .sec.dark .notice-link{ background:var(--paper); color:var(--pine) }
 .sec.dark .copy, .sec.dark .map-links a{ color:var(--ink) }
+.sec.dark .map-links a{ border-color:var(--line-strong) }
 
 /* 청해파 무늬 띠 — 장식입니다 */
 .waves{ position:absolute; top:0; left:0; right:0; display:flex; flex-direction:column }
@@ -399,6 +400,8 @@ button{ font-family:inherit; font-size:inherit }
 .venue-name{ font-family:var(--serif); font-size:1.2rem }
 .venue-addr{ font-size:.96rem; color:var(--ink-soft); margin-top:5px }
 .map-links{ display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap }
+.part-links{ margin:8px 0 4px }
+.part-links-title{ margin:16px 0 0; font-size:.9rem; font-weight:600; color:var(--ink) }
 .map-links a{
   flex:1 1 30%; text-align:center; min-height:46px;
   display:flex; align-items:center; justify-content:center;
@@ -845,14 +848,19 @@ const CONFIG = {
     {
       mark: "三",
       title: { ko:"3부 · 피로연(2차)", en:"Part 3 · Reception2" },
-      meta:  { ko:"19:00 – · The Baer", en:"From 19:00 · The Baer" },
+      meta:  { ko:"19:00 – · The Bear", en:"From 19:00 · The Bear" },
       notes: [
         { ko:"편한 옷으로 갈아입고 오셔도 좋습니다.", en:"Feel free to change into something comfortable." },
         { ko:"인원 파악을 위해 참석 의사를 보내실 때 3부 참석 여부도 알려주세요.", en:"Please tell us in your RSVP whether you'll join Part 3." }
       ],
-      /* 순서마다 장소 지도 링크를 붙일 수 있습니다. 비워 두면 버튼이 숨습니다. */
-      link: "https://maps.app.goo.gl/NtXyXgKnLB5oPZcKA",
-      linkText: { ko:"The Baer 위치 보기", en:"See The Baer on the map" }
+      /* 순서마다 장소 지도 링크를 붙일 수 있습니다. 통째로 지우면 버튼이 숨습니다.
+         label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
+      linksTitle: { ko:"The Bear 위치", en:"Finding The Bear" },
+      links: [
+        { label:"kakao",  url:"https://place.map.kakao.com/17735953" },
+        { label:"naver",  url:"https://naver.me/x5GrDmb4" },
+        { label:"google", url:"https://maps.app.goo.gl/NtXyXgKnLB5oPZcKA" }
+      ]
     }
   ],
 
@@ -1141,7 +1149,10 @@ function render(){
           <h3 class="part-title">${t(p.title)}</h3>
           <p class="part-meta">${t(p.meta)}</p>
           <ul class="part-notes">${p.notes.map(n => `<li>${t(n)}</li>`).join("")}</ul>
-          ${p.link ? `<a class="notice-link" href="${p.link}" target="_blank" rel="noopener">${t(p.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>` : ""}
+          ${(p.links && p.links.length) ? `
+            <p class="part-links-title">${t(p.linksTitle)}</p>
+            <div class="part-links map-links">${p.links.map(l => `
+              <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
           ${menu}${song}
         </div>
       </div>`;

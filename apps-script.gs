@@ -92,6 +92,8 @@ function doPost(e) {
     SpreadsheetApp.flush();
     return jsonResponse_({ok:true,number: number,requestId:data.requestId});
   } catch (error) {
+    /* 실행 기록에도 남겨 둡니다 */
+    console.error('RSVP 저장 실패', error);
     /* reason 은 원인을 찾기 위한 짧은 영문 메모입니다. 하객 화면에는 보이지 않습니다. */
     return jsonResponse_({ok:false,message:'저장하지 못했습니다. 설정과 입력값을 확인해 주세요.',reason:String((error && error.message) || error)});
   } finally { if (lock && lock.hasLock()) lock.releaseLock(); }
