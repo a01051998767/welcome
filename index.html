@@ -91,6 +91,7 @@ button{ font-family:inherit; font-size:inherit }
 
 .paper{
   max-width:var(--col); margin:0 auto;
+  padding-bottom:var(--bar-h, 88px);
   background:var(--paper); min-height:100vh;
   position:relative; overflow:hidden;
   box-shadow:0 0 80px rgba(0,0,0,.35);
@@ -120,6 +121,44 @@ button{ font-family:inherit; font-size:inherit }
   color:var(--ink-soft); min-height:34px;
 }
 .pillset button[aria-pressed="true"]{ background:var(--pine); color:var(--paper) }
+.menu-btn{ min-width:44px; min-height:34px; font-size:1rem; color:var(--pine) }
+.menu-btn[aria-expanded="true"]{ background:var(--pine); color:var(--paper) }
+
+/* ── 목차 ── */
+.menu-panel{
+  position:fixed; z-index:59; top:64px;
+  left:50%; transform:translateX(-50%);
+  width:min(calc(100vw - 24px), var(--col));
+  max-height:min(70dvh, 520px); overflow:auto;
+  padding:8px 0; margin:0;
+  background:var(--paper); border:1px solid var(--line-strong); border-radius:3px;
+  box-shadow:var(--shadow);
+}
+.menu-panel a{
+  display:block; min-height:48px; padding:13px 22px;
+  font-size:1rem; color:var(--ink); text-decoration:none;
+}
+.menu-panel a + a{ border-top:1px solid var(--line) }
+.menu-panel a:hover, .menu-panel a:focus-visible{ background:var(--paper-warm) }
+
+/* ── 하단 참석 의사 바 ── */
+.rsvp-bar{
+  position:fixed; z-index:58; bottom:0; left:50%; transform:translateX(-50%);
+  width:min(100%, var(--col));
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+  background:rgba(247,244,236,.96); backdrop-filter:blur(10px);
+  border-top:1px solid var(--line-strong);
+  box-shadow:0 -8px 26px rgba(35,48,43,.10);
+}
+.rsvp-bar p{
+  margin:0; font-family:var(--sans); font-size:.8rem; line-height:1.65;
+  color:var(--ink-soft);
+}
+.rsvp-bar .btn{ flex:0 0 auto; padding:14px 18px; font-size:.9rem }
+
+/* 도구 막대가 제목을 가리지 않도록 */
+.sec, .cover{ scroll-margin-top:74px }
 
 /* ── 공통 섹션 : 크림 바탕과 연녹 바탕이 번갈아 나옵니다 ── */
 .sec{ padding:60px var(--gutter); background:var(--paper); --card:var(--paper-warm) }
@@ -502,7 +541,8 @@ button{ font-family:inherit; font-size:inherit }
 /* 인쇄 */
 @media print{
   body{ background:#fff }
-  .toolbar, .skip, .lightbox, .modal, .song-toggle{ display:none !important }
+  .toolbar, .skip, .lightbox, .modal, .menu-panel, .rsvp-bar, .song-toggle{ display:none !important }
+  .paper{ padding-bottom:0 }
   .song-panel{ display:block !important }
   .paper{ box-shadow:none; max-width:none }
 }
@@ -522,7 +562,14 @@ button{ font-family:inherit; font-size:inherit }
     <button type="button" data-size="text-lg" aria-pressed="false" style="font-size:1rem">가</button>
     <button type="button" data-size="text-xl" aria-pressed="false" style="font-size:1.2rem">가</button>
   </div>
+  <div class="pillset">
+    <button type="button" id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="menuPanel">
+      <span aria-hidden="true">☰</span><span class="sr-only" data-k="menuOpen"></span>
+    </button>
+  </div>
 </div>
+
+<nav class="menu-panel" id="menuPanel" aria-labelledby="menuBtn" hidden></nav>
 
 <!-- 전통 문양 — 장식입니다. 색은 CSS의 color 로 정합니다. -->
 <svg class="sprite" aria-hidden="true" focusable="false"><defs>
@@ -549,17 +596,17 @@ button{ font-family:inherit; font-size:inherit }
     <svg class="orn-divider" aria-hidden="true"><use href="#orn-07"></use></svg>
   </header>
 
-  <section class="sec greeting" aria-labelledby="h-greeting">
+  <section id="s-greeting" tabindex="-1" class="sec greeting" aria-labelledby="h-greeting">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-greeting" data-k="greetingTitle"></h2><p class="en" lang="en" aria-hidden="true">Invitation</p></div>
     <div id="greetingBody"></div>
   </section>
 
-  <section class="sec" aria-labelledby="h-family">
+  <section id="s-family" tabindex="-1" class="sec" aria-labelledby="h-family">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-family" data-k="familyTitle"></h2><p class="en" lang="en" aria-hidden="true">Family</p></div>
     <div class="family" id="familyBody"></div>
   </section>
 
-  <section class="sec" style="padding-left:0;padding-right:0" aria-labelledby="h-gallery">
+  <section id="s-gallery" tabindex="-1" class="sec" style="padding-left:0;padding-right:0" aria-labelledby="h-gallery">
     <div class="sec-head" style="padding:0 var(--gutter)">
       <svg class="orn" aria-hidden="true"><use href="#orn-02"></use></svg><h2 id="h-gallery" data-k="galleryTitle"></h2><p class="en" lang="en" aria-hidden="true">Our days</p>
     </div>
@@ -567,18 +614,18 @@ button{ font-family:inherit; font-size:inherit }
     <p class="gallery-hint" data-k="galleryHint"></p>
   </section>
 
-  <section class="sec dark" aria-labelledby="h-program">
+  <section id="s-program" tabindex="-1" class="sec dark" aria-labelledby="h-program">
     <div class="waves" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-07"></use></svg><h2 id="h-program" data-k="programTitle"></h2><p class="en" lang="en" aria-hidden="true">Programme</p></div>
     <div id="programBody"></div>
   </section>
 
-  <section class="sec" aria-labelledby="h-notice">
+  <section id="s-notice" tabindex="-1" class="sec" aria-labelledby="h-notice">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-notice" data-k="noticeTitle"></h2><p class="en" lang="en" aria-hidden="true">Good to know</p></div>
     <div class="notices" id="noticeBody"></div>
   </section>
 
-  <section class="sec" aria-labelledby="h-location">
+  <section id="s-location" tabindex="-1" class="sec" aria-labelledby="h-location">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-location" data-k="locationTitle"></h2><p class="en" lang="en" aria-hidden="true">Location</p></div>
     <div class="map" id="mapBox"></div>
     <div class="venue" id="venueBox"></div>
@@ -586,25 +633,25 @@ button{ font-family:inherit; font-size:inherit }
     <div class="transit" id="transitBody"></div>
   </section>
 
-  <section class="sec rsvp" aria-labelledby="h-rsvp">
+  <section id="s-rsvp" tabindex="-1" class="sec rsvp" aria-labelledby="h-rsvp">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-02"></use></svg><h2 id="h-rsvp" data-k="rsvpTitle"></h2><p class="en" lang="en" aria-hidden="true">RSVP</p></div>
     <p class="lead" data-k="rsvpDesc"></p>
     <button class="btn" type="button" id="rsvpBtn"></button>
     <span class="note" data-k="rsvpNote"></span>
   </section>
 
-  <section class="sec" aria-labelledby="h-gift">
+  <section id="s-gift" tabindex="-1" class="sec" aria-labelledby="h-gift">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-07"></use></svg><h2 id="h-gift" data-k="giftTitle"></h2><p class="en" lang="en" aria-hidden="true">With thanks</p></div>
     <div id="giftBody"></div>
   </section>
 
-  <section class="sec credits" id="creditsSection" aria-labelledby="h-credits">
+  <section class="sec credits" id="creditsSection" tabindex="-1" aria-labelledby="h-credits">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-credits" data-k="creditsTitle"></h2><p class="en" lang="en" aria-hidden="true">Thanks to</p></div>
     <p class="lead" data-k="creditsDesc"></p>
     <div id="creditsBody"></div>
   </section>
 
-  <section class="sec share" aria-labelledby="h-share">
+  <section id="s-share" tabindex="-1" class="sec share" aria-labelledby="h-share">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-share" data-k="shareTitle"></h2><p class="en" lang="en" aria-hidden="true">Share</p></div>
     <button class="btn" type="button" id="shareBtn"></button>
     <p class="license" id="a11yNote" data-k="a11yNote"></p>
@@ -621,6 +668,11 @@ button{ font-family:inherit; font-size:inherit }
   </footer>
 
 </main>
+
+<div class="rsvp-bar" id="rsvpBar">
+  <p data-k="rsvpBarText"></p>
+  <button class="btn" type="button" id="rsvpBarBtn"></button>
+</div>
 
 <dialog class="modal" id="rsvpModal" aria-labelledby="rsvpHeading">
   <form method="dialog" class="modal-top">
@@ -903,6 +955,12 @@ const CONFIG = {
                    en:"So we can prepare well, please tell us which parts you'll join."},
     rsvpBtn:      {ko:"참석 의사 보내기",en:"Send your RSVP"},
     rsvpNote:     {ko:"같은 화면에서 입력창이 열립니다.",en:"A short form opens on this page."},
+    menuOpen:     {ko:"차례 열기",en:"Open the contents"},
+    menuClose:    {ko:"차례 닫기",en:"Close the contents"},
+    menuLabel:    {ko:"청첩장 차례",en:"Invitation contents"},
+    rsvpBarText:  {ko:"참석 여부를 알려주시면 정성껏 준비하겠습니다.",
+                   en:"Tell us if you can come and we'll prepare with care."},
+    rsvpBarBtn:   {ko:"참석 의사 전달하기",en:"Send your RSVP"},
     rsvpName:     {ko:"성함",en:"Your name"},
     rsvpSide:     {ko:"어느 쪽 하객이신가요",en:"Whose guest are you?"},
     groomSideShort:{ko:"신랑측",en:"Groom's side"},
@@ -1107,7 +1165,22 @@ function render(){
       <div class="transit-desc">${t(r.desc)}</div>
     </div>`).join("");
 
+  /* 차례(햄버거 메뉴) */
+  const menuItems = [
+    ["s-greeting","greetingTitle"], ["s-family","familyTitle"], ["s-gallery","galleryTitle"],
+    ["s-program","programTitle"],   ["s-notice","noticeTitle"], ["s-location","locationTitle"],
+    ["s-rsvp","rsvpTitle"],         ["s-gift","giftTitle"],     ["creditsSection","creditsTitle"],
+    ["s-share","shareTitle"]
+  ];
+  $("#menuPanel").setAttribute("aria-label", L("menuLabel"));
+  $("#menuPanel").innerHTML = menuItems
+    .filter(([id]) => { const el = document.getElementById(id); return el && el.style.display !== "none"; })
+    .map(([id, key]) => `<a href="#${id}">${L(key)}</a>`).join("");
+  $("#menuBtn").querySelector(".sr-only").textContent =
+    L($("#menuBtn").getAttribute("aria-expanded") === "true" ? "menuClose" : "menuOpen");
+
   /* 참석 의사 */
+  $("#rsvpBarBtn").textContent = L("rsvpBarBtn");
   $("#rsvpBtn").textContent = L("rsvpBtn");
   $("#rsvpSend").textContent = L(rsvpPending ? "rsvpSending" : "rsvpSend");
   $("#rsvpAgain").textContent = L("rsvpAgain");
@@ -1164,6 +1237,44 @@ function render(){
   $("#outroDate").textContent = CONFIG.outroDate;
 }
 
+/* ── 차례(햄버거 메뉴) ── */
+const menuBtn = $("#menuBtn"), menuPanel = $("#menuPanel");
+
+function setMenu(open){
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuPanel.hidden = !open;
+  menuBtn.querySelector(".sr-only").textContent = L(open ? "menuClose" : "menuOpen");
+}
+menuBtn.addEventListener("click", () => {
+  const open = menuBtn.getAttribute("aria-expanded") !== "true";
+  setMenu(open);
+  if (open) menuPanel.querySelector("a")?.focus();
+});
+/* 항목을 고르면 닫고, 그 자리로 초점을 옮깁니다 */
+menuPanel.addEventListener("click", e => {
+  const a = e.target.closest("a"); if (!a) return;
+  setMenu(false);
+  const target = document.getElementById(a.getAttribute("href").slice(1));
+  if (target) setTimeout(() => target.focus({ preventScroll:true }), 400);
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && menuBtn.getAttribute("aria-expanded") === "true"){
+    setMenu(false); menuBtn.focus();
+  }
+});
+document.addEventListener("click", e => {
+  if (menuPanel.hidden) return;
+  if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
+});
+
+/* 하단 바 높이만큼 본문 아래에 여백을 둡니다 */
+const bar = $("#rsvpBar");
+if (window.ResizeObserver){
+  new ResizeObserver(() => {
+    document.documentElement.style.setProperty("--bar-h", `${bar.offsetHeight}px`);
+  }).observe(bar);
+}
+
 /* ── 참석 의사 입력창 ── */
 const rsvpModal = $("#rsvpModal");
 const rsvpForm  = $("#rsvpForm");
@@ -1173,15 +1284,19 @@ let rsvpRequest = null;       /* 같은 내용을 다시 보내도 줄이 두 �
 
 function rsvpSay(key){ $("#rsvpMsg").textContent = key ? L(key) : ""; }
 
-$("#rsvpBtn").addEventListener("click", () => {
+let rsvpOpener = null;   /* 닫을 때 초점을 돌려줄 버튼 */
+function openRsvp(e){
+  rsvpOpener = e.currentTarget;
   rsvpSay("");
   rsvpModal.showModal();
   $("#rsvpName").focus();
-});
+}
+$("#rsvpBtn").addEventListener("click", openRsvp);
+$("#rsvpBarBtn").addEventListener("click", openRsvp);
 
 /* 바깥을 누르면 닫힙니다 (Esc 와 닫기 버튼은 dialog 가 알아서 처리합니다) */
 rsvpModal.addEventListener("click", e => { if (e.target === rsvpModal) rsvpModal.close(); });
-rsvpModal.addEventListener("close", () => $("#rsvpBtn").focus());
+rsvpModal.addEventListener("close", () => (rsvpOpener || $("#rsvpBtn")).focus());
 
 /* 체크 상태 기억 */
 $("#rsvpParts").addEventListener("change", e => {
