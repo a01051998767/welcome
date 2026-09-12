@@ -400,8 +400,9 @@ button{ font-family:inherit; font-size:inherit }
 .venue-name{ font-family:var(--serif); font-size:1.2rem }
 .venue-addr{ font-size:.96rem; color:var(--ink-soft); margin-top:5px }
 .map-links{ display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap }
-.part-links{ margin:8px 0 4px }
-.part-links-title{ margin:16px 0 0; font-size:.9rem; font-weight:600; color:var(--ink) }
+.song-panel .venue{ margin-bottom:16px }
+.song-panel .map{ margin-bottom:16px }
+.song-panel .map-links{ margin-bottom:0 }
 .map-links a{
   flex:1 1 30%; text-align:center; min-height:46px;
   display:flex; align-items:center; justify-content:center;
@@ -414,6 +415,9 @@ button{ font-family:inherit; font-size:inherit }
 .transit-row{ display:grid; grid-template-columns:64px 1fr; gap:12px; font-size:.96rem }
 .transit-label{ color:var(--jade); font-weight:600 }
 .transit-desc{ color:var(--ink-soft); line-height:1.8 }
+.transit-steps{ margin:0; padding-left:1.25em }
+.transit-steps li{ margin-bottom:6px }
+.transit-steps li:last-child{ margin-bottom:0 }
 
 /* ── 참석 의사 ── */
 .rsvp{ text-align:center }
@@ -648,8 +652,8 @@ button{ font-family:inherit; font-size:inherit }
 
   <section id="s-location" tabindex="-1" class="sec" aria-labelledby="h-location">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-location" data-k="locationTitle"></h2><p class="en" lang="en" aria-hidden="true">Location</p></div>
-    <div class="map" id="mapBox"></div>
     <div class="venue" id="venueBox"></div>
+    <div class="map" id="mapBox"></div>
     <div class="map-links" id="mapLinks"></div>
     <div class="transit" id="transitBody"></div>
   </section>
@@ -766,12 +770,12 @@ const CONFIG = {
   dateText:  { ko:"2026년 10월 24일 토요일", en:"Saturday, 8 May 2027" },
   timeText:  { ko:"17시", en:"17:00" },
   venueName: { ko:"관악문화예절원", en:"Gwanak Cultural Etiquette Institute" },
-  venueAddr: { ko:"서울시 관악구 낙성대로3길45(관악문화예절원)", en:"45, Nakseongdae-ro 3-gil, Gwanak-gu, Seoul" },
+  venueAddr: { ko:"서울시 관악구 낙성대로3길 45 (봉천동)", en:"45, Nakseongdae-ro 3-gil, Gwanak-gu, Seoul" },
   outroDate: "2026.10.24.",
 
   /* 구글 지도 → 공유 → 지도 퍼가기 → src="..." 안 주소만 붙여넣기.
      비워두면 지도 칸이 자동으로 숨겨집니다. */
-  mapEmbed: "",
+  mapEmbed: "https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%EC%8B%9C+%EA%B4%80%EC%95%85%EA%B5%AC+%EB%82%99%EC%84%B1%EB%8C%80%EB%A1%9C3%EA%B8%B8+45&output=embed&hl=ko",
 
   /* 예식장 지도 링크. 지도 앱에서 장소를 열고 공유 주소를 그대로 붙여넣으면 됩니다.
      label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
@@ -799,12 +803,14 @@ const CONFIG = {
 
   /* ── 4. 인사말 ──────────────────────────────── */
   greeting: [
-    { ko:"함께 웃고, 이따금 다투고, 다시 손을 잡으며 여러 번의 봄과 겨울을 지나왔습니다.",
-      en:"We have laughed together, argued now and then, taken each other's hand again, and passed through many springs and winters this way." },
-    { ko:"그 계절마다 곁을 지켜주신 분들이 계셨기에 오늘 이 자리를 마련할 수 있었습니다. 이제 두 사람이 서로의 가족이 되려 합니다.",
-      en:"In every one of those seasons someone was there beside us, and that is why this day is possible at all. Now the two of us are becoming family to each other." },
-    { ko:"귀한 걸음 하시어 저희의 첫날을 함께 지켜봐 주세요. 마주 앉아 따뜻한 밥 한 끼 나누어 주시면 그것으로 더없이 기쁘겠습니다.",
-      en:"Please come and see us begin. To sit across from you and share a warm meal together would make the day complete." }
+    { ko:"험난한 세상 속에서 아등바등 살아가던 두 사람이 기대고 의지할 수 있는 버팀목을 만났습니다.",
+      en:"Two people getting by in a hard world found in each other something to lean on." },
+    { ko:"저마다 다른 모습의 삶을 살아왔지만, 이제는 서로에게 꼭 맞는 짝이 되어 함께하려 합니다.",
+      en:"We have lived quite different lives, and now we come together as a pair that fits." },
+    { ko:"서로를 존중하며, 함께이기에 지속 가능한 미래를 만들어가겠습니다.",
+      en:"We will respect each other, and because we are together, build a future that lasts." },
+    { ko:"저희의 시작을 곁에서 축복해 주시면 감사하겠습니다.",
+      en:"We would be grateful if you were beside us to bless our beginning." }
   ],
 
   /* ── 5. 예식 순서 (1부 · 2부 · 3부) ─────────── */
@@ -855,19 +861,24 @@ const CONFIG = {
     {
       mark: "三",
       title: { ko:"3부 · 피로연(2차)", en:"Part 3 · Reception2" },
-      meta:  { ko:"19:00 – · The Bear", en:"From 19:00 · The Bear" },
+      meta:  { ko:"19:00 – · 더 베어", en:"From 19:00 · The Bear" },
       notes: [
         { ko:"편한 옷으로 갈아입고 오셔도 좋습니다.", en:"Feel free to change into something comfortable." },
         { ko:"인원 파악을 위해 참석 의사를 보내실 때 3부 참석 여부도 알려주세요.", en:"Please tell us in your RSVP whether you'll join Part 3." }
       ],
-      /* 순서마다 장소 지도 링크를 붙일 수 있습니다. 통째로 지우면 버튼이 숨습니다.
-         label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
-      linksTitle: { ko:"The Bear 위치", en:"Finding The Bear" },
-      links: [
-        { label:"kakao",  url:"https://map.kakao.com/?urlX=490891.00000000093&urlY=1104817.0000000007&urlLevel=3&itemId=17735953&q=%EB%8D%94%EB%B2%A0%EC%96%B4%20%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&srcid=17735953&map_type=TYPE_MAP" },
-        { label:"naver",  url:"https://naver.me/x5GrDmb4" },
-        { label:"google", url:"https://maps.app.goo.gl/NtXyXgKnLB5oPZcKA" }
-      ]
+      /* 장소 안내 — 버튼을 누르면 주소·지도·지도 앱 링크가 아래로 열립니다.
+         통째로 지우면 버튼이 숨습니다. addr 를 비우면 주소 줄이 빠집니다. */
+      place: {
+        button: { ko:"피로연(2차) 장소 보기", en:"Where Part 3 is" },
+        name:   { ko:"더 베어 낙성대점", en:"The Bear, Nakseongdae" },
+        addr:   { ko:"", en:"" },
+        embed:  "https://www.google.com/maps?q=%EB%8D%94%EB%B2%A0%EC%96%B4+%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&output=embed&hl=ko",
+        links: [
+          { label:"naver",  url:"https://naver.me/x5GrDmb4" },
+          { label:"kakao",  url:"https://map.kakao.com/?urlX=490891.00000000093&urlY=1104817.0000000007&urlLevel=3&itemId=17735953&q=%EB%8D%94%EB%B2%A0%EC%96%B4%20%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&srcid=17735953&map_type=TYPE_MAP" },
+          { label:"google", url:"https://maps.app.goo.gl/NtXyXgKnLB5oPZcKA" }
+        ]
+      }
     }
   ],
 
@@ -910,9 +921,19 @@ const CONFIG = {
 
   /* ── 7. 교통 안내 ───────────────────────────── */
   transit: [
-    { label:{ko:"지하철",en:"Subway"},  desc:{ko:"O호선 OO역 O번 출구에서 도보 5분. 엘리베이터는 O번 출구에 있습니다.", en:"5 min walk from OO Station (Line O), Exit O. The lift is at Exit O."} },
-    { label:{ko:"버스",  en:"Bus"},     desc:{ko:"OO정류장 하차 · 000, 000, 000번.", en:"Get off at OO stop — bus 000, 000, 000."} },
-    { label:{ko:"주차",  en:"Parking"}, desc:{ko:"지하 주차장 2시간 무료. 장애인 전용 주차 구역은 지상 정문 옆에 있습니다.", en:"Two hours free at the basement car park. Accessible parking is beside the main entrance."} }
+    { label:{ko:"대중교통",en:"By transit"},
+      steps:[
+        {ko:"2호선 낙성대역 4번 출구로 나오기", en:"Leave Nakseongdae Station (Line 2) by Exit 4"},
+        {ko:"관악02-1 또는 관악02-2번 마을버스 타기", en:"Take village bus Gwanak 02-1 or 02-2"},
+        {ko:"'낙성대공원 · 다시가는캠퍼스' 정류장에서 내리기", en:"Get off at Nakseongdae Park · Dasiganeun Campus"},
+        {ko:"길 건너 낙성대공원 안 기와집으로 들어오기", en:"Cross the road into Nakseongdae Park and head for the tiled-roof hall"}
+      ] },
+    { label:{ko:"자가용",en:"By car"},
+      desc:{ko:"관악구민종합체육센터 주차장(유료, 공영)을 이용하시면 됩니다.",
+            en:"Use the Gwanak Sports Centre car park (public, paid)."} },
+    { label:{ko:"부탁",en:"Please note"},
+      desc:{ko:"주차 공간이 매우 좁습니다. 되도록 대중교통으로 와주시면 고맙겠습니다.",
+            en:"Parking is very tight, so please come by public transport if you can."} }
   ],
 
   /* ── 8. 참석 의사 접수 주소 ──
@@ -973,7 +994,7 @@ const CONFIG = {
 
   /* ── 12. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
   labels: {
-    greetingTitle:{ko:"초대합니다",en:"You are invited"},
+    greetingTitle:{ko:"혼례의 자리에 모십니다",en:"You are invited to our wedding"},
     familyTitle:  {ko:"우리 두 사람",en:"The two of us"},
     galleryTitle: {ko:"함께한 날들",en:"Our days"},
     galleryHint:  {ko:"옆으로 넘기거나 방향키로 넘겨 보세요. 사진을 누르면 크게 볼 수 있습니다.",
@@ -1141,6 +1162,19 @@ function render(){
         <ul>${p.menu.items.map(m => `<li>${t(m)}</li>`).join("")}</ul>
         ${p.menu.foot ? `<p>${t(p.menu.foot)}</p>` : ""}
       </div>` : "";
+    const place = p.place ? `
+      <button class="song-toggle" type="button" aria-expanded="false" aria-controls="place-${i}">
+        <span>${t(p.place.button)}</span><span class="chev" aria-hidden="true">▾</span>
+      </button>
+      <div class="song-panel" id="place-${i}">
+        <div class="venue">
+          <div class="venue-name">${t(p.place.name)}</div>
+          ${t(p.place.addr) ? `<div class="venue-addr">${t(p.place.addr)}</div>` : ""}
+        </div>
+        ${p.place.embed ? `<div class="map"><iframe src="${p.place.embed}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="${t(p.place.name)} ${L("mapTitle")}"></iframe></div>` : ""}
+        <div class="map-links">${(p.place.links || []).map(l => `
+          <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>
+      </div>` : "";
     const song = p.song ? `
       <button class="song-toggle" type="button" data-song="${i}" aria-expanded="false" aria-controls="song-${i}">
         <span>${t(p.song.button)}</span><span class="chev" aria-hidden="true">▾</span>
@@ -1158,11 +1192,7 @@ function render(){
           <h3 class="part-title">${t(p.title)}</h3>
           <p class="part-meta">${t(p.meta)}</p>
           <ul class="part-notes">${p.notes.map(n => `<li>${t(n)}</li>`).join("")}</ul>
-          ${(p.links && p.links.length) ? `
-            <p class="part-links-title">${t(p.linksTitle)}</p>
-            <div class="part-links map-links">${p.links.map(l => `
-              <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
-          ${menu}${song}
+          ${place}${menu}${song}
         </div>
       </div>`;
   }).join("");
@@ -1192,7 +1222,9 @@ function render(){
   $("#transitBody").innerHTML = CONFIG.transit.map(r => `
     <div class="transit-row">
       <div class="transit-label">${t(r.label)}</div>
-      <div class="transit-desc">${t(r.desc)}</div>
+      <div class="transit-desc">${r.steps
+        ? `<ol class="transit-steps">${r.steps.map(x => `<li>${t(x)}</li>`).join("")}</ol>`
+        : t(r.desc)}</div>
     </div>`).join("");
 
   /* 차례(햄버거 메뉴) */
@@ -1418,10 +1450,10 @@ $("#sizeGroup").addEventListener("click", e => {
   say(L("sizeMsg"));
 });
 
-/* ── 축가 가사 펼치기 ── */
+/* ── 접이식 패널 펼치기 (축가 가사 · 장소 안내) ── */
 document.addEventListener("click", e => {
   const b = e.target.closest(".song-toggle"); if (!b) return;
-  const panel = document.getElementById("song-" + b.dataset.song);
+  const panel = document.getElementById(b.getAttribute("aria-controls"));
   const open = panel.classList.toggle("open");
   b.setAttribute("aria-expanded", String(open));
   b.querySelector(".chev").textContent = open ? "▴" : "▾";
