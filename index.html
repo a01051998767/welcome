@@ -342,18 +342,12 @@ button{ font-family:inherit; font-size:inherit }
   content:""; position:absolute; left:0; top:.72em;
   width:5px; height:5px; border-radius:50%; background:var(--jade);
 }
+/* 아이콘이 붙은 줄은 점 대신 아이콘이 머리표 노릇을 합니다 */
+.part-notes li.has-ico{ padding-left:42px }
+.part-notes li.has-ico::before{ display:none }
+.part-notes li.has-ico .ico{ position:absolute; left:0; top:.15em }
 
-/* ── 피로연: 비건 메뉴 · 축가 ── */
-.menu-box{
-  margin-top:15px; padding:16px 18px;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-left:4px solid var(--jade);
-  border-radius:2px;
-}
-.menu-box h4{ margin:0 0 8px; font-family:var(--serif); font-weight:400; font-size:1rem }
-.menu-box ul{ margin:0; padding-left:18px; font-size:.94rem; color:var(--ink-soft); line-height:1.9 }
-.menu-box p{ margin:10px 0 0; font-size:.88rem; color:var(--ink-soft) }
+/* ── 피로연: 축가 ── */
 
 .song-toggle{
   margin-top:15px; width:100%;
@@ -395,7 +389,6 @@ button{ font-family:inherit; font-size:inherit }
   border-radius:50%; background:rgba(46,91,79,.12); color:var(--jade);
 }
 .sec.dark .ico{ background:rgba(247,244,236,.12) }
-.menu-box h4{ display:flex; align-items:center; gap:10px }
 .notice p{ margin:7px 0 0; font-size:.96rem; color:var(--ink-soft); line-height:1.85 }
 .notice-link{
   display:inline-block; margin-top:12px; min-height:44px;
@@ -857,22 +850,12 @@ const CONFIG = {
       title: { ko:"2부 · 피로연", en:"Part 2 · Reception" },
       meta:  { ko:"18:00 – 19:00 · 관악문화예절원 마당", en:"18:00 – 19:00 · Gwanak Cultural Etiquette Institute courtyard" },
       notes: [
-        { ko:"뷔페로 준비했습니다.", en:"A buffet meal will be served." },
+        { icon:"leaf",
+          ko:"뷔페로 준비했습니다. 동물성 재료를 쓰지 않은 비건 · 채식 요리도 함께 차립니다. 어느 분이든 드실 것이 있도록 준비하겠습니다.",
+          en:"A buffet is served, and it includes vegan and vegetarian dishes cooked without animal products, so there is something for everyone." },
         { ko:"신랑이 통기타를 연주하며 축가를 부릅니다. 같이 불러주세요.",
           en:"The groom will sing, accompanying himself on guitar — please sing along." }
       ],
-
-      /* 비건 · 채식 메뉴 (필요 없으면 menu 통째로 지우세요) */
-      menu: {
-        title: { ko:"비건 · 채식 메뉴", en:"Vegan & vegetarian menu" },
-        items: [
-          { ko:"메뉴 이름을 적어주세요", en:"Write the dish name" },
-          { ko:"메뉴 이름을 적어주세요", en:"Write the dish name" },
-          { ko:"메뉴 이름을 적어주세요", en:"Write the dish name" }
-        ],
-        foot: { ko:"동물성 재료 없이 따로 조리합니다.",
-                en:"Prepared separately, without animal products." }
-      },
 
       /* 축가 가사
          · credit : 작사·작곡·노래·발표 연도. 반드시 채웁니다.
@@ -891,7 +874,12 @@ const CONFIG = {
       mark: "三",
       title: { ko:"3부 · 피로연(2차)", en:"Part 3 · Reception2" },
       meta:  { ko:"19:00부터 · 더 베어", en:"From 19:00 · The Bear" },
-      notes: [],
+      notes: [
+        { ko:"정해진 순서 없이 편히 머무시다 가세요. 잠깐 얼굴만 보고 가셔도 좋고, 오래 앉아 이야기 나누셔도 좋습니다.",
+          en:"There is no programme — stay as long as you like. Drop in to say hello, or settle in and talk the night away." },
+        { ko:"가게는 새벽 1시에 문을 닫습니다. 그때까지 자리를 열어 두겠습니다.",
+          en:"The Bear closes at 1 a.m. The table is yours until then." }
+      ],
       /* 장소 안내 — 버튼을 누르면 주소·지도·지도 앱 링크가 아래로 열립니다.
          통째로 지우면 버튼이 숨습니다. addr 를 비우면 주소 줄이 빠집니다. */
       place: {
@@ -1191,12 +1179,6 @@ function render(){
 
   /* 예식 순서 */
   $("#programBody").innerHTML = CONFIG.program.map((p, i) => {
-    const menu = p.menu ? `
-      <div class="menu-box">
-        <h4><svg class="ico" aria-hidden="true"><use href="#ico-leaf"></use></svg>${t(p.menu.title)}</h4>
-        <ul>${p.menu.items.map(m => `<li>${t(m)}</li>`).join("")}</ul>
-        ${p.menu.foot ? `<p>${t(p.menu.foot)}</p>` : ""}
-      </div>` : "";
     const place = p.place ? `
       <button class="song-toggle" type="button" aria-expanded="false" aria-controls="place-${i}">
         <span>${t(p.place.button)}</span><span class="chev" aria-hidden="true">▾</span>
@@ -1226,8 +1208,10 @@ function render(){
         <div>
           <h3 class="part-title">${t(p.title)}</h3>
           <p class="part-meta">${t(p.meta)}</p>
-          <ul class="part-notes">${p.notes.map(n => `<li>${t(n)}</li>`).join("")}</ul>
-          ${place}${menu}${song}
+          <ul class="part-notes">${p.notes.map(n => `
+            <li${n.icon ? ' class="has-ico"' : ""}>${n.icon
+              ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n)}</li>`).join("")}</ul>
+          ${place}${song}
         </div>
       </div>`;
   }).join("");
