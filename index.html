@@ -618,6 +618,7 @@ button{ font-family:inherit; font-size:inherit }
   <symbol id="ico-caption" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10.6 10.4a2.6 2.6 0 1 0 0 3.2"/><path d="M17.1 10.4a2.6 2.6 0 1 0 0 3.2"/></g></symbol>
   <symbol id="ico-route" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="16.5" r="4.6"/><circle cx="13.6" cy="3.9" r="1.7"/><path d="M12.6 7.1v5.2h4.1"/><path d="M16.7 12.3 19 18.6"/></g></symbol>
   <symbol id="ico-live" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="13" rx="2.5"/><path d="M10.2 8.6 15 11l-4.8 2.4z"/><path d="M8 21h8"/></g></symbol>
+  <symbol id="ico-flower" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="2.6"/><circle cx="16.18" cy="7.64" r="2.6"/><circle cx="14.58" cy="12.56" r="2.6"/><circle cx="9.42" cy="12.56" r="2.6"/><circle cx="7.82" cy="7.64" r="2.6"/><path d="M12 14.6V21"/><path d="M12 19.2c-1.9 0-3.2-1.3-3.4-3.1 1.9-.2 3.3 1 3.4 3.1Z"/></g></symbol>
   <symbol id="ico-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 3.5c0 8.6-4.9 13.6-11.4 13.6-1.3 0-2.4-.2-3.3-.6C5.4 9.2 10.3 5.4 20.5 3.5Z"/><path d="M6.6 20.5c.6-3.6 2.4-6.4 5.4-8.4"/></g></symbol>
 </defs></svg>
 
@@ -840,6 +841,8 @@ const CONFIG = {
       title: { ko:"1부 · 전통혼례", en:"Part 1 · Traditional Ceremony" },
       meta:  { ko:"17:00 – 18:00 · 관악문화예절원 마당", en:"17:00 – 18:00 · Gwanak Cultural Etiquette Institute courtyard" },
       notes: [
+        { ko:"예식이 시작되기 전, 마당에서 저희 두 사람이 오시는 분들을 맞이합니다. 조금 일찍 오셔서 인사 나눠 주시면 더없이 기쁘겠습니다.",
+          en:"Before the ceremony begins, the two of us will be out in the courtyard to greet you. Come a little early and say hello if you can." },
         { ko:"낙성대공원 입구에서 혼례식장까지 흙모래길을 지나야 합니다. 편한 신발을 신고 오시기를 권해드립니다.",
           en:"From the park entrance to the ceremony there is a stretch of sand and earth path. Comfortable shoes are a good idea." },
         { ko:"1부 전통혼례와 2부 피로연은 모두 야외에서 진행됩니다. 비가 오면 천막을 치고 진행하니 옷을 고르실 때 참고해 주세요.",
@@ -905,6 +908,14 @@ const CONFIG = {
       title: { ko:"편하게 읽으시라고", en:"Reading this invitation" },
       desc:  { ko:"이 청첩장은 웹 접근성을 지켜 만들었습니다. 화면 위쪽 버튼으로 글씨를 150%까지 키우실 수 있고, 한국어와 영어를 오갈 수 있습니다. 스크린 리더(안드로이드 TalkBack · 아이폰 VoiceOver)로 처음부터 끝까지 읽으실 수 있으며, 사진에는 설명을 붙였습니다. 마우스 없이 키보드만으로도 모든 기능을 쓰실 수 있습니다.",
                en:"This invitation is built to be accessible. Use the buttons at the top to enlarge the text up to 150% or switch between Korean and English. It reads end to end with a screen reader (TalkBack on Android, VoiceOver on iPhone), every photograph has a description, and everything works with the keyboard alone." },
+      link:  "",
+      linkText: { ko:"", en:"" }
+    },
+    {
+      icon:  "flower",
+      title: { ko:"화환은 정중히 사양합니다", en:"Please, no wreaths" },
+      desc:  { ko:"마음만으로도 충분히 고맙습니다. 화환은 정중히 사양하오니 보내지 않으셔도 괜찮습니다. 다만 직접 들고 오셨다가 가실 때 다시 가져가시는 응원 깃발이나 현수막처럼, 자리에 남지 않는 것은 얼마든지 환영합니다.",
+               en:"Your kind thought is more than enough — please do not send a congratulatory wreath. Anything you carry in and carry home again, such as a banner or a flag, is warmly welcome." },
       link:  "",
       linkText: { ko:"", en:"" }
     },
