@@ -1089,6 +1089,7 @@ const CONFIG = {
     rsvpAgain:    {ko:"한 분 더 보내기",en:"Send another reply"},
     close:        {ko:"닫기",en:"Close"},
     giftTitle:    {ko:"마음 전하실 곳",en:"With thanks"},
+    acctPending:  {ko:"계좌는 곧 올려 두겠습니다.",en:"This account will be added shortly."},
     copy:         {ko:"복사",en:"Copy"},
     copied:       {ko:"복사됨",en:"Copied"},
     copyAria:     {ko:"계좌번호 복사",en:"Copy account number"},
@@ -1302,12 +1303,14 @@ function render(){
 
   /* 계좌 */
   $("#giftBody").innerHTML = CONFIG.accounts.map(g => {
-    const items = (g.items || []).filter(a => a.number);   /* 아직 안 적은 계좌는 숨깁니다 */
-    if (!items.length) return "";
+    const all = g.items || [];
+    const items = all.filter(a => a.number);
     return `
     <div class="acct-group">
       <h3>${t(g.title)}</h3>
       ${g.note ? `<p class="acct-note">${t(g.note)}</p>` : ""}
+      ${items.length === 0 && all.length
+        ? `<p class="acct-note">${all.map(a => t(a.who)).join(" · ")} — ${L("acctPending")}</p>` : ""}
       ${items.map(a => `
         <div class="acct">
           <div>
