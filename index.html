@@ -444,6 +444,9 @@ button{ font-family:inherit; font-size:inherit }
   font-family:var(--serif); font-weight:400; font-size:1.05rem;
   margin:0 0 12px; padding-bottom:9px; border-bottom:1px solid var(--line);
 }
+.acct-note{
+  margin:0 0 6px; font-size:.92rem; line-height:1.85; color:var(--ink-soft);
+}
 .acct{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0 }
 .acct-who{ font-size:.88rem; color:var(--ink-soft) }
 .acct-num{ font-size:1rem; margin-top:2px }
@@ -976,17 +979,30 @@ const CONFIG = {
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbyNFnuDxvf71ztOzuK7En9lBJAxZRR68hfNwK5LTernxaoodlFRvs8FEThDLcOYXtXS/exec",
 
   /* ── 9. 마음 전하실 곳 ──────────────────────── */
-  accounts: {
-    groomSide: [
-      { who:{ko:"신랑 엄지",en:"Groom"},                      bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신랑의 아버지 엄봉호",en:"Groom's father"}, bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신랑의 어머니 박미성",en:"Groom's mother"}, bank:"OO은행", number:"000-000000-00-000" }
-    ],
-    brideSide: [
-      { who:{ko:"신부 이도연",en:"Bride"},                    bank:"OO은행", number:"000-000000-00-000" },
-      { who:{ko:"신부의 어머니 정나일선",en:"Bride's mother"}, bank:"OO은행", number:"000-000000-00-000" }
-    ]
-  },
+  /* number 가 비어 있는 줄은 화면에 나오지 않습니다. 한 묶음이 통째로 비면 묶음도 숨습니다. */
+  accounts: [
+    {
+      title: { ko:"신랑 · 신부에게", en:"To the two of us" },
+      note:  { ko:"살림을 함께 꾸리기로 하면서 통장도 하나로 모았습니다. 어느 쪽으로 보내야 할지 고민하지 않으셔도 되도록 계좌 하나만 적어 둡니다.",
+               en:"We are making one household together, so we have made one account too. We list just the one, to spare you wondering which side to send to." },
+      items: [
+        { who:{ko:"엄지 · 이도연",en:"Ji Eom & Doyeon Lee"}, bank:{ko:"토스뱅크",en:"Toss Bank"}, number:"1002-3605-1961" }
+      ]
+    },
+    {
+      title: { ko:"신랑의 부모님께", en:"To the groom's parents" },
+      items: [
+        { who:{ko:"아버지 엄봉호",en:"Father, Bongho Eom"},  bank:{ko:"농협",en:"Nonghyup"}, number:"335052-52-171566" },
+        { who:{ko:"어머니 박미성",en:"Mother, Miseong Park"}, bank:{ko:"농협",en:"Nonghyup"}, number:"335052-52-164424" }
+      ]
+    },
+    {
+      title: { ko:"신부의 어머니께", en:"To the bride's mother" },
+      items: [
+        { who:{ko:"어머니 정나일선",en:"Mother, Ilseon Jeongna"}, bank:{ko:"",en:""}, number:"" }
+      ]
+    }
+  ],
 
   /* ── 10. 소스코드 주소 (비우면 공유 섹션의 안내가 숨습니다) ── */
   repoUrl: "https://github.com/a01051998767/welcome",
@@ -1073,8 +1089,6 @@ const CONFIG = {
     rsvpAgain:    {ko:"한 분 더 보내기",en:"Send another reply"},
     close:        {ko:"닫기",en:"Close"},
     giftTitle:    {ko:"마음 전하실 곳",en:"With thanks"},
-    groomSide:    {ko:"신랑에게",en:"To the groom's family"},
-    brideSide:    {ko:"신부에게",en:"To the bride's family"},
     copy:         {ko:"복사",en:"Copy"},
     copied:       {ko:"복사됨",en:"Copied"},
     copyAria:     {ko:"계좌번호 복사",en:"Copy account number"},
@@ -1287,21 +1301,24 @@ function render(){
     </label>`).join("");
 
   /* 계좌 */
-  const group = (key, list) => `
+  $("#giftBody").innerHTML = CONFIG.accounts.map(g => {
+    const items = (g.items || []).filter(a => a.number);   /* 아직 안 적은 계좌는 숨깁니다 */
+    if (!items.length) return "";
+    return `
     <div class="acct-group">
-      <h3>${L(key)}</h3>
-      ${list.map(a => `
+      <h3>${t(g.title)}</h3>
+      ${g.note ? `<p class="acct-note">${t(g.note)}</p>` : ""}
+      ${items.map(a => `
         <div class="acct">
           <div>
             <div class="acct-who">${t(a.who)}</div>
-            <div class="acct-num">${a.bank} ${a.number}</div>
+            <div class="acct-num">${t(a.bank)} ${a.number}</div>
           </div>
-          <button class="copy" type="button" data-copy="${a.bank} ${a.number}"
+          <button class="copy" type="button" data-copy="${a.number}"
                   aria-label="${t(a.who)} ${L("copyAria")}">${L("copy")}</button>
         </div>`).join("")}
     </div>`;
-  $("#giftBody").innerHTML =
-    group("groomSide", CONFIG.accounts.groomSide) + group("brideSide", CONFIG.accounts.brideSide);
+  }).join("");
 
   /* 고마운 분들 */
   const credits = CONFIG.credits || [];
