@@ -472,7 +472,7 @@ button{ font-family:inherit; font-size:inherit }
   color:var(--pine); font-weight:600;
   text-decoration:underline; text-underline-offset:3px;
 }
-.credit-role{ font-size:.92rem; color:var(--ink-soft); line-height:1.8; margin-top:2px }
+.credit-role{ font-size:.88rem; color:var(--ink-soft); line-height:1.7; margin-bottom:2px }
 
 /* ── 공유 · 맺음 ── */
 .share{ text-align:center }
@@ -885,7 +885,7 @@ const CONFIG = {
     },
     {
       mark: "三",
-      title: { ko:"3부 · 피로연(2차)", en:"Part 3 · Reception2" },
+      title: { ko:"3부 · 뒤풀이", en:"Part 3 · After-party" },
       meta:  { ko:"19:00부터 · 더 베어", en:"From 19:00 · The Bear" },
       notes: [
         { ko:"정해진 순서 없이 편히 머무시다 가세요. 잠깐 얼굴만 보고 가셔도 좋고, 오래 앉아 이야기 나누셔도 좋습니다.",
@@ -896,7 +896,7 @@ const CONFIG = {
       /* 장소 안내 — 버튼을 누르면 주소·지도·지도 앱 링크가 아래로 열립니다.
          통째로 지우면 버튼이 숨습니다. addr 를 비우면 주소 줄이 빠집니다. */
       place: {
-        button: { ko:"피로연(2차) 장소 보기", en:"Where Part 3 is" },
+        button: { ko:"뒤풀이 장소 보기", en:"Where the after-party is" },
         name:   { ko:"더 베어 낙성대점", en:"The Bear, Nakseongdae" },
         addr:   { ko:"서울 관악구 낙성대로 20", en:"20, Nakseongdae-ro, Gwanak-gu, Seoul" },
         embed:  "https://www.google.com/maps?q=%EB%8D%94%EB%B2%A0%EC%96%B4+%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&output=embed&hl=ko",
@@ -1004,8 +1004,8 @@ const CONFIG = {
     },
     {
       title: { ko:"신부의 어머니께", en:"To the bride's mother" },
-      note:  { ko:"어머니 정나일선께 전하실 마음은 위의 신랑 · 신부 계좌로 함께 받습니다. 저희가 빠짐없이 전해 드리겠습니다.",
-               en:"Gifts for the bride's mother come to the couple's account above, and we will pass every one of them on." },
+      note:  { ko:"어머니 정나일선께 전하실 마음은 위의 신랑 · 신부 계좌로 함께 받습니다.",
+               en:"Gifts for the bride's mother come to the couple's account above." },
       items: []
     }
   ],
@@ -1086,8 +1086,8 @@ const CONFIG = {
     rsvpPartsHint:{ko:"오실 수 있는 순서를 모두 골라주세요. 이번에 오기 어려우시면 비워 두고 보내셔도 됩니다.",
                    en:"Tick every part you can join. If you cannot come this time, send it with none ticked."},
     rsvpNeeds:    {ko:"미리 알려주실 것",en:"Anything we can prepare for you"},
-    rsvpNeedsHint:{ko:"오시는 길이나 자리에서 저희가 미리 챙겨두면 좋을 것이 있으면 편하게 적어주세요. 휠체어 자리와 이동, 문자통역, 무엇이든 괜찮습니다. 비건 · 채식 식사가 필요하시면 인원수에 맞춰 준비할 수 있도록 꼭 적어주세요.",
-                   en:"If there is anything we can arrange for you in advance, please tell us here — a wheelchair space, a step-free route, live captioning, anything at all. If you need a vegan or vegetarian meal, do be sure to say so, so we can cook the right number."},
+    rsvpNeedsHint:{ko:"오시는 길이나 자리에서 저희가 미리 챙겨두면 좋을 것이 있으면 무엇이든 편하게 적어주세요. 비건 · 채식 식사가 필요하시면 인원수에 맞춰 준비할 수 있도록 꼭 적어주세요.",
+                   en:"If there is anything at all we can arrange for you in advance, please tell us here. If you need a vegan or vegetarian meal, do be sure to say so, so we can cook the right number."},
     rsvpPhone:    {ko:"연락처",en:"Phone"},
     rsvpRequired: {ko:"(필수)",en:"(required)"},
     rsvpOptional: {ko:"(선택)",en:"(optional)"},
@@ -1348,10 +1348,10 @@ function render(){
       <ul class="credit-list">
         ${g.items.map(i => `
           <li>
+            ${i.role ? `<div class="credit-role">${t(i.role)}</div>` : ""}
             ${i.url
               ? `<a class="credit-name" href="${i.url}" target="_blank" rel="noopener">${t(i.name)}<span class="sr-only"> — ${L("newWindow")}</span></a>`
               : `<div class="credit-name">${t(i.name)}</div>`}
-            ${i.role ? `<div class="credit-role">${t(i.role)}</div>` : ""}
           </li>`).join("")}
       </ul>
     </div>`).join("");
