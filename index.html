@@ -404,6 +404,9 @@ button{ font-family:inherit; font-size:inherit }
 .venue-addr{ font-size:.96rem; color:var(--ink-soft); margin-top:5px }
 .map-links{ display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap }
 .notice-links{ margin:14px 0 0 }
+.place-row + .place-row{ margin-top:18px }
+.place-name{ margin:0 0 8px; font-size:.96rem; font-weight:600; color:var(--ink) }
+.place-row .map-links{ margin-bottom:0 }
 .song-panel .venue{ margin-bottom:16px }
 .song-panel .map{ margin-bottom:16px }
 .song-panel .map-links{ margin-bottom:0 }
@@ -943,12 +946,21 @@ const CONFIG = {
                en:"There are two accessible public restrooms — one at the venue and one at Nakseongdae Station. The buttons below open their locations on a map. If you need help getting around, tell us in your RSVP or ask one of us on the day." },
       link:  "",
       linkText: { ko:"", en:"" },
-      /* 링크를 여러 개 달 때는 links 를 씁니다. */
-      links: [
-        { url:"https://map.kakao.com/?urlX=491061.9999999979&urlY=1103477.9999999993&urlLevel=3&itemId=26333683&q=%EB%82%99%EC%84%B1%EB%8C%80%20%EA%B0%9C%EB%B0%A9%ED%99%94%EC%9E%A5%EC%8B%A4&srcid=26333683&map_type=TYPE_MAP",
-          text:{ ko:"관악문화예절원 개방화장실", en:"Public restroom at the venue" } },
-        { url:"https://map.kakao.com/?urlX=491941.0000000022&urlY=1104900.0000000035&urlLevel=3&itemId=26331314&q=%EB%82%99%EC%84%B1%EB%8C%80%EC%97%AD%20%EA%B0%9C%EB%B0%A9%ED%99%94%EC%9E%A5%EC%8B%A4&srcid=26331314&map_type=TYPE_MAP",
-          text:{ ko:"낙성대역 개방화장실", en:"Public restroom at Nakseongdae Station" } }
+      /* 버튼을 누르면 아래로 열리는 장소 목록입니다. 각 장소마다 지도 앱 링크를 답니다. */
+      toggle: { ko:"화장실 위치 보기", en:"See where the restrooms are" },
+      places: [
+        { name: { ko:"관악문화예절원 개방화장실", en:"Public restroom at the venue" },
+          links: [
+            { label:"kakao",  url:"https://map.kakao.com/?urlX=491061.9999999979&urlY=1103477.9999999993&urlLevel=3&itemId=26333683&q=%EB%82%99%EC%84%B1%EB%8C%80%20%EA%B0%9C%EB%B0%A9%ED%99%94%EC%9E%A5%EC%8B%A4&srcid=26333683&map_type=TYPE_MAP" },
+            { label:"naver",  url:"https://map.naver.com/p/search/%EA%B4%80%EC%95%85%EB%AC%B8%ED%99%94%EC%98%88%EC%A0%88%EC%9B%90%20%ED%99%94%EC%9E%A5%EC%8B%A4" },
+            { label:"google", url:"https://www.google.com/maps/search/?api=1&query=%EA%B4%80%EC%95%85%EB%AC%B8%ED%99%94%EC%98%88%EC%A0%88%EC%9B%90%20%ED%99%94%EC%9E%A5%EC%8B%A4" }
+          ] },
+        { name: { ko:"낙성대역 개방화장실", en:"Public restroom at Nakseongdae Station" },
+          links: [
+            { label:"kakao",  url:"https://map.kakao.com/?urlX=491941.0000000022&urlY=1104900.0000000035&urlLevel=3&itemId=26331314&q=%EB%82%99%EC%84%B1%EB%8C%80%EC%97%AD%20%EA%B0%9C%EB%B0%A9%ED%99%94%EC%9E%A5%EC%8B%A4&srcid=26331314&map_type=TYPE_MAP" },
+            { label:"naver",  url:"https://map.naver.com/p/search/%EB%82%99%EC%84%B1%EB%8C%80%EC%97%AD%20%EA%B0%9C%EB%B0%A9%ED%99%94%EC%9E%A5%EC%8B%A4" },
+            { label:"google", url:"https://www.google.com/maps/search/?api=1&query=%EB%82%99%EC%84%B1%EB%8C%80%EC%97%AD%20%EA%B0%9C%EB%B0%A9%ED%99%94%EC%9E%A5%EC%8B%A4" }
+          ] }
       ]
     },
     {
@@ -1048,8 +1060,10 @@ const CONFIG = {
           role: { ko:"한복 자문", en:"Hanbok advice" }, url:"" },
         { name: { ko:"임건호", en:"Lim Geonho" },
           role: { ko:"온라인 중계", en:"Live stream" }, url:"" },
-        { name: { ko:"윤춘필 · 공시형", en:"Yun Chunpil · Gong Sihyeong" },
-          role: { ko:"축의금", en:"Gift table" }, url:"" },
+        { name: { ko:"한미욱 · 공시형 · 윤춘필", en:"Han Miuk · Gong Sihyeong · Yun Chunpil" },
+          role: { ko:"축의대", en:"Gift table" }, url:"" },
+        { name: { ko:"한미정", en:"Han Mijeong" },
+          role: { ko:"전시대 운영", en:"Display table" }, url:"" },
         { name: { ko:"이재", en:"Yijae" },
           role: { ko:"청첩장 디자인과 전통 문양", en:"Invitation design and the traditional patterns" },
           url:  "" }
@@ -1261,13 +1275,25 @@ function render(){
   }).join("");
 
   /* 안내 사항 */
-  $("#noticeBody").innerHTML = CONFIG.notices.map(n => `
+  $("#noticeBody").innerHTML = CONFIG.notices.map((n, i) => `
     <div class="notice">
       <h3>${n.icon ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n.title)}</h3>
       <p>${t(n.desc)}</p>
       ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>` : ""}
       ${(n.links && n.links.length) ? `<div class="map-links notice-links">${n.links.map(l => `
         <a href="${l.url}" target="_blank" rel="noopener">${t(l.text)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
+      ${(n.places && n.places.length) ? `
+        <button class="song-toggle" type="button" aria-expanded="false" aria-controls="notice-places-${i}">
+          <span>${t(n.toggle)}</span><span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <div class="song-panel" id="notice-places-${i}">
+          ${n.places.map(pl => `
+            <div class="place-row">
+              <p class="place-name">${t(pl.name)}</p>
+              <div class="map-links">${pl.links.map(l => `
+                <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>
+            </div>`).join("")}
+        </div>` : ""}
     </div>`).join("");
 
   /* 오시는 길 */
