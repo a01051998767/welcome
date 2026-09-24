@@ -998,9 +998,9 @@ const CONFIG = {
     },
     {
       title: { ko:"신부의 어머니께", en:"To the bride's mother" },
-      items: [
-        { who:{ko:"어머니 정나일선",en:"Mother, Ilseon Jeongna"}, bank:{ko:"",en:""}, number:"" }
-      ]
+      note:  { ko:"어머니 정나일선께 전하실 마음은 위의 신랑 · 신부 계좌로 함께 받습니다. 저희가 빠짐없이 전해 드리겠습니다.",
+               en:"Gifts for the bride's mother come to the couple's account above, and we will pass every one of them on." },
+      items: []
     }
   ],
 
@@ -1015,27 +1015,37 @@ const CONFIG = {
     {
       title: { ko:"함께해 주신 기관 · 단체", en:"Organisations who helped" },
       items: [
-        { name: { ko:"기관 이름을 적어주세요", en:"Organisation name" },
-          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 문자통역 지원)",
-                  en:"One line on how they helped — e.g. live captioning." },
-          url:  "https://기관_홈페이지_주소" },
-        { name: { ko:"기관 이름을 적어주세요", en:"Organisation name" },
-          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 전통혼례 진행)",
-                  en:"One line on how they helped — e.g. running the traditional ceremony." },
-          url:  "https://기관_홈페이지_주소" }
+        { name: { ko:"에이유디 사회적협동조합", en:"AUD Social Cooperative" },
+          role: { ko:"예식 전 과정 문자통역", en:"Live captioning throughout the ceremony" },
+          url:  "https://audsc.org" },
+        { name: { ko:"우리옛멋", en:"Uri Yetmeot" },
+          role: { ko:"전통혼례 진행", en:"Running the traditional ceremony" },
+          url:  "https://www.gonji.co.kr" },
+        { name: { ko:"플러스에젤", en:"Plus Ezer" },
+          role: { ko:"휠체어와 이동 보조 기기", en:"Wheelchairs and mobility equipment" },
+          url:  "https://plusezer.com/index.html" },
+        { name: { ko:"자매주단", en:"Jamae Judan" },
+          role: { ko:"혼례 한복", en:"Wedding hanbok" },
+          url:  "https://blog.naver.com/jamaejudan" }
       ]
     },
     {
       title: { ko:"도움 주신 분들", en:"People who helped" },
       items: [
+        { name: { ko:"김현철 · 박동실 · 김정현 · 황상용", en:"Kim Hyeoncheol · Park Dongsil · Kim Jeonghyeon · Hwang Sangyong" },
+          role: { ko:"가마꾼", en:"Palanquin bearers" }, url:"" },
+        { name: { ko:"김민성", en:"Kim Minseong" },
+          role: { ko:"휠체어 접근성 자문", en:"Wheelchair access advice" }, url:"" },
+        { name: { ko:"김소희", en:"Kim Sohee" },
+          role: { ko:"문자통역 자문", en:"Live captioning advice" }, url:"" },
+        { name: { ko:"이현주 · 김지민", en:"Lee Hyeonju · Kim Jimin" },
+          role: { ko:"한복 자문", en:"Hanbok advice" }, url:"" },
+        { name: { ko:"임건호", en:"Lim Geonho" },
+          role: { ko:"온라인 중계", en:"Live stream" }, url:"" },
+        { name: { ko:"윤춘필 · 공시형", en:"Yun Chunpil · Gong Sihyeong" },
+          role: { ko:"축의금", en:"Gift table" }, url:"" },
         { name: { ko:"이재", en:"Yijae" },
           role: { ko:"청첩장 디자인과 전통 문양", en:"Invitation design and the traditional patterns" },
-          url:  "" },
-        { name: { ko:"이름을 적어주세요", en:"Name" },
-          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 사진)", en:"e.g. photography" },
-          url:  "" },
-        { name: { ko:"이름을 적어주세요", en:"Name" },
-          role: { ko:"어떤 도움을 주셨는지 한 줄로 적어주세요. (예: 청첩장 글씨)", en:"e.g. calligraphy" },
           url:  "" }
       ]
     }
@@ -1070,8 +1080,8 @@ const CONFIG = {
     rsvpPartsHint:{ko:"오실 수 있는 순서를 모두 골라주세요. 이번에 오기 어려우시면 비워 두고 보내셔도 됩니다.",
                    en:"Tick every part you can join. If you cannot come this time, send it with none ticked."},
     rsvpNeeds:    {ko:"미리 알려주실 것",en:"Anything we can prepare for you"},
-    rsvpNeedsHint:{ko:"오시는 길이나 자리에서 저희가 미리 챙겨두면 좋을 것이 있으면 편하게 적어주세요. 채식이나 알레르기 같은 식사, 휠체어 자리와 이동, 문자통역, 무엇이든 괜찮습니다. 덕분에 더 잘 준비하겠습니다.",
-                   en:"If there is anything we can arrange for you in advance, please tell us here — a vegetarian or allergy-safe meal, a wheelchair space or step-free route, live captioning, anything at all. It helps us prepare well."},
+    rsvpNeedsHint:{ko:"오시는 길이나 자리에서 저희가 미리 챙겨두면 좋을 것이 있으면 편하게 적어주세요. 휠체어 자리와 이동, 문자통역, 무엇이든 괜찮습니다. 비건 · 채식 식사가 필요하시면 인원수에 맞춰 준비할 수 있도록 꼭 적어주세요.",
+                   en:"If there is anything we can arrange for you in advance, please tell us here — a wheelchair space, a step-free route, live captioning, anything at all. If you need a vegan or vegetarian meal, do be sure to say so, so we can cook the right number."},
     rsvpPhone:    {ko:"연락처",en:"Phone"},
     rsvpRequired: {ko:"(필수)",en:"(required)"},
     rsvpOptional: {ko:"(선택)",en:"(optional)"},
