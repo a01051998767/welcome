@@ -462,20 +462,29 @@ button{ font-family:inherit; font-size:inherit }
 .copy.done, .btn-line.done{ background:var(--pine); color:var(--paper); border-color:var(--pine) }
 
 /* ── 고마운 분들 ── */
-.credits .lead{ font-size:.96rem; color:var(--ink-soft); margin:0 0 26px; text-align:center }
-.credit-group + .credit-group{ margin-top:28px }
+.credits{ text-align:center }
+.credits .lead{
+  max-width:26em; margin:0 auto 44px; font-size:.96rem; line-height:1.95; color:var(--ink-soft);
+}
+.credit-group + .credit-group{ margin-top:52px }
 .credit-group h3{
-  font-family:var(--serif); font-weight:400; font-size:1.05rem;
-  margin:0 0 12px; padding-bottom:9px; border-bottom:1px solid var(--line);
+  font-family:var(--latin); font-weight:400;
+  font-size:.72rem; letter-spacing:.3em; color:var(--jade);
+  margin:0 0 26px; padding:0 0 14px;
+  border-bottom:1px solid var(--line);
 }
-.credit-list{ list-style:none; margin:0; padding:0; display:grid; gap:16px }
-.credit-name{ font-size:1rem }
+.credit-list{ list-style:none; margin:0; padding:0; display:grid; gap:30px }
+.credit-role{
+  font-family:var(--sans); font-size:.78rem; letter-spacing:.14em;
+  color:var(--ink-soft); line-height:1.6; margin-bottom:7px;
+}
+.credit-name{ font-family:var(--serif); font-size:1.2rem; line-height:1.5; letter-spacing:.02em }
 .credit-list a.credit-name{
-  display:inline-flex; align-items:center; min-height:44px;
-  color:var(--pine); font-weight:600;
-  text-decoration:underline; text-underline-offset:3px;
+  display:inline-flex; align-items:center; justify-content:center; min-height:44px;
+  color:var(--ink); text-decoration:underline; text-underline-offset:4px;
 }
-.credit-role{ font-size:.88rem; color:var(--ink-soft); line-height:1.7; margin-bottom:2px }
+/* 맨 끝에 금색 문양으로 마무리 */
+.credits .orn-divider{ margin-top:52px }
 
 /* ── 공유 · 맺음 ── */
 .share{ text-align:center }
@@ -624,6 +633,7 @@ button{ font-family:inherit; font-size:inherit }
   <symbol id="ico-caption" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10.6 10.4a2.6 2.6 0 1 0 0 3.2"/><path d="M17.1 10.4a2.6 2.6 0 1 0 0 3.2"/></g></symbol>
   <symbol id="ico-route" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="16.5" r="4.6"/><circle cx="13.6" cy="3.9" r="1.7"/><path d="M12.6 7.1v5.2h4.1"/><path d="M16.7 12.3 19 18.6"/></g></symbol>
   <symbol id="ico-live" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="13" rx="2.5"/><path d="M10.2 8.6 15 11l-4.8 2.4z"/><path d="M8 21h8"/></g></symbol>
+  <symbol id="ico-desk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M15.5 5.5v13"/><path d="M6 10h5.5"/><path d="M6 14h4"/></g></symbol>
   <symbol id="ico-flower" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="2.6"/><circle cx="16.18" cy="7.64" r="2.6"/><circle cx="14.58" cy="12.56" r="2.6"/><circle cx="9.42" cy="12.56" r="2.6"/><circle cx="7.82" cy="7.64" r="2.6"/><path d="M12 14.6V21"/><path d="M12 19.2c-1.9 0-3.2-1.3-3.4-3.1 1.9-.2 3.3 1 3.4 3.1Z"/></g></symbol>
   <symbol id="ico-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 3.5c0 8.6-4.9 13.6-11.4 13.6-1.3 0-2.4-.2-3.3-.6C5.4 9.2 10.3 5.4 20.5 3.5Z"/><path d="M6.6 20.5c.6-3.6 2.4-6.4 5.4-8.4"/></g></symbol>
 </defs></svg>
@@ -691,10 +701,12 @@ button{ font-family:inherit; font-size:inherit }
     <div id="giftBody"></div>
   </section>
 
-  <section class="sec credits" id="creditsSection" tabindex="-1" aria-labelledby="h-credits">
+  <section class="sec credits dark" id="creditsSection" tabindex="-1" aria-labelledby="h-credits">
+    <div class="waves" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg><h2 id="h-credits" data-k="creditsTitle"></h2></div>
     <p class="lead" data-k="creditsDesc"></p>
     <div id="creditsBody"></div>
+    <svg class="orn-divider" aria-hidden="true"><use href="#orn-07"></use></svg>
   </section>
 
   <section id="s-share" tabindex="-1" class="sec share" aria-labelledby="h-share">
@@ -924,6 +936,14 @@ const CONFIG = {
       linkText: { ko:"", en:"" }
     },
     {
+      icon:  "desk",
+      title: { ko:"당일 접수대에서", en:"At the welcome desk" },
+      desc:  { ko:"접수대에서 종이 청첩장이나 이 모바일 청첩장을 보여주시고, 방명록에 이름을 남겨주세요. 그 자리에서 오신 인원수대로 식권을 받아 가시면 됩니다.",
+               en:"At the desk, show your paper invitation or this page and sign the guest book. You will be handed one meal ticket for each person in your party." },
+      link:  "",
+      linkText: { ko:"", en:"" }
+    },
+    {
       icon:  "flower",
       title: { ko:"화환 대신 마음만 받겠습니다", en:"Your presence is gift enough" },
       desc:  { ko:"축하해 주시는 마음만으로 이미 넘치도록 충분합니다. 화환은 정중히 사양하려 하니 편한 마음으로 몸만 와 주세요. 다만 직접 들고 오셨다가 돌아가실 때 함께 가져가시는 응원 깃발이나 현수막처럼, 자리에 남지 않는 것이라면 언제든 반갑게 맞이하겠습니다.",
@@ -1001,8 +1021,8 @@ const CONFIG = {
   accounts: [
     {
       title: { ko:"신랑 · 신부에게", en:"To the two of us" },
-      note:  { ko:"살림을 함께 꾸리기로 하면서 통장도 하나로 모았습니다. 어느 쪽으로 보내야 할지 고민하지 않으셔도 되도록 계좌 하나만 적어 둡니다.",
-               en:"We are making one household together, so we have made one account too. We list just the one, to spare you wondering which side to send to." },
+      note:  { ko:"살림을 함께 꾸리기로 하면서 통장도 하나로 모았습니다. 어느 쪽으로 보내야 할지 고민하지 않으셔도 되도록 계좌 하나만 적어 둡니다. 예식이 야외에서 열리고 자리도 넉넉하지 않아 접수대가 붐빌 듯합니다. 번거로우시겠지만 되도록 현금보다 계좌이체로 보내주시면 고맙겠습니다.",
+               en:"We are making one household together, so we have made one account too — just the one, to spare you wondering which side to send to. The ceremony is outdoors and space is tight, so the welcome desk may get busy: a bank transfer rather than cash would help us a great deal." },
       items: [
         { who:{ko:"엄지 · 이도연",en:"Ji Eom & Doyeon Lee"}, bank:{ko:"토스뱅크",en:"Toss Bank"}, number:"1002-3605-1961" }
       ]
