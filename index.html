@@ -910,8 +910,8 @@ const CONFIG = {
       notes: [
         { ko:"예식이 시작되기 전, 마당에서 저희 두 사람이 오시는 분들을 맞이합니다. 조금 일찍 오셔서 인사 나눠 주시면 더없이 기쁘겠습니다.",
           en:"Before the ceremony begins, the two of us will be out in the courtyard to greet you. Come a little early and say hello if you can." },
-        { ko:"낙성대공원 입구에서 혼례식장까지 흙모래길을 지나야 합니다. 편한 신발을 신고 오시기를 권해드립니다.",
-          en:"From the park entrance to the ceremony there is a stretch of sand and earth path. Comfortable shoes are a good idea." },
+        { ko:"낙성대공원 입구에서 혼례식장까지 흙모래길이 이어집니다. 오가시기 편한 신발과 차림으로 오시기를 권해 드립니다.",
+          en:"A sand-and-earth path runs from the park entrance to the ceremony, so shoes and clothes that are easy to get about in are a good idea." },
         { ko:"1부 전통혼례와 2부 피로연은 모두 야외에서 진행됩니다. 비가 오면 천막을 치고 진행하니 옷을 고르실 때 참고해 주세요.",
           en:"Parts 1 and 2 both take place outdoors. If it rains we will set up a marquee — please bear that in mind when choosing what to wear." }
       ]
@@ -924,8 +924,8 @@ const CONFIG = {
         { icon:"leaf",
           ko:"뷔페로 준비했습니다. 동물성 재료를 쓰지 않은 비건 · 채식 요리도 함께 차립니다. 어느 분이든 드실 것이 있도록 준비하겠습니다.",
           en:"A buffet is served, and it includes vegan and vegetarian dishes cooked without animal products, so there is something for everyone." },
-        { ko:"신랑이 통기타를 연주하며 축가를 부릅니다. 같이 불러주세요.",
-          en:"The groom will sing, accompanying himself on guitar — please sing along." }
+        { ko:"신랑이 통기타를 연주하며 축가를 부릅니다. 함께 따라 불러 주셔도 좋습니다.",
+          en:"The groom will sing, accompanying himself on guitar — you are welcome to sing along." }
       ],
 
       /* 축가 가사
@@ -973,7 +973,7 @@ const CONFIG = {
     {
       icon:  "flower",
       title: { ko:"화환 대신 마음만 받겠습니다", en:"Your presence is gift enough" },
-      desc:  { ko:"축하해 주시는 마음만으로 이미 넘치도록 충분합니다. 화환은 정중히 사양하려 하니 편한 마음으로 몸만 와 주세요. 다만 직접 들고 오셨다가 돌아가실 때 함께 가져가시는 응원 깃발이나 현수막처럼, 자리에 남지 않는 것이라면 언제든 반갑게 맞이하겠습니다.",
+      desc:  { ko:"축하해 주시는 마음만으로 이미 넘치도록 충분합니다. 화환은 정중히 사양하려 하니 편한 마음으로 오시기만 하면 됩니다. 다만 직접 들고 오셨다가 돌아가실 때 함께 가져가시는 응원 깃발이나 현수막처럼, 자리에 남지 않는 것이라면 언제든 반갑게 맞이하겠습니다.",
                en:"Your good wishes are already more than enough, so please do not send a congratulatory wreath — just come as you are. Anything you carry in and carry home again, such as a banner or a flag, we will welcome gladly." },
       link:  "",
       linkText: { ko:"", en:"" }
@@ -988,7 +988,7 @@ const CONFIG = {
     },
     {
       icon:  "route",
-      title: { ko:"장애인 화장실 · 이동 안내", en:"Accessible restroom & step-free route" },
+      title: { ko:"화장실 · 이동 안내", en:"Restrooms & getting around" },
       desc:  { ko:"예식장과 낙성대역에 휠체어로도 편히 쓰실 수 있는 개방화장실이 있습니다. 아래 버튼을 누르면 두 곳의 위치를 지도로 보실 수 있습니다. 오시는 길이나 식장 안에서 저희가 미리 챙겨 두면 좋을 것이 있다면, 참석 여부를 알려주실 때 적어 주시거나 당일 가까이 있는 사람에게 편하게 말씀해 주세요.",
                en:"The venue and Nakseongdae Station each have a public restroom that works comfortably with a wheelchair. The button below shows both on a map. If there is anything we could have ready for your journey or your time at the venue, add it to your RSVP or just tell whoever is nearby on the day." },
       link:  "",
@@ -1049,8 +1049,8 @@ const CONFIG = {
       desc:{ko:"관악구민종합체육센터 주차장(유료, 공영)을 이용하시면 됩니다.",
             en:"Use the Gwanak Sports Centre car park (public, paid)."} },
     { label:{ko:"부탁",en:"A small ask"},
-      desc:{ko:"주차 공간이 넉넉하지 않아 마음이 쓰입니다. 가능하시다면 대중교통으로 와주시면 한결 편안하게 모실 수 있겠습니다.",
-            en:"Parking is limited, and we would rather you didn't have to circle for a space. If you can come by public transport, it will make the day easier for everyone."} }
+      desc:{ko:"주차 공간이 넉넉하지 않습니다. 차가 꼭 필요하신 분들이 편히 대실 수 있도록, 가능하시다면 대중교통으로 와 주시면 고맙겠습니다.",
+            en:"Parking is limited. If you can come by public transport, the spaces will be free for those who really need them — thank you."} }
   ],
 
   /* ── 8. 참석 의사 접수 주소 ──
@@ -1170,11 +1170,11 @@ const CONFIG = {
     rsvpSending:  {ko:"보내는 중입니다…",en:"Sending…"},
     rsvpNeedName: {ko:"성함을 입력해 주세요.",en:"Please enter your name."},
     rsvpNotReady: {ko:"참석 접수가 아직 준비 중입니다. 보내지지 않았습니다.",en:"The RSVP form is not connected yet. Nothing was sent."},
-    rsvpNoReach:  {ko:"접수 서버에 닿지 못했습니다. 잠시 후 다시 보내주세요. 계속 이러면 신랑·신부에게 알려주세요.",
-                   en:"We could not reach the RSVP server. Please try again shortly, and let the couple know if it keeps happening."},
-    rsvpRejected: {ko:"서버가 저장하지 못했다고 답했습니다. 신랑·신부에게 알려주세요.",
-                   en:"The server replied that it could not save your reply. Please let the couple know."},
-    rsvpFailed:   {ko:"저장된 것을 확인하지 못했습니다. 잠시 후 다시 보내주세요.",en:"We could not confirm your reply was saved. Please try again in a moment."},
+    rsvpNoReach:  {ko:"접수가 전달되지 않았습니다. 잠시 후 다시 보내 주세요. 계속 보내지지 않으면 신랑 · 신부에게 알려 주세요.",
+                   en:"Your reply did not go through. Please try again shortly, and let the couple know if it keeps happening."},
+    rsvpRejected: {ko:"접수가 저장되지 않았습니다. 번거로우시겠지만 신랑 · 신부에게 알려 주세요.",
+                   en:"Your reply was not saved. Sorry for the trouble — please let the couple know."},
+    rsvpFailed:   {ko:"잘 저장되었는지 확인하지 못했습니다. 잠시 후 다시 보내 주세요.",en:"We could not confirm your reply was saved. Please try again in a moment."},
     rsvpThanks:   {ko:"참석 여부를 잘 받았습니다. 고맙습니다.",en:"We have received your reply. Thank you."},
     rsvpNumber:   {ko:"접수 번호",en:"Reference"},
     rsvpAgain:    {ko:"한 분 더 보내기",en:"Send another reply"},
