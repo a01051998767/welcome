@@ -408,6 +408,9 @@ button{ font-family:inherit; font-size:inherit }
 .venue-addr{ font-size:.96rem; color:var(--ink-soft); margin-top:5px }
 .map-links{ display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap }
 .notice-links{ margin:14px 0 0 }
+button.notice-link{ border:0; font-family:inherit; cursor:pointer }
+.notice-pending{ margin:10px 0 0; font-size:.94rem; color:var(--ink) }
+.notice-pending:empty{ display:none }
 .place-row + .place-row{ margin-top:18px }
 .place-name{ margin:0 0 8px; font-size:.96rem; font-weight:600; color:var(--ink) }
 .place-row .map-links{ margin-bottom:0 }
@@ -1021,7 +1024,7 @@ const CONFIG = {
       title: { ko:"문자통역", en:"Live captioning" },
       desc:  { ko:"예식 전 과정을 실시간 문자로 옮겨드립니다. 아래 링크를 휴대폰으로 열어두시면 자리에서 바로 보실 수 있습니다.",
                en:"The whole ceremony is transcribed live. Open the link on your phone to follow along from your seat." },
-      link:  "https://여기에_문자통역_링크",
+      link:  "",                         /* 링크가 생기면 넣으세요. 비어 있으면 누를 때 "준비 중" 안내가 나옵니다. */
       linkText: { ko:"문자통역 열기", en:"Open live captions" }
     },
     {
@@ -1029,7 +1032,7 @@ const CONFIG = {
       title: { ko:"온라인 중계", en:"Watch online" },
       desc:  { ko:"먼 곳에서 함께해 주시는 분들을 위해 1부 전통혼례를 실시간으로 중계합니다. 예식 10분 전부터 접속하실 수 있습니다.",
                en:"Part 1 will be streamed live for those joining from afar. The stream opens ten minutes before the ceremony." },
-      link:  "https://여기에_스트리밍_링크",
+      link:  "",                         /* 링크가 생기면 넣으세요. 비어 있으면 누를 때 "준비 중" 안내가 나옵니다. */
       linkText: { ko:"중계 보러 가기", en:"Watch the stream" }
     },
     {
@@ -1190,6 +1193,8 @@ const CONFIG = {
     giftTitle:    {ko:"마음 전하실 곳",en:"With thanks"},
     giftDesc:     {ko:"오셔서 함께 웃어 주시는 것만으로도 저희에게는 큰 선물입니다. 그래도 마음을 보태고 싶으신 분들을 위해 조심스레 적어 둡니다.",
                    en:"Your company and your laughter are gift enough. For those who would still like to send something, we have noted the details below."},
+    linkPending:  {ko:"아직 준비 중입니다. 예식이 가까워지면 이곳에 링크를 올려 두겠습니다.",
+                   en:"Not ready yet — we will post the link here closer to the day."},
     acctPending:  {ko:"계좌는 곧 올려 두겠습니다.",en:"This account will be added shortly."},
     copy:         {ko:"복사",en:"Copy"},
     copied:       {ko:"복사됨",en:"Copied"},
@@ -1363,7 +1368,9 @@ function render(){
     <div class="notice">
       <h3>${n.icon ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n.title)}</h3>
       <p>${t(n.desc)}</p>
-      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>` : ""}
+      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>`
+        : t(n.linkText) ? `<button class="notice-link" type="button" data-pending="notice-pending-${i}">${t(n.linkText)}</button>
+          <p class="notice-pending" id="notice-pending-${i}" role="status"></p>` : ""}
       ${(n.links && n.links.length) ? `<div class="map-links notice-links">${n.links.map(l => `
         <a href="${l.url}" target="_blank" rel="noopener">${t(l.text)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
       ${(n.places && n.places.length) ? `
@@ -1642,6 +1649,12 @@ document.addEventListener("click", e => {
   const open = panel.classList.toggle("open");
   b.setAttribute("aria-expanded", String(open));
   b.querySelector(".chev").textContent = open ? "▴" : "▾";
+});
+
+/* ── 아직 링크가 없는 안내 버튼: 누르면 "준비 중" 문구를 글자로 보여 줍니다 ── */
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-pending]"); if (!b) return;
+  document.getElementById(b.dataset.pending).textContent = L("linkPending");
 });
 
 /* ── 계좌 복사 ── */
