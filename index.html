@@ -1337,7 +1337,7 @@ function render(){
     fig.className = "shot";
     const el = photo(item, "button");
     el.type = "button";
-    el.setAttribute("aria-label", `${t(item.alt)} — ${L("enlarge")}`);
+    el.setAttribute("aria-label", `${t(item.alt)} ${L("enlarge")}`);
     el.addEventListener("click", () => openLightbox(item, el));
     fig.appendChild(el);
     if (item.date || item.caption){             /* 날짜 · 한 줄 설명 */
@@ -1364,9 +1364,9 @@ function render(){
           <div class="venue-name">${t(p.place.name)}</div>
           ${t(p.place.addr) ? `<div class="venue-addr">${t(p.place.addr)}</div>` : ""}
         </div>
-        ${p.place.embed ? `<div class="map"><iframe src="${p.place.embed}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="${t(p.place.name)} ${L("mapTitle")}"></iframe></div>` : ""}
+        ${p.place.embed ? `<div class="map" aria-hidden="true"><iframe tabindex="-1" src="${p.place.embed}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="${t(p.place.name)} ${L("mapTitle")}"></iframe></div>` : ""}
         <div class="map-links">${(p.place.links || []).map(l => `
-          <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>
+          <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only">, ${L("newWindow")}</span></a>`).join("")}</div>
       </div>` : "";
     const song = p.song ? `
       <button class="song-toggle" type="button" data-song="${i}" aria-expanded="false" aria-controls="song-${i}">
@@ -1398,11 +1398,11 @@ function render(){
       <h3>${n.icon ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n.title)}</h3>
       <p>${t(n.desc)}</p>
       ${n.localAt && localTime(n.localAt) ? `<p class="notice-local">${t(n.localText).replace("{t}", localTime(n.localAt))}</p>` : ""}
-      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}<span class="sr-only"> — ${L("newWindow")}</span></a>`
+      ${n.link ? `<a class="notice-link" href="${n.link}" target="_blank" rel="noopener">${t(n.linkText)}<span class="sr-only">, ${L("newWindow")}</span></a>`
         : t(n.linkText) ? `<button class="notice-link" type="button" data-pending="notice-pending-${i}">${t(n.linkText)}</button>
           <p class="notice-pending" id="notice-pending-${i}" role="status"></p>` : ""}
       ${(n.links && n.links.length) ? `<div class="map-links notice-links">${n.links.map(l => `
-        <a href="${l.url}" target="_blank" rel="noopener">${t(l.text)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
+        <a href="${l.url}" target="_blank" rel="noopener">${t(l.text)}<span class="sr-only">, ${L("newWindow")}</span></a>`).join("")}</div>` : ""}
       ${(n.places && n.places.length) ? `
         <button class="song-toggle" type="button" aria-expanded="false" aria-controls="notice-places-${i}">
           <span>${t(n.toggle)}</span><span class="chev" aria-hidden="true">▾</span>
@@ -1412,7 +1412,7 @@ function render(){
             <div class="place-row">
               <p class="place-name">${t(pl.name)}</p>
               <div class="map-links">${pl.links.map(l => `
-                <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("")}</div>
+                <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only">, ${L("newWindow")}</span></a>`).join("")}</div>
             </div>`).join("")}
         </div>` : ""}
     </div>`).join("");
@@ -1421,7 +1421,10 @@ function render(){
   const mapBox = $("#mapBox");
   if (CONFIG.mapEmbed){
     mapBox.style.display = "";
-    mapBox.innerHTML = `<iframe src="${CONFIG.mapEmbed}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="${L("mapTitle")}"></iframe>`;
+    /* 구글 지도 속 글꼴·그림 크기 같은 정보가 화면 낭독기로 읽히지 않게 숨깁니다.
+       주소와 지도 앱 링크가 같은 내용을 글자로 알려 줍니다. */
+    mapBox.setAttribute("aria-hidden", "true");
+    mapBox.innerHTML = `<iframe tabindex="-1" src="${CONFIG.mapEmbed}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="${L("mapTitle")}"></iframe>`;
   } else {
     mapBox.style.display = "none";
   }
@@ -1429,11 +1432,11 @@ function render(){
     `<div class="venue-name">${t(CONFIG.venueName)}</div><div class="venue-addr">${t(CONFIG.venueAddr)}</div>`;
 
   $("#mapLinks").innerHTML = (CONFIG.mapLinks || []).map(m => `
-    <a href="${m.url}" target="_blank" rel="noopener">${L(m.label)}<span class="sr-only"> — ${L("newWindow")}</span></a>`).join("");
+    <a href="${m.url}" target="_blank" rel="noopener">${L(m.label)}<span class="sr-only">, ${L("newWindow")}</span></a>`).join("");
 
   $("#transitBody").innerHTML = CONFIG.transit.map(r => `
     <div class="transit-row">
-      <div class="transit-label">${t(r.label)}</div>
+      <div class="transit-label" role="heading" aria-level="3">${t(r.label)}</div>
       <div class="transit-desc">${r.steps
         ? `<ol class="transit-steps">${r.steps.map(x => `<li>${t(x)}</li>`).join("")}</ol>`
         : t(r.desc)}</div>
@@ -1495,9 +1498,9 @@ function render(){
       <ul class="credit-list">
         ${g.items.map(i => `
           <li>
-            ${i.role ? `<div class="credit-role">${t(i.role)}</div>` : ""}
+            ${i.role ? `<div class="credit-role">${t(i.role)}<span class="sr-only">, </span></div>` : ""}
             ${i.url
-              ? `<a class="credit-name" href="${i.url}" target="_blank" rel="noopener">${t(i.name)}<span class="sr-only"> — ${L("newWindow")}</span></a>`
+              ? `<a class="credit-name" href="${i.url}" target="_blank" rel="noopener">${t(i.name)}<span class="sr-only">, ${L("newWindow")}</span></a>`
               : `<div class="credit-name">${t(i.name)}</div>`}
           </li>`).join("")}
       </ul>
@@ -1509,7 +1512,7 @@ function render(){
   const note = $("#licenseNote");
   if (CONFIG.repoUrl){
     note.style.display = "";
-    note.innerHTML = `${L("licenseDesc")} <a href="${CONFIG.repoUrl}" target="_blank" rel="noopener">${L("repoLink")}<span class="sr-only"> — ${L("newWindow")}</span></a>`;
+    note.innerHTML = `${L("licenseDesc")} <a href="${CONFIG.repoUrl}" target="_blank" rel="noopener">${L("repoLink")}<span class="sr-only">, ${L("newWindow")}</span></a>`;
   } else {
     note.style.display = "none";
   }
