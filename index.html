@@ -161,6 +161,11 @@ button{ font-family:inherit; font-size:inherit }
 }
 .menu-panel a + a{ border-top:1px solid var(--line) }
 .menu-panel a:hover, .menu-panel a:focus-visible{ background:var(--paper-warm) }
+.menu-close{
+  display:block; width:100%; min-height:48px; padding:13px 22px; margin-top:4px;
+  border:0; border-top:1px solid var(--line-strong); background:var(--paper-warm);
+  font:inherit; font-size:1rem; font-weight:600; color:var(--jade); cursor:pointer;
+}
 
 /* ── 하단 참석 의사 바 ── */
 .rsvp-bar{
@@ -353,7 +358,7 @@ button{ font-family:inherit; font-size:inherit }
   margin-top:15px; width:100%;
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   padding:14px 16px; cursor:pointer; min-height:48px;
-  background:var(--card); color:var(--pine);
+  background:var(--card); color:var(--jade);
   border:1px solid var(--line-strong); border-radius:2px;
   font-size:.96rem; font-weight:600; text-align:left;
 }
@@ -424,7 +429,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
   text-decoration:underline; text-underline-offset:3px;
   padding:11px 6px; font-size:.9rem; font-weight:600;
   border:1px solid var(--line-strong); border-radius:2px;
-  background:var(--card); color:var(--pine);
+  background:var(--card); color:var(--jade);
 }
 .transit{ display:grid; gap:15px }
 .transit-row{ display:grid; grid-template-columns:64px 1fr; gap:12px; font-size:.96rem }
@@ -467,7 +472,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
 .copy{
   flex:0 0 auto; min-height:44px;
   border:1px solid var(--line-strong); background:var(--card);
-  color:var(--pine); font-size:.88rem; font-weight:600;
+  color:var(--jade); font-size:.88rem; font-weight:600;
   padding:9px 16px; border-radius:2px; cursor:pointer;
 }
 .copy.done, .btn-line.done{ background:var(--pine); color:var(--paper); border-color:var(--pine) }
@@ -501,14 +506,14 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
 .share{ text-align:center }
 .share-btns{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
 .share-btns .btn{ flex:1 1 auto; min-width:9em; padding:16px 22px }
-.btn-line{ background:var(--card); color:var(--pine); border:1px solid var(--line-strong) }
+.btn-line{ background:var(--card); color:var(--jade); border:1px solid var(--line-strong) }
 .share .license{
   font-size:.88rem; line-height:1.9; color:var(--ink-soft);
   margin:24px auto 0; max-width:34em; text-align:left;
 }
 .share .license a{
   display:inline-flex; align-items:center; min-height:44px;
-  color:var(--pine); font-weight:600;
+  color:var(--jade); font-weight:600;
   text-decoration:underline; text-underline-offset:3px;
 }
 .share .license + .license{ margin-top:14px }
@@ -516,8 +521,8 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
 .outro .orn-outro{ display:block; width:34px; height:34px; margin:0 auto 18px; color:var(--gold-soft); opacity:.95 }
 .outro .hui{ font-family:var(--serif); font-size:1.7rem; color:var(--gold-soft) }
 .outro-names{ font-family:var(--serif); font-size:1.1rem; margin:18px 0 6px }
-.outro-date{ font-family:var(--latin); font-size:.78rem; letter-spacing:.22em; color:#CFDCD2 }
-.outro-thanks{ font-size:.94rem; margin-top:22px; color:#E8EFE6 }
+.outro-date{ font-family:var(--latin); font-size:.78rem; letter-spacing:.22em; color:var(--paper) }
+.outro-thanks{ font-size:.94rem; margin-top:22px; color:var(--paper) }
 
 /* ── 참석 의사 입력창 ── */
 .modal{
@@ -536,7 +541,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
 .modal-close{
   flex:0 0 auto; min-width:44px; min-height:44px;
   border:1px solid var(--line-strong); border-radius:2px;
-  background:var(--paper-warm); color:var(--pine); font-size:1.2rem; cursor:pointer;
+  background:var(--paper-warm); color:var(--jade); font-size:1.2rem; cursor:pointer;
 }
 #rsvpForm, #rsvpDone{ padding:20px 22px 26px }
 .field{ margin:0 0 22px; padding:0; border:0 }
@@ -631,7 +636,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
   </div>
 </div>
 
-<nav class="menu-panel" id="menuPanel" aria-labelledby="menuBtn" hidden></nav>
+<nav class="menu-panel" id="menuPanel" hidden></nav>
 
 <!-- 전통 문양 — 장식입니다. 색은 CSS의 color 로 정합니다. -->
 <svg class="sprite" aria-hidden="true" focusable="false"><defs>
@@ -750,7 +755,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
 <dialog class="modal" id="rsvpModal" aria-labelledby="rsvpHeading">
   <form method="dialog" class="modal-top">
     <h2 id="rsvpHeading" data-k="rsvpTitle"></h2>
-    <button class="modal-close" type="submit" id="rsvpClose">×<span class="sr-only" data-k="close"></span></button>
+    <button class="modal-close" type="submit" id="rsvpClose"><span aria-hidden="true">×</span><span class="sr-only" data-k="close"></span></button>
   </form>
 
   <form id="rsvpForm" novalidate>
@@ -786,8 +791,8 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
   </div>
 </dialog>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
-  <button class="close" type="button" id="lightboxClose">×<span class="sr-only">닫기</span></button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="close" type="button" id="lightboxClose"><span aria-hidden="true">×</span><span class="sr-only" data-k="close"></span></button>
   <img alt="" id="lightboxImg">
   <p class="caption" id="lightboxCaption"></p>
 </div>
@@ -1200,6 +1205,7 @@ const CONFIG = {
     rsvpNumber:   {ko:"접수 번호",en:"Reference"},
     rsvpAgain:    {ko:"한 분 더 보내기",en:"Send another reply"},
     close:        {ko:"닫기",en:"Close"},
+    lightboxLabel:{ko:"사진 크게 보기",en:"Enlarged photo"},
     giftTitle:    {ko:"마음 전하실 곳",en:"With thanks"},
     giftDesc:     {ko:"오셔서 함께 웃어 주시는 것만으로도 저희에게는 큰 선물입니다. 그래도 마음을 보태고 싶으신 분들을 위해 조심스레 적어 둡니다.",
                    en:"Your company and your laughter are gift enough. For those who would still like to send something, we have noted the details below."},
@@ -1454,7 +1460,9 @@ function render(){
   $("#menuPanel").setAttribute("aria-label", L("menuLabel"));
   $("#menuPanel").innerHTML = menuItems
     .filter(([id]) => { const el = document.getElementById(id); return el && el.style.display !== "none"; })
-    .map(([id, key]) => `<a href="#${id}">${L(key)}</a>`).join("");
+    .map(([id, key]) => `<a href="#${id}">${L(key)}</a>`).join("")
+    + `<button type="button" class="menu-close" id="menuClose">${L("menuClose")}</button>`;
+  $("#lightbox").setAttribute("aria-label", L("lightboxLabel"));
   $("#menuBtn").querySelector(".sr-only").textContent =
     L($("#menuBtn").getAttribute("aria-expanded") === "true" ? "menuClose" : "menuOpen");
 
@@ -1522,14 +1530,33 @@ function render(){
   $("#outroDate").textContent = CONFIG.outroDate;
 }
 
+/* 창(차례·사진 확대)이 열려 있는 동안 그 밖의 모든 것을 inert 로 막습니다.
+   보이지 않는 뒤쪽으로 초점이나 화면 낭독기가 새어 나가지 않습니다. */
+function isolate(keep, on){
+  [...document.body.children].forEach(el => {
+    if (el !== keep && el.id !== "live" && el.tagName !== "SCRIPT") el.inert = on;
+  });
+}
+
 /* ── 차례(햄버거 메뉴) ── */
 const menuBtn = $("#menuBtn"), menuPanel = $("#menuPanel");
 
+/* 차례가 열려 있는 동안에는 차례 밖(도구 막대·본문·하단 바)을 inert 로 막아
+   보이지 않는 곳으로 초점이나 화면 낭독기가 가지 않게 합니다.
+   차례 항목 → 맨 끝 "차례 닫기" 버튼 순서로만 돕니다. */
 function setMenu(open){
   menuBtn.setAttribute("aria-expanded", String(open));
   menuPanel.hidden = !open;
   menuBtn.querySelector(".sr-only").textContent = L(open ? "menuClose" : "menuOpen");
+  isolate(menuPanel, open);
 }
+menuPanel.addEventListener("keydown", e => {
+  if (e.key !== "Tab") return;
+  const items = [...menuPanel.querySelectorAll("a, button")];
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
 menuBtn.addEventListener("click", () => {
   const open = menuBtn.getAttribute("aria-expanded") !== "true";
   setMenu(open);
@@ -1537,6 +1564,7 @@ menuBtn.addEventListener("click", () => {
 });
 /* 항목을 고르면 닫고, 그 자리로 초점을 옮깁니다 */
 menuPanel.addEventListener("click", e => {
+  if (e.target.closest("#menuClose")){ setMenu(false); menuBtn.focus(); return; }
   const a = e.target.closest("a"); if (!a) return;
   setMenu(false);
   const target = document.getElementById(a.getAttribute("href").slice(1));
@@ -1742,10 +1770,12 @@ function openLightbox(item, trigger){
   const title = [item.date, t(item.caption)].filter(Boolean).join(" · ");
   $("#lightboxCaption").textContent = title || t(item.alt) || "";
   $("#lightbox").classList.add("on");
+  isolate($("#lightbox"), true);
   $("#lightboxClose").focus();
 }
 function closeLightbox(){
   $("#lightbox").classList.remove("on");
+  isolate($("#lightbox"), false);
   if (lastFocus) lastFocus.focus();
 }
 $("#lightboxClose").addEventListener("click", closeLightbox);
