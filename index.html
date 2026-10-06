@@ -37,6 +37,7 @@
 <meta name="apple-mobile-web-app-title" content="엄지 ♡ 이도연">
 <meta name="application-name" content="엄지 ♡ 이도연">
 <meta name="theme-color" content="#2E5B4F">
+<meta name="color-scheme" content="light dark">
 <!-- ▲▲ 여기까지 ▲▲ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,6 +60,8 @@
   --line-strong:rgba(46,91,79,.40);
   --focus:      #B4531F;   /* 초록 위에서도 분간되는 주황 계열 */
   --shadow:     0 18px 50px -30px rgba(35,48,43,.55);
+  --on-pine:    #F7F4EC;   /* 소나무·낙관 바탕 위 글씨 — 다크 모드에서도 그대로 */
+  color-scheme: light dark;
 
   --serif: "Gowun Batang", "Noto Serif KR", serif;
   --sans:  "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -103,7 +106,7 @@ button{ font-family:inherit; font-size:inherit }
 }
 .skip{
   position:absolute; left:8px; top:0; z-index:100;
-  background:var(--pine); color:var(--paper); padding:12px 20px;
+  background:var(--pine); color:var(--on-pine); padding:12px 20px;
   border-radius:0 0 4px 4px; text-decoration:none; font-weight:600;
   /* 제 높이만큼 위로 숨깁니다. 글씨를 키워도 안 삐져나옵니다. */
   transform:translateY(-200%);
@@ -141,9 +144,9 @@ button{ font-family:inherit; font-size:inherit }
   font-size:.8rem; font-weight:500; letter-spacing:.02em;
   color:var(--ink-soft); min-height:34px;
 }
-.pillset button[aria-pressed="true"]{ background:var(--pine); color:var(--paper) }
+.pillset button[aria-pressed="true"]{ background:var(--pine); color:var(--on-pine) }
 .menu-btn{ min-width:44px; min-height:34px; font-size:1rem; color:var(--pine) }
-.menu-btn[aria-expanded="true"]{ background:var(--pine); color:var(--paper) }
+.menu-btn[aria-expanded="true"]{ background:var(--pine); color:var(--on-pine) }
 
 /* ── 목차 ── */
 .menu-panel{
@@ -211,7 +214,7 @@ button{ font-family:inherit; font-size:inherit }
 }
 .sec.dark .sec-head .orn{ color:var(--gold-soft) }
 .sec.dark .song-toggle{ color:var(--ink) }
-.sec.dark .notice-link{ background:var(--paper); color:var(--pine) }
+.sec.dark .notice-link{ background:var(--on-pine); color:var(--pine) }
 .sec.dark .copy, .sec.dark .map-links a{ color:var(--ink) }
 .sec.dark .map-links a{ border-color:var(--line-strong) }
 
@@ -245,7 +248,7 @@ button{ font-family:inherit; font-size:inherit }
   position:relative; z-index:1; width:100%;
   padding:26px var(--gutter) 36px;
   background:rgba(22,36,29,.92);
-  color:var(--paper);
+  color:var(--on-pine);
 }
 .hero-text::before{
   content:""; position:absolute; left:0; right:0; bottom:100%; height:130px;
@@ -332,7 +335,7 @@ button{ font-family:inherit; font-size:inherit }
 }
 .seal{
   width:46px; height:46px; border-radius:2px;
-  background:var(--seal); color:var(--paper);
+  background:var(--seal); color:var(--on-pine);
   display:flex; align-items:center; justify-content:center;
   font-family:var(--serif); font-size:1.2rem;
 }
@@ -475,7 +478,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
   color:var(--jade); font-size:.88rem; font-weight:600;
   padding:9px 16px; border-radius:2px; cursor:pointer;
 }
-.copy.done, .btn-line.done{ background:var(--pine); color:var(--paper); border-color:var(--pine) }
+.copy.done, .btn-line.done{ background:var(--pine); color:var(--on-pine); border-color:var(--pine) }
 
 /* ── 고마운 분들 ── */
 .credits{ text-align:center }
@@ -517,12 +520,12 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
   text-decoration:underline; text-underline-offset:3px;
 }
 .share .license + .license{ margin-top:14px }
-.outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:var(--paper) }
+.outro{ text-align:center; padding:58px var(--gutter) 72px; background:var(--pine); color:var(--on-pine) }
 .outro .orn-outro{ display:block; width:34px; height:34px; margin:0 auto 18px; color:var(--gold-soft); opacity:.95 }
 .outro .hui{ font-family:var(--serif); font-size:1.7rem; color:var(--gold-soft) }
 .outro-names{ font-family:var(--serif); font-size:1.1rem; margin:18px 0 6px }
-.outro-date{ font-family:var(--latin); font-size:.78rem; letter-spacing:.22em; color:var(--paper) }
-.outro-thanks{ font-size:.94rem; margin-top:22px; color:var(--paper) }
+.outro-date{ font-family:var(--latin); font-size:.78rem; letter-spacing:.22em; color:var(--on-pine) }
+.outro-thanks{ font-size:.94rem; margin-top:22px; color:var(--on-pine) }
 
 /* ── 참석 의사 입력창 ── */
 .modal{
@@ -587,6 +590,34 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
 .lightbox .caption{
   position:absolute; left:0; right:0; bottom:18px;
   text-align:center; color:#E3EDE1; font-size:.9rem; padding:0 24px;
+}
+
+/* 다크 모드 — 휴대폰 설정을 따릅니다. 크림 바탕은 먹색, 글씨는 미색으로 뒤집고
+   초록·금색 분위기와 대비 7:1 이상은 그대로 둡니다. 사진은 건드리지 않습니다.
+   고대비 모드를 켠 기기에서는 아래 고대비 설정이 우선합니다. */
+@media (prefers-color-scheme:dark) and (prefers-contrast:no-preference){
+  :root{
+    --paper:      #141B18;
+    --paper-warm: #1C2521;
+    --ink:        #EEEAE0;
+    --ink-soft:   #C9D3CB;
+    --jade:       #B7D8C6;
+    --line:       rgba(238,234,224,.16);
+    --line-strong:rgba(238,234,224,.36);
+    --shadow:     0 18px 50px -30px rgba(0,0,0,.8);
+  }
+  body{ background:#0B100E }
+  .paper{ box-shadow:0 0 80px rgba(0,0,0,.6) }
+  .pillset{ background:rgba(20,27,24,.95) }
+  .menu-btn{ color:var(--ink) }
+  .rsvp-bar{ background:rgba(20,27,24,.96); box-shadow:0 -8px 26px rgba(0,0,0,.4) }
+  .notice-link{ background:var(--pine) }
+  .ico{ background:rgba(183,216,198,.12) }
+  .hero, .gallery .photo{ background:linear-gradient(160deg,#22302A,#1C2521) }
+  .map{ background:#1C2521 }
+  .photo.empty::after{ color:var(--ink) }
+  .rsvp-msg{ color:#F4BDB5 }
+  .orn-divider{ color:var(--gold-soft) }
 }
 
 /* 고대비 모드 */
