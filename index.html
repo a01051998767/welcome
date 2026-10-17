@@ -379,6 +379,10 @@ button{ font-family:inherit; font-size:inherit }
 }
 .song-panel .cite{ margin:14px 0 0; font-size:.85rem; line-height:1.8; color:var(--ink-soft) }
 .song-panel .cite + .cite{ margin-top:8px }
+.menu-group + .menu-group{ margin-top:22px; padding-top:18px; border-top:1px solid var(--line) }
+.menu-group .cite{ margin:-4px 0 10px }
+.menu-items{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:.92rem; line-height:1.6 }
+.menu-items li{ word-break:keep-all }
 
 /* ── 안내 사항 ── */
 .notices{ display:grid; gap:13px }
@@ -971,13 +975,49 @@ const CONFIG = {
       meta:  { ko:"17:40 – 19:00 KST · 관악문화예절원 마당", en:"17:40 – 19:00 KST · Gwanak Cultural Etiquette Institute courtyard" },
       notes: [
         { icon:"leaf",
-          ko:"뷔페로 준비했습니다. 동물성 재료를 쓰지 않은 비건 · 채식 요리도 함께 차립니다. 미리 챙겨 두면 좋을 것이 있으면 참석 여부를 알려주실 때 적어주세요. 할 수 있는 만큼 마음 써서 준비하겠습니다.",
-          en:"A buffet is served, including vegan and vegetarian dishes made without animal products. If there is anything we could arrange for your meal, mention it when you tell us you are coming and we will do what we can." },
+          ko:"뷔페로 준비했습니다. 동물성 재료를 쓰지 않은 비건 도시락도 따로 마련합니다. 비건 도시락이 필요하시면 참석 여부를 알려주실 때 꼭 적어주세요. 그 밖에도 미리 챙겨 두면 좋을 것이 있으면 함께 적어주세요. 할 수 있는 만큼 마음 써서 준비하겠습니다.",
+          en:"A buffet is served, and separate vegan lunch boxes made without any animal products are also prepared. If you would like a vegan lunch box, please be sure to say so when you tell us you are coming, along with anything else we could arrange for you." },
         { ko:"식사는 참석하시는 인원에 맞추어 준비하려 합니다. 번거로우시겠지만 화면 아래의 '참석 여부 알리기'를 누르셔서 참석 여부를 꼭 알려주시면 감사하겠습니다. 함께 오시는 분이 계시면 유아 · 어린이까지 한 분씩 알려주세요.",
           en:"We will prepare the food according to the numbers you give us, so please tap 'Tell us' at the bottom of the screen and let us know whether you can come. If others are coming with you, babies and children included, please send a reply for each person." },
         { ko:"신랑이 통기타를 연주하며 축가를 부릅니다. 함께 따라 불러 주셔도 좋습니다.",
           en:"The groom will sing, accompanying himself on guitar — you are welcome to sing along." }
       ],
+
+      /* 메뉴 — "메뉴 보기"를 누르면 아래로 열립니다. 묶음마다 title 과 items.
+         메뉴판(뷔페)과 에티컬테이블 비건 도시락 안내서를 옮겨 적었습니다. */
+      menu: {
+        button: { ko:"메뉴 보기", en:"See the menu" },
+        groups: [
+          { title:{ ko:"뷔페 · 한식", en:"Buffet · Korean" },
+            items:[ {ko:"신선 육회",en:"Fresh beef yukhoe"}, {ko:"홍어회무침",en:"Spicy skate salad"}, {ko:"해파리 & 족발 냉채",en:"Chilled jellyfish & pork trotters"},
+                    {ko:"또띠아 치즈롤",en:"Tortilla cheese rolls"}, {ko:"삼채무침",en:"Samchae root salad"}, {ko:"쉬림프 갈릭버터구이",en:"Garlic butter shrimp"},
+                    {ko:"모둠 올리브",en:"Mixed olives"}, {ko:"부추잡채",en:"Chive japchae"}, {ko:"낙지 미나리무침",en:"Octopus & water parsley salad"}, {ko:"배추김치",en:"Napa cabbage kimchi"} ] },
+          { title:{ ko:"뷔페 · 따뜻한 요리", en:"Buffet · Hot dishes" },
+            items:[ {ko:"버섯 소불고기",en:"Beef bulgogi with mushrooms"}, {ko:"동파육",en:"Dongpo pork"}, {ko:"해물 팔보채",en:"Eight-treasure seafood"},
+                    {ko:"탕수육",en:"Sweet & sour pork"}, {ko:"깐풍기",en:"Kkanpunggi chicken"}, {ko:"스파게티 & 미트소스",en:"Spaghetti with meat sauce"},
+                    {ko:"영양밥",en:"Nutritious mixed-grain rice"}, {ko:"호박죽",en:"Pumpkin porridge"}, {ko:"잔치국수",en:"Banquet noodles"} ] },
+          { title:{ ko:"뷔페 · 찬 요리", en:"Buffet · Cold dishes" },
+            items:[ {ko:"훈제연어 & 홀스래디시",en:"Smoked salmon & horseradish"}, {ko:"모둠 참치회",en:"Assorted tuna sashimi"}, {ko:"대하새우",en:"King prawns"},
+                    {ko:"새송이 & 초석잠",en:"King oyster mushroom & Chinese artichoke"}, {ko:"연어초밥",en:"Salmon sushi"}, {ko:"참치초밥",en:"Tuna sushi"},
+                    {ko:"한치초밥",en:"Squid sushi"}, {ko:"북방조개초밥",en:"Surf clam sushi"}, {ko:"새우초밥",en:"Shrimp sushi"} ] },
+          { title:{ ko:"뷔페 · 샐러드", en:"Buffet · Salads" },
+            items:[ {ko:"양상추 샐러드",en:"Lettuce salad"}, {ko:"연어 샐러드",en:"Salmon salad"}, {ko:"트리플베리 요거트",en:"Triple-berry yoghurt"},
+                    {ko:"구운 단호박 샐러드",en:"Roast kabocha salad"}, {ko:"토마토 카프레제",en:"Tomato caprese"}, {ko:"푸실리 파스타 샐러드",en:"Fusilli pasta salad"} ] },
+          { title:{ ko:"뷔페 · 디저트", en:"Buffet · Desserts" },
+            items:[ {ko:"계절 과일 4종",en:"Four seasonal fruits"}, {ko:"모둠떡 4종",en:"Four kinds of rice cake"}, {ko:"브라우니",en:"Brownies"},
+                    {ko:"미니 케이크",en:"Mini cakes"}, {ko:"머핀",en:"Muffins"}, {ko:"호두파이",en:"Walnut pie"} ] },
+          { title:{ ko:"비건 도시락 · 에티컬테이블", en:"Vegan lunch box · Ethical Table" },
+            note:{ ko:"동물성 재료를 쓰지 않습니다. 참석 여부를 알려주실 때 비건 도시락이 필요하다고 적어 주신 분께 따로 드립니다.",
+                   en:"Made without any animal products. Served to everyone who asks for one when telling us they are coming." },
+            items:[ {ko:"연어 없는 훈제 당근 유부초밥",en:"Smoked carrot inari (no salmon)"}, {ko:"장어 없는 가지 데리야키 초밥",en:"Eggplant teriyaki sushi (no eel)"},
+                    {ko:"느타리버섯 직화볶음 잡채",en:"Fire-tossed oyster mushroom japchae"}, {ko:"비건 진미채와 케일쌈밥",en:"Vegan tofu-skin jinmichae & kale rice wraps"},
+                    {ko:"두부 버섯 강정",en:"Sweet soy tofu & mushroom gangjeong"}, {ko:"매콤 결두부 직화구이 꼬치",en:"Spicy grilled tofu & vegetable skewers"},
+                    {ko:"아란치니풍 김치주먹밥 튀김",en:"Arancini-style fried kimchi rice balls"}, {ko:"비건 미트볼 파스타",en:"Vegan meatball pasta"},
+                    {ko:"비건 참치마요 샐러드",en:"Salad with vegan tuna mayo"}, {ko:"비건 에그마요 & 햄 미니 샌드위치",en:"Vegan egg mayo & ham mini sandwiches"},
+                    {ko:"라즈베리 초코 미니 컵케이크(글루텐프리)",en:"Raspberry chocolate mini cupcakes (gluten-free)"}, {ko:"과일 토핑 프렌치파이",en:"Fruit-topped French pie"} ] }
+        ],
+        note: { ko:"메뉴는 계절과 시장 사정에 따라 조금 달라질 수 있습니다.", en:"Dishes may change slightly with the season and the market." }
+      },
 
       /* 축가 가사 — 제목(곡명 — 가수)만 두고 작사·작곡·저작권 줄은 싣지 않는다(공유 섹션 라이선스 안내와 겹침). */
       song: {
@@ -1218,8 +1258,8 @@ const CONFIG = {
     rsvpPartsHint:{ko:"오실 수 있는 순서를 모두 골라주세요. 이번에 오기 어려우시면 비워 두고 보내셔도 됩니다.",
                    en:"Tick every part you can join. If you cannot come this time, send it with none ticked."},
     rsvpNeeds:    {ko:"미리 알려주실 것",en:"Anything we can prepare for you"},
-    rsvpNeedsHint:{ko:"오시는 길이나 자리에서 저희가 미리 챙겨두면 좋을 것이 있으면 무엇이든 편하게 적어주세요. 비건 · 채식 식사가 필요하시면 인원수에 맞춰 준비할 수 있도록 꼭 적어주세요.",
-                   en:"If there is anything at all we can arrange for you in advance, please tell us here. If you need a vegan or vegetarian meal, do be sure to say so, so we can cook the right number."},
+    rsvpNeedsHint:{ko:"오시는 길이나 자리에서 저희가 미리 챙겨두면 좋을 것이 있으면 무엇이든 편하게 적어주세요. 비건 도시락이 필요하시면 인원수에 맞춰 준비할 수 있도록 꼭 적어주세요.",
+                   en:"If there is anything at all we can arrange for you in advance, please tell us here. If you would like a vegan lunch box, do be sure to say so, so we can order the right number."},
     rsvpPhone:    {ko:"연락처",en:"Phone"},
     rsvpRequired: {ko:"(필수)",en:"(required)"},
     rsvpOptional: {ko:"(선택)",en:"(optional)"},
@@ -1407,6 +1447,19 @@ function render(){
         <div class="map-links">${(p.place.links || []).map(l => `
           <a href="${l.url}" target="_blank" rel="noopener">${L(l.label)}<span class="sr-only">, ${L("newWindow")}</span></a>`).join("")}</div>
       </div>` : "";
+    const menu = p.menu ? `
+      <button class="song-toggle" type="button" aria-expanded="false" aria-controls="menu-${i}">
+        <span>${t(p.menu.button)}</span><span class="chev" aria-hidden="true">▾</span>
+      </button>
+      <div class="song-panel menu-panel-body" id="menu-${i}">
+        ${p.menu.groups.map(g => `
+          <div class="menu-group">
+            <h4>${t(g.title)}</h4>
+            ${g.note ? `<p class="cite">${t(g.note)}</p>` : ""}
+            <ul class="menu-items">${g.items.map(x => `<li>${t(x)}</li>`).join("")}</ul>
+          </div>`).join("")}
+        ${p.menu.note ? `<p class="cite">${t(p.menu.note)}</p>` : ""}
+      </div>` : "";
     const song = p.song ? `
       <button class="song-toggle" type="button" data-song="${i}" aria-expanded="false" aria-controls="song-${i}">
         <span>${t(p.song.button)}</span><span class="chev" aria-hidden="true">▾</span>
@@ -1426,7 +1479,7 @@ function render(){
           <ul class="part-notes">${p.notes.map(n => `
             <li${n.icon ? ' class="has-ico"' : ""}>${n.icon
               ? `<svg class="ico" aria-hidden="true"><use href="#ico-${n.icon}"></use></svg>` : ""}${t(n)}</li>`).join("")}</ul>
-          ${place}${song}
+          ${place}${menu}${song}
         </div>
       </div>`;
   }).join("");
