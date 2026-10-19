@@ -865,7 +865,9 @@ const CONFIG = {
 
   /* 구글 지도 → 공유 → 지도 퍼가기 → src="..." 안 주소만 붙여넣기.
      비워두면 지도 칸이 자동으로 숨겨집니다. */
-  mapEmbed: "https://www.google.com/maps?q=%EA%B4%80%EC%95%85%EB%AC%B8%ED%99%94%EC%98%88%EC%A0%88%EC%9B%90&output=embed&hl=ko",
+  /* 지도 — 오픈스트리트맵(키 없이, 카카오톡 안 브라우저에서도 열림). 구글 지도는 카카오톡에서 막혀 바꿨습니다.
+     좌표는 카카오지도 링크의 위치를 옮긴 것입니다. 예식장 37.472365, 126.959854 */
+  mapEmbed: "https://www.openstreetmap.org/export/embed.html?bbox=126.955854%2C37.470165%2C126.963854%2C37.474565&layer=mapnik&marker=37.472365%2C126.959854",
 
   /* 예식장 지도 링크. 지도 앱에서 장소를 열고 공유 주소를 그대로 붙여넣으면 됩니다.
      label 은 아래 labels 의 이름(kakao · naver · google)을 씁니다. */
@@ -1044,7 +1046,7 @@ const CONFIG = {
         button: { ko:"뒤풀이 장소 보기", en:"Where the after-party is" },
         name:   { ko:"더 베어 낙성대점", en:"The Bear, Nakseongdae" },
         addr:   { ko:"서울 관악구 낙성대로 20", en:"20, Nakseongdae-ro, Gwanak-gu, Seoul" },
-        embed:  "https://www.google.com/maps?q=%EB%8D%94%EB%B2%A0%EC%96%B4+%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&output=embed&hl=ko",
+        embed:  "https://www.openstreetmap.org/export/embed.html?bbox=126.954803%2C37.474515%2C126.962803%2C37.478915&layer=mapnik&marker=37.476715%2C126.958803",   /* 더 베어 37.476715, 126.958803 */
         links: [
           { label:"naver",  url:"https://naver.me/x5GrDmb4" },
           { label:"kakao",  url:"https://map.kakao.com/?urlX=490891.00000000093&urlY=1104817.0000000007&urlLevel=3&itemId=17735953&q=%EB%8D%94%EB%B2%A0%EC%96%B4%20%EB%82%99%EC%84%B1%EB%8C%80%EC%A0%90&srcid=17735953&map_type=TYPE_MAP" },
