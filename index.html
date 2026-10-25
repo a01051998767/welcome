@@ -278,6 +278,14 @@ button{ font-family:inherit; font-size:inherit }
   font-size:.8rem; line-height:1.6; color:var(--pine);
 }
 /* ── 인사말 ── */
+.after-note{
+  text-align:center; padding:44px var(--gutter) 46px;
+  background:var(--paper); border-bottom:1px solid var(--line);
+}
+.after-note .orn{ display:block; width:34px; height:34px; margin:0 auto 14px; color:var(--gold) }
+.after-note h2{ margin:0 0 18px; font-family:var(--serif); font-weight:400; font-size:1.3rem; line-height:1.4; color:var(--jade) }
+.after-note p{ margin:0 0 12px; font-size:1rem; line-height:2; word-break:keep-all }
+.after-note p:last-child{ margin-bottom:0 }
 .greeting{ text-align:center }
 .greeting p{ margin:0 0 16px; font-size:1rem; line-height:2.05 }
 .greeting p:last-child{ margin-bottom:0 }
@@ -702,6 +710,13 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
     </div>
   </header>
 
+  <!-- 예식 뒤 감사 인사 — 글은 CONFIG.afterNote. 비우면 숨습니다. -->
+  <div class="after-note" id="afterNote" aria-labelledby="h-after">
+    <svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg>
+    <h2 id="h-after" data-k="afterTitle"></h2>
+    <div id="afterBody"></div>
+  </div>
+
   <section id="s-greeting" tabindex="-1" class="sec greeting" aria-labelledby="h-greeting">
     <div class="sec-head"><svg class="orn" aria-hidden="true"><use href="#orn-05"></use></svg><h2 id="h-greeting" data-k="greetingTitle"></h2></div>
     <div id="greetingBody"></div>
@@ -940,6 +955,14 @@ const CONFIG = {
       caption:{ ko:"커플 사진 촬영", en:"Couple photo shoot" },
       alt:{ ko:"이도연이 엄지의 뺨에 입을 맞추고, 엄지는 눈을 감은 채 활짝 웃고 있습니다.",
             en:"Doyeon kisses Ji on the cheek and he breaks into a wide grin." } }
+  ],
+
+  /* ── 예식 뒤 감사 인사 — 표지 바로 아래에 나옵니다. [] 로 두면 숨습니다. */
+  afterNote: [
+    { ko:"덕분에 잔치를 잘 치렀습니다.", en:"Thanks to you, our celebration went beautifully." },
+    { ko:"함께 웃고, 노래하고, 축하해 주신 그날의 마음을 오래 간직하겠습니다.",
+      en:"We will long treasure the laughter, the songs and the good wishes you shared with us that day." },
+    { ko:"앞으로도 저희 두 사람을 따뜻하게 지켜봐 주세요.", en:"Please keep watching over the two of us with the same warmth." }
   ],
 
   /* ── 4. 인사말 ──────────────────────────────── */
@@ -1236,7 +1259,8 @@ const CONFIG = {
 
   /* ── 12. 화면 문구 (보통 그대로 두셔도 됩니다) ── */
   labels: {
-    heroLabel:    {ko:"결혼식에 초대합니다",en:"You are invited to our wedding"},
+    heroLabel:    {ko:"함께해 주셔서 고맙습니다",en:"Thank you for celebrating with us"},
+    afterTitle:   {ko:"잔치를 마치며",en:"After the celebration"},
     greetingTitle:{ko:"혼례의 자리에 모십니다",en:"You are invited to our wedding"},
     familyTitle:  {ko:"우리 두 사람",en:"The two of us"},
     galleryTitle: {ko:"함께한 날들",en:"Our days"},
@@ -1395,6 +1419,11 @@ function render(){
   /* 한국 시간 안내 — 기기 시간대가 한국과 다르면 그곳 시간으로 바꾼 줄을 덧붙입니다 */
   const local = localTime(CONFIG.startsAt);
   $("#tzNote").innerHTML = L("tzNote") + (local ? `<strong>${L("tzLocal").replace("{t}", local)}</strong>` : "");
+
+  /* 예식 뒤 감사 인사 */
+  const after = CONFIG.afterNote || [];
+  $("#afterNote").hidden = !after.length;
+  $("#afterBody").innerHTML = after.map(x => `<p>${t(x)}</p>`).join("");
 
   /* 인사말 */
   $("#greetingBody").innerHTML = CONFIG.greeting.map(p => `<p>${t(p)}</p>`).join("");
