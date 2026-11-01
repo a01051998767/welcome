@@ -286,6 +286,7 @@ button{ font-family:inherit; font-size:inherit }
 .after-note h2{ margin:0 0 18px; font-family:var(--serif); font-weight:400; font-size:1.3rem; line-height:1.4; color:var(--jade) }
 .after-note p{ margin:0 0 12px; font-size:1rem; line-height:2; word-break:keep-all }
 .after-note p:last-child{ margin-bottom:0 }
+#afterReplay:not(:empty){ margin-top:22px; padding-top:20px; border-top:1px solid var(--line) }
 .greeting{ text-align:center }
 .greeting p{ margin:0 0 16px; font-size:1rem; line-height:2.05 }
 .greeting p:last-child{ margin-bottom:0 }
@@ -715,6 +716,7 @@ button.notice-link{ border:0; font-family:inherit; cursor:pointer }
     <svg class="orn" aria-hidden="true"><use href="#orn-11"></use></svg>
     <h2 id="h-after" data-k="afterTitle"></h2>
     <div id="afterBody"></div>
+    <div id="afterReplay"></div>
   </div>
 
   <section id="s-greeting" tabindex="-1" class="sec greeting" aria-labelledby="h-greeting">
@@ -964,6 +966,16 @@ const CONFIG = {
       en:"We will long treasure the laughter, the songs and the good wishes you shared with us that day." },
     { ko:"앞으로도 저희 두 사람을 따뜻하게 지켜봐 주세요.", en:"Please keep watching over the two of us with the same warmth." }
   ],
+
+  /* 다시 보기 — 감사 인사 상자 아래에 버튼으로 나옵니다. */
+  afterReplay: {
+    text:     { ko:"그날의 전통혼례는 유튜브에서 다시 보실 수 있습니다.", en:"You can watch the traditional ceremony again on YouTube." },
+    link:     "https://www.youtube.com/@welcome.1024",
+    linkText: { ko:"다시 보기", en:"Watch again" }
+  },
+
+  /* 예식이 끝나 접어 둔 섹션들 — 지우지 않고 숨깁니다. 다시 보이려면 이 목록에서 빼세요. */
+  hideSections: ["s-greeting", "s-family", "s-gallery", "s-program", "s-notice", "s-location", "s-gift"],
 
   /* ── 4. 인사말 ──────────────────────────────── */
   greeting: [
@@ -1423,7 +1435,15 @@ function render(){
     document.documentElement.style.setProperty("--bar-h", "0px");
   }
 
+  /* 예식이 끝나 접어 둔 섹션 — 지우지 않고 숨깁니다. 차례에서도 빠집니다. */
+  (CONFIG.hideSections || []).forEach(id => {
+    const el = document.getElementById(id); if (el) el.style.display = "none";
+  });
+
   /* 예식 뒤 감사 인사 */
+  const replay = CONFIG.afterReplay;
+  $("#afterReplay").innerHTML = replay && replay.link ? `<p>${t(replay.text)}</p>
+    <a class="notice-link" href="${replay.link}" target="_blank" rel="noopener">${t(replay.linkText)}<span class="sr-only">, ${L("newWindow")}</span></a>` : "";
   const after = CONFIG.afterNote || [];
   $("#afterNote").hidden = !after.length;
   $("#afterBody").innerHTML = after.map(x => `<p>${t(x)}</p>`).join("");
